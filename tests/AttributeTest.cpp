@@ -68,7 +68,7 @@ bool AttributeTest::emptyValueTest() {
 bool AttributeTest::findValueTest() {
     Attribute attribute("string",10);
     int insertedKey = attribute.addValue("test value");
-    int foundKey = attribute.findValue("test value");
+    int foundKey = attribute.findValue("test value").front();
     return insertedKey == foundKey;
 }
 

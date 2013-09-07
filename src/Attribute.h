@@ -50,16 +50,17 @@ class Attribute{
     }
     
     /*
-     * Returns key for found `value`
-     * or -1 if not found
+     * Returns keys for found `value`
+     * or empty vector if not found
      */
-    int findValue(string value) {
+    vector<int> findValue(string value) {
+        vector<int> keys;
         for (int i = 0; i < values.size(); ++i) {
             if (values[i] == value) {
-                return i;
+                keys.push_back(i);
             }
         }
-        return -1;
+        return keys;
     }
 
     void removeValue(int key) {
