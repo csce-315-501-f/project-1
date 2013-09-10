@@ -9,130 +9,95 @@ using namespace std;
 
 
 class Attribute{
-    vector<string> values;
-    
-    // available types are string and integer
-    string type;
-    int length;
+    friend class Relation;
+    friend class Database;
+private:
 
-    queue<int> freeKeys;
+    vector<string> values; /**< Holds the attribute values, with the vector key being the row number */
+    string type;           /**< The type of the attribute, available types are `string` and `integer` */
+    int length;            /**< If the type is `string` this this is its max length, otherwise */
+
+    queue<int> freeKeys;   /**< Holds the free keys in the array if a value has been removed */
 
   public:
+    /**
+     * Default constructor
+     * Initializes type to "" and length to 0
+     */
     Attribute() : type(""), length(0) {}
-    Attribute(string attrType, int len) {
-        transform(attrType.begin(), attrType.end(), attrType.begin(), ::tolower);
-        if (attrType != "string" || attrType != "integer") {
-            // error, type can only be string or integer
-        }
-        type = attrType;
-        length = len;
-    }
 
-    // checks if the Attribute is empty if no key given
-    // check if values[key] is empty is key given
-    // returns false if `key` is not empty, or does not exist
-    bool isEmpty(int key = -1) {
-        if (key == -1) {
-            return length == 0 && type == "";
-        }
-        else {
-            if (values.size() <= key) return false;
-            if (values[key] == "") return true;
-            else return false;
-        }
-    }
-
-    string getType() { return type; }
-    int getSize() { return values.size(); }
-    
-    string getValue(int key) {
-        return values[key];
-    }
-    
-    /*
-     * Returns keys for found `value`
-     * or empty vector if not found
+    /**
+     * Normal Attribute Constructor
+     * @param string attrType the type of the attribute
+     * @param int len the length of the attribute
      */
-    vector<int> findValue(string value) {
-        vector<int> keys;
-        for (int i = 0; i < values.size(); ++i) {
-            if (values[i] == value) {
-                keys.push_back(i);
-            }
-        }
-        return keys;
-    }
+    Attribute(string attrType, int len);
 
-    void removeValue(int key) {
-        // Check if key exists in `values`
-        if (values.size() > key) {
-            values[key] = "";
-            freeKeys.push(key);
-        }
-        else {
-            // throw an error for key not being in `values`
-        }
-    }
-
-    void removeLast() {
-        values.pop_back();
-    }
-
-    /*
-     * Adds a new value to the `values` vector at `key`
-     * if `key` is not passed, then `val` is insterted at the first
-     * free key of `values`
-     * Returns key of where `val` was inserted
-     * Return value of -1 means `val` was not inserted
+    /** 
+     * isEmpty
+     * @param int key key of value to check
+     * @return bool if key == 1 then if Attribute is empty, otherwise if value at key is empty
      */
-    int addValue(string val, int key = -1) {
-        int insertedKey = key;
+    bool isEmpty(int key = -1);
 
-        if (type == "string" && val.size() > length) {
-            // error, trying to insert string larger than `length`
-            return -1;
-        }
-
-        if (key == -1) {
-            if (freeKeys.empty()) {
-                // There are no free keys, insert new `val` at end
-                insertedKey = values.size();
-                values.push_back(val);
-                return insertedKey;
-            }
-            else {
-                // There is a free key, insert `val` at that key
-                insertedKey = freeKeys.front();
-                freeKeys.pop();
-                values[insertedKey] = val;
-                return insertedKey;
-            }
-        }
-        else {
-            if (values.size() <= key) {
-                //throw exception because inserting at key not in vector
-                return -1;
-            }
-            else {
-                values[insertedKey] = val;
-                return insertedKey;
-            }
-        }
-    }
-    
-    bool updateValue(int key, string val) {
-        if (type == "string" && val.size() > length) {
-            // error, trying to insert string larger than `length`
-            return false;
-        }
-        if (values.size() <= key) {
-            // error, trying to update non-existant key
-            return false;
-        }
-        values[key] = val;
-    }
-
+    /** 
+     * setLength
+     * @param int len
+     */
     void setLength(int len) { length = len; }
+
+    /** 
+     * getType
+     * @return string
+     */
+    string getType() { return type; }
+
+    /** 
+     * getSize
+     * @return int number of values
+     */
+    int getSize() { return values.size(); }
+
+    /** 
+     * getValue
+     * @param int key
+     * @return string value at key
+     */
+    string getValue(int key) { return values[key]; }
+    
+    /** 
+     * findValue
+     * @param string value to find
+     * @return vector<int> keys where value appears
+     */
+    vector<int> findValue(string value);
+
+    /** 
+     * removeValue
+     * @param int key of value to remove
+     */
+    void removeValue(int key);
+
+    /** 
+     * removeLast
+     */
+    void removeLast() { values.pop_back(); }
+
+    /** 
+     * addValue
+     * @param string val value to add
+     * @param int key position to insert val
+     * @return key where val insterted
+     */
+    int addValue(string val, int key = -1);
+    
+    /** 
+     * updateValue
+     * @param int key where to update
+     * @param string val to update to
+     * @return bool success of update
+     */
+    bool updateValue(int key, string val);
 };
 
 #endif

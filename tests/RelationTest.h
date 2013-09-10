@@ -14,6 +14,9 @@ class RelationTest {
     bool getRowTest();
     bool getRowsWhereTest();
     bool removeValueTest();
+    bool updateAttributeValueTest();
+    bool renameAttributeTest();
+    bool getAllRowsTest();
 
 public:
     void runAll();

@@ -5,124 +5,102 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include <queue>
+#include <algorithm>
 using namespace std;
 
 class Relation {
+    friend class Database;
 private:
-    // vector<Attribute> attributes;
-
-    // maps attribute name to attribute
-    map<string, Attribute> attributes;
-    // holds the attribute names in order of insertion
-    vector<string> attributeNames;
-
-    queue<int> freeKeys;
-
+    map<string, Attribute> attributes; /**< Map of attribute names mapped to attributes */
+    vector<string> attributeNames;     /**< Holds the attribute names in order of insertion */
 public:
-    /*
-     * Adds a new attribute to vector
-     * Sets values for keys in existing attributes
-     * to "" in added attribute
-     * returns true if attr added successfully
+    /**
+     * attributeExists
+     * @param string name of attribute
+     * @return bool attribute exists in relation
      */
-    bool addAttribute(string name, string type, int length) {
-        if (attributes.find(name) == attributes.end()) {
-            // attribute name does not exist in `attributes`
-            Attribute attribute(type,length);
-            attributes[name] = attribute;
+    bool attributeExists(string name);
 
-            int length = attributes.begin()->second.getSize();
-            for (int i = 0; i < length; ++i) {
-                attributes[name].addValue("");
-            }
-            if (attributes[name].getSize() == length) {
-                attributeNames.push_back(name);
-                return true;
-            }
-            else return false;
-        }
-        else {
-            // error, attribute namealready exists in attributes
-            return false;
-        }
-    }
-
-    /*
-     * Accepts a vector of strings that is the same length
-     * as the number of attributes
-     * returns true if row successfully added
+    /**
+     * addAttribute
+     * Sets all row values to ""
+     * @param string name of attribute to add
+     * @param string type of attribute to add
+     * @param int length of attribute to add
+     * @return bool success of adding attribute
      */
-    bool addRow(vector<string> row) {
-        if (row.size() != attributeNames.size()) {
-            // error, passed row length differs from relation row length
-            return false;
-        }
-        int insertedKey;
-        for (int i = 0; i < attributeNames.size(); ++i) {
-            string name = attributeNames[i];
-            insertedKey = attributes[name].addValue(row[i]);
-            if (insertedKey == -1) {
-                // error, failed to add value, remove previously inserted values
-                for (int j = i; j > 0; --j) {
-                    name = attributeNames[j];
-                    attributes[name].removeLast();
-                }
-                return false;
-            }
-        }
-        return true;
-    }
+    bool addAttribute(string name, string type, int length);
 
-
-    void removeRow(int key) {
-
-        for (int i = 0; i < attributeNames.size(); ++i) {
-            attributes[attributeNames[i]].removeValue(key);
-        }
-
-    }
-
-    /*
-     * Returns the row at key `key` as a vector of the values
-     * or empty vector if not found
+     /**
+     * addRow
+     * @param vector<string> row of values to add, must be same length as number of attributes
+     * @return int key of added row, -1 if not added
      */
-    vector<string> getRow(int key) {
-        vector<string> row;
+    int addRow(vector<string> row);
 
-        int length = attributes.begin()->second.getSize();
-        if (length <= key) {
-            // error, out of index
-            return row;
-        }
-
-        for (int i = 0; i < attributeNames.size(); ++i) {
-            string value = attributes[attributeNames[i]].getValue(key);
-            row.push_back(value);
-        }
-        return row;
-    }
-
-    /*
-     * Returns rows where `attributeName` has `value`
-     * or empty vector if not found
+    /**
+     * removeRow
+     * @param int key of row to remove
      */
-    vector< vector<string> > getRowsWhere(string attributeName, string value) {
-        vector< vector<string> > rows;
-        if (attributes.find(attributeName) == attributes.end()) {
-            // error, attribute does not exist
-            return rows;
-        }
-        vector<int> foundRowKeys = attributes[attributeName].findValue(value);
-        
-        for (int i = 0; i < foundRowKeys.size(); ++i) {
-            vector<string> row = getRow(foundRowKeys[i]);
-            rows.push_back(row);
-        }
-        return rows;
-    }
+    void removeRow(int key);
 
+    /**
+     * removeAttribute
+     * @param string name of attribute to remove
+     * @return bool success of removing attribute
+     */
+    bool removeAttribute(string name);
 
+    /**
+     * getRow
+     * @param int key of row to get
+     * @return vector<string> row found at key, or empty vector if not found
+     */
+    vector<string> getRow(int key);
+
+    /**
+     * getRowsWhere
+     * @param string attributeName
+     * @param string value
+     * @return vector< vector<string> > containing rows where attributeName held value, or empty if none found
+     */
+    vector< vector<string> > getRowsWhere(string attributeName, string value);
+
+    /**
+     * getAllRows
+     * @return vector< vector<string> > all rows in relation
+     */
+    vector< vector<string> > getAllRows();
+
+    /**
+     * updateAttributeValue
+     * @param int key
+     * @param string attributeName
+     * @param string value
+     * @return success of updating value at key in attributeName
+     */
+    bool updateAttributeValue(int key, string attributeName, string value);
+
+    /**
+     * show
+     * Prints relation to command line
+     */
+    void show();
+
+    /**
+     * renameAttribute
+     * @param string currentName attribute to rename
+     * @param string newName new name for attribute
+     * @return success of rename
+     */
+    bool renameAttribute(string currentName, string newName);
+
+    /**
+     * Relation = operator
+     */
+    Relation operator=(Relation b);
 };
+
+
 
 #endif
