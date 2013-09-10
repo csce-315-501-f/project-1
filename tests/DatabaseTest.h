@@ -8,6 +8,7 @@ class DatabaseTest {
     bool removeRelationTest();
     bool removeAttributeTest();
     bool addRowTest();
+    bool removeRowTest();
     bool getRowsWhereTest();
     bool renameRelationTest();
     bool renameAttributeTest();

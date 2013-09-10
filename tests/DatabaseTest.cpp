@@ -48,6 +48,22 @@ bool DatabaseTest::addRowTest() {
     return success;
 }
 
+bool DatabaseTest::removeRowTest() {
+    Database database;
+    database.addRelation("testRelation");
+    database.addAttribute("testRelation", "testStringAttribute", "string", 10);
+    vector<string> row;
+    row.push_back("testAttr");
+    int rowKey = database.addRow("testRelation",row);
+    bool successAddRow = database.getRowsWhere("testRelation","testStringAttribute","testAttr").size() == 1;
+    if (successAddRow) {
+        database.removeRow("testRelation",rowKey);
+        bool successRemoveRow = database.getRowsWhere("testRelation","testStringAttribute","testAttr").size() == 0;
+        return successAddRow && successRemoveRow;
+    }
+    else return false;
+}
+
 bool DatabaseTest::getRowsWhereTest() {
     Database database;
     database.addRelation("testRelation");
@@ -265,6 +281,7 @@ void DatabaseTest::runAll() {
     cout << "removeRelationTest:    " << (removeRelationTest()?"Passed":"Failed") << endl;
     cout << "removeAttributeTest:   " << (removeAttributeTest()?"Passed":"Failed") << endl;
     cout << "addRowTest:            " << (addRowTest()?"Passed":"Failed") << endl;
+    cout << "removeRowTest:         " << (removeRowTest()?"Passed":"Failed") << endl;
     cout << "getRowsWhereTest:      " << (getRowsWhereTest()?"Passed":"Failed") << endl;
     cout << "renameRelationTest:    " << (renameRelationTest()?"Passed":"Failed") << endl;
     cout << "renameAttributeTest:   " << (renameAttributeTest()?"Passed":"Failed") << endl;

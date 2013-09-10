@@ -74,6 +74,14 @@ public:
      */
     int addRow(string relName, vector<string> row);
 
+
+    /**
+     * removeRow
+     * @param string relName relation name
+     * @param int key row to remove
+     */
+    void removeRow(string relName, int key);
+
     /**
      * updateAttributeValue
      * @param string relName relation name

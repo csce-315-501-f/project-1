@@ -91,6 +91,12 @@ int Database::addRow(string relName, vector<string> row) {
     }
 }
 
+void Database::removeRow(string relName, int key) {
+    if (relationExists(relName)) {
+        relations[relName].removeRow(key);
+    }
+}
+
 bool Database::updateAttributeValue(string relName, int key, string attributeName, string value) {
     if (relationExists(relName)) {
         return relations[relName].updateAttributeValue(key,attributeName,value);   
