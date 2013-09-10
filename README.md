@@ -7,8 +7,6 @@ Test Compilation Instructions
 -----------------------------
 The tests were compiled and tested with the included Makefile using the g++ compiler.
 To compile and run the tests do the following (from project root):
-<code>
-cd tests/
+<pre><code>cd tests/
 make all
-mainTest
-</code>
+mainTest</code></pre>
