@@ -2,6 +2,23 @@ Christopher Murray, Kevin Vece, Juan Reyes
 CSCE 315-501
 Project 1
 ========
+Set Operation Functions
+_______________________
+<table>
+<tr><th>Operation</th><th>Our Function in Database</th>
+<tr><td>create table</td><td>Database::addRelation</td></tr>
+<tr><td>insert into</td><td>Database::addRow</td></tr>
+<tr><td>delete</td><td>Database::removeRelation<br />Database::removeAttribute<br />Database::removeRow</td></tr>
+<tr><td>selection</td><td>Database::getRowsWhere</td></tr>
+<tr><td>projection</td><td>Database::projection</td></tr>
+<tr><td>renaming</td><td>Database::renameRelation<br />Database::renameAttribute</td></tr>
+<tr><td>set union</td><td>Database::relationUnion</td></tr>
+<tr><td>set difference</td><td>Database::relationDifference</td></tr>
+<tr><td>cross product</td><td>Database::relationCrossProduct</td></tr>
+<tr><td>update</td><td>Database::updateAttributeValue</td></tr>
+<tr><td>show</td><td>Database::show</td></tr>
+</table>
+
 
 Test Compilation Instructions
 -----------------------------
