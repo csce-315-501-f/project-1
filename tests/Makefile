@@ -21,3 +21,6 @@ relationTest: $(ATTR_HEADERS) $(ATTR_SRC) $(RELATION_HEADERS) $(RELATION_SRC) $(
 
 databaseTest: $(ATTR_HEADERS) $(ATTR_SRC) $(RELATION_HEADERS) $(RELATION_SRC) $(DATABASE_HEADERS) $(DATABASE_SRC) $(DATABASE_TEST_FILE)
 	$(CC) $(ATTR_SRC) $(RELATION_SRC) $(DATABASE_SRC) $(DATABASE_TEST_FILE) -o databaseTest
+
+clean:
+	rm attributeTest relationTest databaseTest mainTest
