@@ -14,3 +14,9 @@
 
 # Generic Files
 .DS_Store
+
+# Project Test Files
+attributeTest
+relationTest
+databaseTest
+mainTest
