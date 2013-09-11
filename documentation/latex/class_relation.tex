@@ -1,0 +1,247 @@
+\hypertarget{class_relation}{\section{Relation Class Reference}
+\label{class_relation}\index{Relation@{Relation}}
+}
+
+
+\hyperlink{class_relation}{Relation} Class represents one table in the database. The \hyperlink{class_relation}{Relation} Class represents one table in a database. It includes a vector of \hyperlink{class_attribute}{Attribute} class objects that represent the columns in the relation.  
+
+
+
+
+{\ttfamily \#include $<$Relation.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_relation_a95c3faa21d7bc2eb8a78991dfc059f8c}{attribute\-Exists} (string name)
+\item 
+bool \hyperlink{class_relation_af4a5da7f3ffe0883b9e253c982cb9d20}{add\-Attribute} (string name, string type, int length)
+\item 
+int \hyperlink{class_relation_ac863fb3605fac72c0c2a2b9183ae282e}{add\-Row} (vector$<$ string $>$ row)
+\item 
+void \hyperlink{class_relation_ab8013e49e0d20e1eaab08abe8534f815}{remove\-Row} (int key)
+\item 
+bool \hyperlink{class_relation_ac2c0d40f65dd8a7f2dd95726afcc3091}{remove\-Attribute} (string name)
+\item 
+vector$<$ string $>$ \hyperlink{class_relation_a549eddb9c701414f87ea739407c1d56f}{get\-Row} (int key)
+\item 
+vector$<$ vector$<$ string $>$ $>$ \hyperlink{class_relation_a4eed29fdf5f9427b603e65cdf910b132}{get\-Rows\-Where} (string attribute\-Name, string value)
+\item 
+vector$<$ vector$<$ string $>$ $>$ \hyperlink{class_relation_ae84c1daafc74ca37b516f1c7814569f8}{get\-All\-Rows} ()
+\item 
+bool \hyperlink{class_relation_a1a90eddb0ff2c2ec96df70dcbeb2863b}{update\-Attribute\-Value} (int key, string attribute\-Name, string value)
+\item 
+void \hyperlink{class_relation_a6ae6ba829869995ed0c334e6c4449329}{show} ()
+\item 
+bool \hyperlink{class_relation_afe7d8ff14a51b47fd8dc4e1a1a069e56}{rename\-Attribute} (string current\-Name, string new\-Name)
+\item 
+\hyperlink{class_relation}{Relation} \hyperlink{class_relation_a7a5fd377ae34b659a0b388a67e0b41d4}{operator=} (\hyperlink{class_relation}{Relation} b)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ string, \hyperlink{class_attribute}{Attribute} $>$ \hyperlink{class_relation_ad505b043cf529432345433e6d4e2ded9}{attributes}
+\item 
+vector$<$ string $>$ \hyperlink{class_relation_ace8c91beafd208dcf6469b9b2425ecf7}{attribute\-Names}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_relation_a6efef52d7a939622bbc934ff6b90ffe0}{class {\bfseries Database}}\label{class_relation_a6efef52d7a939622bbc934ff6b90ffe0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_relation}{Relation} Class represents one table in the database. The \hyperlink{class_relation}{Relation} Class represents one table in a database. It includes a vector of \hyperlink{class_attribute}{Attribute} class objects that represent the columns in the relation. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_relation_af4a5da7f3ffe0883b9e253c982cb9d20}{\index{Relation@{Relation}!add\-Attribute@{add\-Attribute}}
+\index{add\-Attribute@{add\-Attribute}!Relation@{Relation}}
+\subsubsection[{add\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}bool Relation\-::add\-Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{name, }
+\item[{string}]{type, }
+\item[{int}]{length}
+\end{DoxyParamCaption}
+)}}\label{class_relation_af4a5da7f3ffe0883b9e253c982cb9d20}
+Adds an \hyperlink{class_attribute}{Attribute} to the \hyperlink{class_relation}{Relation}. If other Attributes exist, this also inserts the value \char`\"{}\char`\"{} for each row that there is already a value in other Attributes. 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of \hyperlink{class_attribute}{Attribute} to add \\
+\hline
+{\em type} & Type of \hyperlink{class_attribute}{Attribute} to add \\
+\hline
+{\em length} & Length of \hyperlink{class_attribute}{Attribute} to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_attribute}{Attribute} was successfully added to the \hyperlink{class_relation}{Relation} 
+\end{DoxyReturn}
+\hypertarget{class_relation_ac863fb3605fac72c0c2a2b9183ae282e}{\index{Relation@{Relation}!add\-Row@{add\-Row}}
+\index{add\-Row@{add\-Row}!Relation@{Relation}}
+\subsubsection[{add\-Row}]{\setlength{\rightskip}{0pt plus 5cm}int Relation\-::add\-Row (
+\begin{DoxyParamCaption}
+\item[{vector$<$ string $>$}]{row}
+\end{DoxyParamCaption}
+)}}\label{class_relation_ac863fb3605fac72c0c2a2b9183ae282e}
+Adds a row to the \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em row} & Row of values to add. Must be same length as number of Attributes in the \hyperlink{class_relation}{Relation}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Key of added row, -\/1 if \hyperlink{class_attribute}{Attribute} was not added. 
+\end{DoxyReturn}
+\hypertarget{class_relation_a95c3faa21d7bc2eb8a78991dfc059f8c}{\index{Relation@{Relation}!attribute\-Exists@{attribute\-Exists}}
+\index{attribute\-Exists@{attribute\-Exists}!Relation@{Relation}}
+\subsubsection[{attribute\-Exists}]{\setlength{\rightskip}{0pt plus 5cm}bool Relation\-::attribute\-Exists (
+\begin{DoxyParamCaption}
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_relation_a95c3faa21d7bc2eb8a78991dfc059f8c}
+Checks if the given \hyperlink{class_attribute}{Attribute} exists in the \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of \hyperlink{class_attribute}{Attribute} to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_attribute}{Attribute} exists in \hyperlink{class_relation}{Relation} 
+\end{DoxyReturn}
+\hypertarget{class_relation_ae84c1daafc74ca37b516f1c7814569f8}{\index{Relation@{Relation}!get\-All\-Rows@{get\-All\-Rows}}
+\index{get\-All\-Rows@{get\-All\-Rows}!Relation@{Relation}}
+\subsubsection[{get\-All\-Rows}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$ string $>$ $>$ Relation\-::get\-All\-Rows (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_relation_ae84c1daafc74ca37b516f1c7814569f8}
+Gets all rows in the \hyperlink{class_relation}{Relation} \begin{DoxyReturn}{Returns}
+All rows in the \hyperlink{class_relation}{Relation} 
+\end{DoxyReturn}
+\hypertarget{class_relation_a549eddb9c701414f87ea739407c1d56f}{\index{Relation@{Relation}!get\-Row@{get\-Row}}
+\index{get\-Row@{get\-Row}!Relation@{Relation}}
+\subsubsection[{get\-Row}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ string $>$ Relation\-::get\-Row (
+\begin{DoxyParamCaption}
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)}}\label{class_relation_a549eddb9c701414f87ea739407c1d56f}
+Gets the specified row 
+\begin{DoxyParams}{Parameters}
+{\em key} & Key of row to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Row found at given key, or empty vector if row not found. 
+\end{DoxyReturn}
+\hypertarget{class_relation_a4eed29fdf5f9427b603e65cdf910b132}{\index{Relation@{Relation}!get\-Rows\-Where@{get\-Rows\-Where}}
+\index{get\-Rows\-Where@{get\-Rows\-Where}!Relation@{Relation}}
+\subsubsection[{get\-Rows\-Where}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$ string $>$ $>$ Relation\-::get\-Rows\-Where (
+\begin{DoxyParamCaption}
+\item[{string}]{attribute\-Name, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}}\label{class_relation_a4eed29fdf5f9427b603e65cdf910b132}
+Gets rows where a given \hyperlink{class_attribute}{Attribute} has a given value 
+\begin{DoxyParams}{Parameters}
+{\em attribute\-Name} & \hyperlink{class_attribute}{Attribute} to search \\
+\hline
+{\em value} & Value to find in given \hyperlink{class_attribute}{Attribute} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Rows where the given value was found in the given \hyperlink{class_attribute}{Attribute} 
+\end{DoxyReturn}
+\hypertarget{class_relation_a7a5fd377ae34b659a0b388a67e0b41d4}{\index{Relation@{Relation}!operator=@{operator=}}
+\index{operator=@{operator=}!Relation@{Relation}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Relation} Relation\-::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf Relation}}]{b}
+\end{DoxyParamCaption}
+)}}\label{class_relation_a7a5fd377ae34b659a0b388a67e0b41d4}
+Assignment Operator for \hyperlink{class_relation}{Relation} class \hypertarget{class_relation_ac2c0d40f65dd8a7f2dd95726afcc3091}{\index{Relation@{Relation}!remove\-Attribute@{remove\-Attribute}}
+\index{remove\-Attribute@{remove\-Attribute}!Relation@{Relation}}
+\subsubsection[{remove\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}bool Relation\-::remove\-Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_relation_ac2c0d40f65dd8a7f2dd95726afcc3091}
+Removes an \hyperlink{class_attribute}{Attribute} from the \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of attribute to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_attribute}{Attribute} was successfully removed 
+\end{DoxyReturn}
+\hypertarget{class_relation_ab8013e49e0d20e1eaab08abe8534f815}{\index{Relation@{Relation}!remove\-Row@{remove\-Row}}
+\index{remove\-Row@{remove\-Row}!Relation@{Relation}}
+\subsubsection[{remove\-Row}]{\setlength{\rightskip}{0pt plus 5cm}void Relation\-::remove\-Row (
+\begin{DoxyParamCaption}
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)}}\label{class_relation_ab8013e49e0d20e1eaab08abe8534f815}
+Removes the specified row from the \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em key} & Key of row to remove \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_relation_afe7d8ff14a51b47fd8dc4e1a1a069e56}{\index{Relation@{Relation}!rename\-Attribute@{rename\-Attribute}}
+\index{rename\-Attribute@{rename\-Attribute}!Relation@{Relation}}
+\subsubsection[{rename\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}bool Relation\-::rename\-Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{current\-Name, }
+\item[{string}]{new\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_relation_afe7d8ff14a51b47fd8dc4e1a1a069e56}
+Renames a given \hyperlink{class_attribute}{Attribute} 
+\begin{DoxyParams}{Parameters}
+{\em current\-Name} & The \hyperlink{class_attribute}{Attribute} to rename \\
+\hline
+{\em new\-Name} & New name for the \hyperlink{class_attribute}{Attribute} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_attribute}{Attribute} was successfully renamed 
+\end{DoxyReturn}
+\hypertarget{class_relation_a6ae6ba829869995ed0c334e6c4449329}{\index{Relation@{Relation}!show@{show}}
+\index{show@{show}!Relation@{Relation}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}void Relation\-::show (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_relation_a6ae6ba829869995ed0c334e6c4449329}
+Prints the \hyperlink{class_relation}{Relation} to command line \hypertarget{class_relation_a1a90eddb0ff2c2ec96df70dcbeb2863b}{\index{Relation@{Relation}!update\-Attribute\-Value@{update\-Attribute\-Value}}
+\index{update\-Attribute\-Value@{update\-Attribute\-Value}!Relation@{Relation}}
+\subsubsection[{update\-Attribute\-Value}]{\setlength{\rightskip}{0pt plus 5cm}bool Relation\-::update\-Attribute\-Value (
+\begin{DoxyParamCaption}
+\item[{int}]{key, }
+\item[{string}]{attribute\-Name, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}}\label{class_relation_a1a90eddb0ff2c2ec96df70dcbeb2863b}
+Updates a given Attributes value 
+\begin{DoxyParams}{Parameters}
+{\em key} & of value to update \\
+\hline
+{\em attribute\-Name} & \hyperlink{class_attribute}{Attribute} to update value in \\
+\hline
+{\em value} & Value to update current value to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if value was updated successfully 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_relation_ace8c91beafd208dcf6469b9b2425ecf7}{\index{Relation@{Relation}!attribute\-Names@{attribute\-Names}}
+\index{attribute\-Names@{attribute\-Names}!Relation@{Relation}}
+\subsubsection[{attribute\-Names}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ Relation\-::attribute\-Names\hspace{0.3cm}{\ttfamily [private]}}}\label{class_relation_ace8c91beafd208dcf6469b9b2425ecf7}
+Holds the \hyperlink{class_attribute}{Attribute} names in order of insertion \hypertarget{class_relation_ad505b043cf529432345433e6d4e2ded9}{\index{Relation@{Relation}!attributes@{attributes}}
+\index{attributes@{attributes}!Relation@{Relation}}
+\subsubsection[{attributes}]{\setlength{\rightskip}{0pt plus 5cm}map$<$string, {\bf Attribute}$>$ Relation\-::attributes\hspace{0.3cm}{\ttfamily [private]}}}\label{class_relation_ad505b043cf529432345433e6d4e2ded9}
+Map of \hyperlink{class_attribute}{Attribute} names mapped to Attributes 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/Relation.\-h\item 
+src/Relation.\-cpp\end{DoxyCompactItemize}

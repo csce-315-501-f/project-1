@@ -1,0 +1,207 @@
+Christopher Murray, Kevin Vece, Juan Reyes C\-S\-C\-E 315-\/501 \section*{Project 1 }
+
+Set Operation Functions 
+
+ \begin{TabularC}{2}
+\hline
+\rowcolor{lightgray}{\bf Operation}&{\bf Our Function in Database }\\\cline{1-2}
+create table&Database\-::add\-Relation \\\cline{1-2}
+insert into&Database\-::add\-Row \\\cline{1-2}
+delete&Database\-::remove\-Relation\newline
+Database\-::remove\-Attribute\newline
+Database\-::remove\-Row \\\cline{1-2}
+selection&Database\-::get\-Rows\-Where \\\cline{1-2}
+projection&Database\-::projection \\\cline{1-2}
+renaming&Database\-::rename\-Relation\newline
+Database\-::rename\-Attribute \\\cline{1-2}
+set union&Database\-::relation\-Union \\\cline{1-2}
+set difference&Database\-::relation\-Difference \\\cline{1-2}
+cross product&Database\-::relation\-Cross\-Product \\\cline{1-2}
+update&Database\-::update\-Attribute\-Value \\\cline{1-2}
+show&Database\-::show \\\cline{1-2}
+\end{TabularC}
+
+
+\subsection*{Test Compilation Instructions }
+
+The tests were compiled and tested with the included Makefile using the g++ compiler. To compile and run the tests do the following (from project root)\-: 
+\begin{DoxyPre}{\ttfamily cd tests/
+make all
+mainTest}\end{DoxyPre}
+
+
+Sample Output from the above commands\-: 
+\begin{DoxyPre}{\ttfamily ccmurray93 [~/Development/CSCE-315/project-1/tests]$make all
+g++ AttributeTest.cpp ../src/Attribute.cpp RelationTest.cpp ../src/Relation.cpp DatabaseTest.cpp ../src/Database.cpp mainTest.cpp -o mainTest
+ccmurray93 [~/Development/CSCE-315/project-1/tests]\$./mainTest 
+
+
+
+* Testing Attribute Class *
+
+
+
+initTest:                          Passed
+insertWithoutKeyTest:              Passed
+insertWithKeyTest:                 Passed
+insertWithValTooLongTest:          Passed
+removeTest:                        Passed
+updateTest:                        Passed
+emptyAttributeTest:                Passed
+emptyValueTest:                    Passed
+findValueTest:                     Passed}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily 
+
+
+* Testing Relation Class *
+
+
+
+initTest:                  Passed
+addAttributeTest:          Passed
+addRowTest:                Passed
+getRowTest:                Passed
+getRowsWhereTest:          Passed
+removeValueTest:           Passed
+updateAttributeValueTest:  Passed
+renameAttributeTest:       Passed
+getAllRowsTest:            Passed}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily 
+
+
+* Testing Database Class *
+
+
+
+initTest:              Passed
+addRelationTest:       Passed
+addAttributeTest:      Passed
+removeRelationTest:    Passed
+removeAttributeTest:   Passed
+addRowTest:            Passed
+getRowsWhereTest:      Passed
+renameRelationTest:    Passed
+renameAttributeTest:   Passed
+projectionTest:        
+
+
+}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** Original Relation ****/
+testIntegerAttribute1  testIntegerAttribute2  
+1                      2                      
+/**** Projection with "testIntegerAttribute2"****/
+testIntegerAttribute2  
+2                      
+
+
+
+relationUnionTest:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** Relation 1 ****/
+testIntegerAttribute1  testIntegerAttribute2  
+1                      2                      
+3                      4}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** Relation 2 ****/
+testIntegerAttribute1  testIntegerAttribute2  
+1                      2                      
+4                      5}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** 1 u 2 ****/
+testIntegerAttribute1  testIntegerAttribute2  
+1                      2                      
+3                      4                      
+\subsection*{4                      5                      
+}}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily }\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily relationDifferenceTest:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** Relation 1 ****/
+testIntegerAttribute1  testIntegerAttribute2  
+1                      2                      
+3                      4}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** Relation 2 ****/
+testIntegerAttribute1  testIntegerAttribute2  
+1                      2                      
+4                      5}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** 1 - 2 ****/
+testIntegerAttribute1  testIntegerAttribute2  
+3                      4}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** 2 - 1 ****/
+testIntegerAttribute1  testIntegerAttribute2  
+\subsection*{4                      5                      
+}}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily }\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily relationCrossProductTest:}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** Relation 1 ****/
+testIntegerAttribute1  testStringAttribute1  
+1                      testString1           
+2                      testString2}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** Relation 2 ****/
+testStringAttribute2  testIntegerAttribute2  
+testString3           3                      
+testString4           4}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** 1 * 2 ****/
+testIntegerAttribute1  testStringAttribute1  testStringAttribute2  testIntegerAttribute2  
+1                      testString1           testString3           3                      
+1                      testString1           testString4           4                      
+2                      testString2           testString3           3                      
+2                      testString2           testString4           4}\end{DoxyPre}
+
+
+
+\begin{DoxyPre}{\ttfamily /**** 2 * 1 ****/
+testStringAttribute2  testIntegerAttribute2  testIntegerAttribute1  testStringAttribute1  
+testString3           3                      1                      testString1           
+testString3           3                      2                      testString2           
+testString4           4                      1                      testString1           
+testString4           4                      2                      testString2           
+------------------------------------------------------------}\end{DoxyPre}
+ 

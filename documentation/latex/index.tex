@@ -1,0 +1,33 @@
+\hypertarget{index_contributors}{}\section{Contributors}\label{index_contributors}
+Christopher Murray, Kevin Vece, Juan Reyes\hypertarget{index_gen_info}{}\section{General Information}\label{index_gen_info}
+The program is an academic management application that will be able to keep track of class schedules, assignments, and important dates for the course. Students from elementary school all the way to college could use the program to stay organized in their classes. With this application the users will be able to avoid missed deadlines and keep track of all their course work. The program could also be modified to later entertain projects for companies and small businesses.
+
+The data that this application uses will be stored in a custom made \hyperlink{class_database}{Database} Management System, that will be designed in parts. The \hyperlink{class_database}{Database} Management System will include an A\-P\-I that will control how the data is stored, a Query Language that will define how to issue commands, and a \hyperlink{class_parser}{Parser} that will translate the queries into function calls that will manipulate data within the database.\hypertarget{index_location}{}\subsection{Project Location}\label{index_location}
+This project can be found on \href{https://github.com/csce-315-501-f/project-1}{\tt Git\-Hub}. \hypertarget{index_compiler}{}\subsection{Compiler}\label{index_compiler}
+This project was compiled, debugged, and tested using the g++ compiler. \hypertarget{index_source_code}{}\subsection{Source Code}\label{index_source_code}
+The source code for this project is located in the src/ directory. \hypertarget{index_test_code}{}\subsection{Test Code}\label{index_test_code}
+The unit tests for this project are located in the tests/ directory.\hypertarget{index_test_info}{}\section{Test Compilation Information}\label{index_test_info}
+The tests were compiled and tested with the included Makefile. To compile and run the tests do the following (from project root)\-: 
+\begin{DoxyPre}
+{\ttfamily cd tests/
+make all
+./mainTest}\end{DoxyPre}
+\hypertarget{index_db_func_info}{}\section{Database Algebraic Functions}\label{index_db_func_info}
+\begin{TabularC}{2}
+\hline
+\rowcolor{lightgray}{\bf Operation}&{\bf Function in \hyperlink{class_database}{Database} }\\\cline{1-2}
+create table&\hyperlink{class_database_ae1a928caf223e2cbe1a3a78140773e88}{Database\-::add\-Relation} \\\cline{1-2}
+insert into&\hyperlink{class_database_ac73ed9280bd5c4f685cdd89ef7e2cd3e}{Database\-::add\-Row} \\\cline{1-2}
+delete&\hyperlink{class_database_abc38a65c8593339c450f918ebe5d48c1}{Database\-::remove\-Relation}\newline
+\hyperlink{class_database_af7bed4fd63c5374cb1fd97f0e9f72b96}{Database\-::remove\-Attribute}\newline
+\hyperlink{class_database_aa8324ade169386cde3f1c0a212e186f9}{Database\-::remove\-Row} \\\cline{1-2}
+selection&\hyperlink{class_database_acfe8e5676779ee61013a47d34ef0e39c}{Database\-::get\-Rows\-Where} \\\cline{1-2}
+projection&\hyperlink{class_database_af113b1e566197ff5231c7b792a6a4d98}{Database\-::projection} \\\cline{1-2}
+renaming&\hyperlink{class_database_af9213d1ecf9a4ec08d67e3f2bd565f2f}{Database\-::rename\-Relation}\newline
+\hyperlink{class_database_a1f9663265995e751bf461d1b9e60ebfd}{Database\-::rename\-Attribute} \\\cline{1-2}
+set union&\hyperlink{class_database_a1fa5ff90a41f1231c58b841a9d3e0475}{Database\-::relation\-Union} \\\cline{1-2}
+set difference&\hyperlink{class_database_a8799dbd5a15a2e43c74bc4543fe8fa2e}{Database\-::relation\-Difference} \\\cline{1-2}
+cross product&\hyperlink{class_database_adabfc3cb1f51932ff08007200b0972a8}{Database\-::relation\-Cross\-Product} \\\cline{1-2}
+update&\hyperlink{class_database_a61173497b8a9b6f1701fabfaa920954c}{Database\-::update\-Attribute\-Value} \\\cline{1-2}
+show&\hyperlink{class_database_a959909a78516b1a6a73ccea7968c70e7}{Database\-::show} \\\cline{1-2}
+\end{TabularC}

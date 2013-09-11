@@ -1,0 +1,400 @@
+\hypertarget{class_database}{\section{Database Class Reference}
+\label{class_database}\index{Database@{Database}}
+}
+
+
+\hyperlink{class_database}{Database} Class represents one database. The \hyperlink{class_database}{Database} Class represents one database that includes a vector of \hyperlink{class_relation}{Relation} class objects that represent the tables in the database. It also includes member functions that provide the functionality to perform operations on those relations.  
+
+
+
+
+{\ttfamily \#include $<$Database.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_database_ac1435d217402f4667dd3c62e2c3456d1}{relation\-Exists} (string name)
+\item 
+bool \hyperlink{class_database_a8553be991d9615cd04aa96f117363537}{attribute\-Exists} (string rel\-Name, string attr\-Name)
+\item 
+bool \hyperlink{class_database_ae1a928caf223e2cbe1a3a78140773e88}{add\-Relation} (string name)
+\item 
+bool \hyperlink{class_database_ab53f2a8af55fd5ff8daa92eaf4f2c55f}{add\-Attribute} (string rel\-Name, string attr\-Name, string type, int length)
+\item 
+bool \hyperlink{class_database_af7bed4fd63c5374cb1fd97f0e9f72b96}{remove\-Attribute} (string rel\-Name, string attr\-Name)
+\item 
+bool \hyperlink{class_database_abc38a65c8593339c450f918ebe5d48c1}{remove\-Relation} (string name)
+\item 
+void \hyperlink{class_database_a959909a78516b1a6a73ccea7968c70e7}{show} (string name=\char`\"{}\char`\"{})
+\item 
+int \hyperlink{class_database_ac73ed9280bd5c4f685cdd89ef7e2cd3e}{add\-Row} (string rel\-Name, vector$<$ string $>$ row)
+\item 
+void \hyperlink{class_database_aa8324ade169386cde3f1c0a212e186f9}{remove\-Row} (string rel\-Name, int key)
+\item 
+bool \hyperlink{class_database_a61173497b8a9b6f1701fabfaa920954c}{update\-Attribute\-Value} (string rel\-Name, int key, string attribute\-Name, string value)
+\item 
+vector$<$ vector$<$ string $>$ $>$ \hyperlink{class_database_acfe8e5676779ee61013a47d34ef0e39c}{get\-Rows\-Where} (string rel\-Name, string attr\-Name, string value)
+\item 
+bool \hyperlink{class_database_af9213d1ecf9a4ec08d67e3f2bd565f2f}{rename\-Relation} (string current\-Name, string new\-Name)
+\item 
+bool \hyperlink{class_database_a1f9663265995e751bf461d1b9e60ebfd}{rename\-Attribute} (string rel\-Name, string current\-Name, string new\-Name)
+\item 
+\hyperlink{class_relation}{Relation} \hyperlink{class_database_af113b1e566197ff5231c7b792a6a4d98}{projection} (string rel\-Name, vector$<$ string $>$ attr\-Names)
+\item 
+bool \hyperlink{class_database_a9e61f5f7d4ac2b56ff768c908acec026}{union\-Compatible} (string rel\-Name1, string rel\-Name2)
+\item 
+\hyperlink{class_relation}{Relation} \hyperlink{class_database_a1fa5ff90a41f1231c58b841a9d3e0475}{relation\-Union} (string rel\-Name1, string rel\-Name2)
+\item 
+\hyperlink{class_relation}{Relation} \hyperlink{class_database_a8799dbd5a15a2e43c74bc4543fe8fa2e}{relation\-Difference} (string rel\-Name1, string rel\-Name2)
+\item 
+\hyperlink{class_relation}{Relation} \hyperlink{class_database_adabfc3cb1f51932ff08007200b0972a8}{relation\-Cross\-Product} (string rel\-Name1, string rel\-Name2)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ string, \hyperlink{class_relation}{Relation} $>$ \hyperlink{class_database_a170fceaed7e90333c306c8003320efc5}{relations}
+\item 
+vector$<$ string $>$ \hyperlink{class_database_ae33e101d9096adf93aeee9c95b7e41d2}{relation\-Names}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_database}{Database} Class represents one database. The \hyperlink{class_database}{Database} Class represents one database that includes a vector of \hyperlink{class_relation}{Relation} class objects that represent the tables in the database. It also includes member functions that provide the functionality to perform operations on those relations. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_database_ab53f2a8af55fd5ff8daa92eaf4f2c55f}{\index{Database@{Database}!add\-Attribute@{add\-Attribute}}
+\index{add\-Attribute@{add\-Attribute}!Database@{Database}}
+\subsubsection[{add\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::add\-Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{string}]{attr\-Name, }
+\item[{string}]{type, }
+\item[{int}]{length}
+\end{DoxyParamCaption}
+)}}\label{class_database_ab53f2a8af55fd5ff8daa92eaf4f2c55f}
+Adds an \hyperlink{class_attribute}{Attribute} to the given \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} to add \hyperlink{class_attribute}{Attribute} to \\
+\hline
+{\em attr\-Name} & Name of \hyperlink{class_attribute}{Attribute} \\
+\hline
+{\em type} & Type of Attibute \\
+\hline
+{\em length} & Length of \hyperlink{class_attribute}{Attribute} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_attribute}{Attribute} was successfully added to \hyperlink{class_relation}{Relation} 
+\end{DoxyReturn}
+\hypertarget{class_database_ae1a928caf223e2cbe1a3a78140773e88}{\index{Database@{Database}!add\-Relation@{add\-Relation}}
+\index{add\-Relation@{add\-Relation}!Database@{Database}}
+\subsubsection[{add\-Relation}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::add\-Relation (
+\begin{DoxyParamCaption}
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_database_ae1a928caf223e2cbe1a3a78140773e88}
+Adds a \hyperlink{class_relation}{Relation} to the \hyperlink{class_database}{Database} 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of \hyperlink{class_relation}{Relation} to add \\
+\hline
+{\em True} & if \hyperlink{class_relation}{Relation} was successfully added \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_database_ac73ed9280bd5c4f685cdd89ef7e2cd3e}{\index{Database@{Database}!add\-Row@{add\-Row}}
+\index{add\-Row@{add\-Row}!Database@{Database}}
+\subsubsection[{add\-Row}]{\setlength{\rightskip}{0pt plus 5cm}int Database\-::add\-Row (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{vector$<$ string $>$}]{row}
+\end{DoxyParamCaption}
+)}}\label{class_database_ac73ed9280bd5c4f685cdd89ef7e2cd3e}
+Adds a row to the given \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} to add row to \\
+\hline
+{\em row} & Row to add to \hyperlink{class_relation}{Relation} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Key of added row 
+\end{DoxyReturn}
+\hypertarget{class_database_a8553be991d9615cd04aa96f117363537}{\index{Database@{Database}!attribute\-Exists@{attribute\-Exists}}
+\index{attribute\-Exists@{attribute\-Exists}!Database@{Database}}
+\subsubsection[{attribute\-Exists}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::attribute\-Exists (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{string}]{attr\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_database_a8553be991d9615cd04aa96f117363537}
+Checks if the given \hyperlink{class_attribute}{Attribute} exists in the given \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} to check \\
+\hline
+{\em attr\-Name} & Name of \hyperlink{class_attribute}{Attribute} to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_attribute}{Attribute} exists in \hyperlink{class_relation}{Relation} 
+\end{DoxyReturn}
+\hypertarget{class_database_acfe8e5676779ee61013a47d34ef0e39c}{\index{Database@{Database}!get\-Rows\-Where@{get\-Rows\-Where}}
+\index{get\-Rows\-Where@{get\-Rows\-Where}!Database@{Database}}
+\subsubsection[{get\-Rows\-Where}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$ string $>$ $>$ Database\-::get\-Rows\-Where (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{string}]{attr\-Name, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}}\label{class_database_acfe8e5676779ee61013a47d34ef0e39c}
+Selection Operation. Gets rows in \hyperlink{class_relation}{Relation} where a given value exists in a given \hyperlink{class_attribute}{Attribute}. 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} to get from  attr\-Name Name of \hyperlink{class_attribute}{Attribute} to search \\
+\hline
+{\em value} & Value to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Rows in given \hyperlink{class_relation}{Relation} where the given value was found in the given \hyperlink{class_attribute}{Attribute} 
+\end{DoxyReturn}
+\hypertarget{class_database_af113b1e566197ff5231c7b792a6a4d98}{\index{Database@{Database}!projection@{projection}}
+\index{projection@{projection}!Database@{Database}}
+\subsubsection[{projection}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Relation} Database\-::projection (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{vector$<$ string $>$}]{attr\-Names}
+\end{DoxyParamCaption}
+)}}\label{class_database_af113b1e566197ff5231c7b792a6a4d98}
+Projection Operation 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} \\
+\hline
+{\em attr\-Names} & Names of Attributes for use in projection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_relation}{Relation} of the resulting projection 
+\end{DoxyReturn}
+\hypertarget{class_database_adabfc3cb1f51932ff08007200b0972a8}{\index{Database@{Database}!relation\-Cross\-Product@{relation\-Cross\-Product}}
+\index{relation\-Cross\-Product@{relation\-Cross\-Product}!Database@{Database}}
+\subsubsection[{relation\-Cross\-Product}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Relation} Database\-::relation\-Cross\-Product (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name1, }
+\item[{string}]{rel\-Name2}
+\end{DoxyParamCaption}
+)}}\label{class_database_adabfc3cb1f51932ff08007200b0972a8}
+Cross/\-Cartesian Product Operation 
+\begin{DoxyParams}{Parameters}
+{\em string} & rel\-Name1 first relation name \\
+\hline
+{\em string} & relname2 second relation name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_relation}{Relation} of the resulting cross/cartesian product 
+\end{DoxyReturn}
+\hypertarget{class_database_a8799dbd5a15a2e43c74bc4543fe8fa2e}{\index{Database@{Database}!relation\-Difference@{relation\-Difference}}
+\index{relation\-Difference@{relation\-Difference}!Database@{Database}}
+\subsubsection[{relation\-Difference}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Relation} Database\-::relation\-Difference (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name1, }
+\item[{string}]{rel\-Name2}
+\end{DoxyParamCaption}
+)}}\label{class_database_a8799dbd5a15a2e43c74bc4543fe8fa2e}
+Difference Operation. 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name1} & Name of the first \hyperlink{class_relation}{Relation} \\
+\hline
+{\em relname2} & Name of the second \hyperlink{class_relation}{Relation} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_relation}{Relation} of the resulting difference 
+\end{DoxyReturn}
+\hypertarget{class_database_ac1435d217402f4667dd3c62e2c3456d1}{\index{Database@{Database}!relation\-Exists@{relation\-Exists}}
+\index{relation\-Exists@{relation\-Exists}!Database@{Database}}
+\subsubsection[{relation\-Exists}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::relation\-Exists (
+\begin{DoxyParamCaption}
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_database_ac1435d217402f4667dd3c62e2c3456d1}
+Checks if the given \hyperlink{class_relation}{Relation} exists in the \hyperlink{class_database}{Database} 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of \hyperlink{class_relation}{Relation} to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_relation}{Relation} exists in \hyperlink{class_database}{Database} 
+\end{DoxyReturn}
+\hypertarget{class_database_a1fa5ff90a41f1231c58b841a9d3e0475}{\index{Database@{Database}!relation\-Union@{relation\-Union}}
+\index{relation\-Union@{relation\-Union}!Database@{Database}}
+\subsubsection[{relation\-Union}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Relation} Database\-::relation\-Union (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name1, }
+\item[{string}]{rel\-Name2}
+\end{DoxyParamCaption}
+)}}\label{class_database_a1fa5ff90a41f1231c58b841a9d3e0475}
+Union Operation. 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name1} & Name of the first \hyperlink{class_relation}{Relation} \\
+\hline
+{\em relname2} & Name of the second \hyperlink{class_relation}{Relation} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_relation}{Relation} of the resulting union 
+\end{DoxyReturn}
+\hypertarget{class_database_af7bed4fd63c5374cb1fd97f0e9f72b96}{\index{Database@{Database}!remove\-Attribute@{remove\-Attribute}}
+\index{remove\-Attribute@{remove\-Attribute}!Database@{Database}}
+\subsubsection[{remove\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::remove\-Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{string}]{attr\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_database_af7bed4fd63c5374cb1fd97f0e9f72b96}
+Removes an \hyperlink{class_attribute}{Attribute} from the given \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} to remove \hyperlink{class_attribute}{Attribute} from \\
+\hline
+{\em attr\-Name} & Name of \hyperlink{class_attribute}{Attribute} to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_attribute}{Attribute} successfully removed from \hyperlink{class_relation}{Relation} 
+\end{DoxyReturn}
+\hypertarget{class_database_abc38a65c8593339c450f918ebe5d48c1}{\index{Database@{Database}!remove\-Relation@{remove\-Relation}}
+\index{remove\-Relation@{remove\-Relation}!Database@{Database}}
+\subsubsection[{remove\-Relation}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::remove\-Relation (
+\begin{DoxyParamCaption}
+\item[{string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_database_abc38a65c8593339c450f918ebe5d48c1}
+Removes a given \hyperlink{class_relation}{Relation} from the \hyperlink{class_database}{Database} 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of \hyperlink{class_relation}{Relation} to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_relation}{Relation} successfully removed from \hyperlink{class_database}{Database} 
+\end{DoxyReturn}
+\hypertarget{class_database_aa8324ade169386cde3f1c0a212e186f9}{\index{Database@{Database}!remove\-Row@{remove\-Row}}
+\index{remove\-Row@{remove\-Row}!Database@{Database}}
+\subsubsection[{remove\-Row}]{\setlength{\rightskip}{0pt plus 5cm}void Database\-::remove\-Row (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)}}\label{class_database_aa8324ade169386cde3f1c0a212e186f9}
+Removes a row from a \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} to remove row from \\
+\hline
+{\em key} & Key of row to remove from \hyperlink{class_relation}{Relation} \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_database_a1f9663265995e751bf461d1b9e60ebfd}{\index{Database@{Database}!rename\-Attribute@{rename\-Attribute}}
+\index{rename\-Attribute@{rename\-Attribute}!Database@{Database}}
+\subsubsection[{rename\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::rename\-Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{string}]{current\-Name, }
+\item[{string}]{new\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_database_a1f9663265995e751bf461d1b9e60ebfd}
+Renames an \hyperlink{class_attribute}{Attribute} in a given \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} \\
+\hline
+{\em current\-Name} & Current \hyperlink{class_attribute}{Attribute} name \\
+\hline
+{\em new\-Name} & New \hyperlink{class_attribute}{Attribute} name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_attribute}{Attribute} in \hyperlink{class_relation}{Relation} was successfully renamed 
+\end{DoxyReturn}
+\hypertarget{class_database_af9213d1ecf9a4ec08d67e3f2bd565f2f}{\index{Database@{Database}!rename\-Relation@{rename\-Relation}}
+\index{rename\-Relation@{rename\-Relation}!Database@{Database}}
+\subsubsection[{rename\-Relation}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::rename\-Relation (
+\begin{DoxyParamCaption}
+\item[{string}]{current\-Name, }
+\item[{string}]{new\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_database_af9213d1ecf9a4ec08d67e3f2bd565f2f}
+Renames the given \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em current\-Name} & Current \hyperlink{class_relation}{Relation} name \\
+\hline
+{\em new\-Name} & New \hyperlink{class_relation}{Relation} name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if \hyperlink{class_relation}{Relation} successfully renamed 
+\end{DoxyReturn}
+\hypertarget{class_database_a959909a78516b1a6a73ccea7968c70e7}{\index{Database@{Database}!show@{show}}
+\index{show@{show}!Database@{Database}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}void Database\-::show (
+\begin{DoxyParamCaption}
+\item[{string}]{name = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}}\label{class_database_a959909a78516b1a6a73ccea7968c70e7}
+Prints the \hyperlink{class_database}{Database}, or given \hyperlink{class_relation}{Relation} to command line. Prints all Relations if no \hyperlink{class_relation}{Relation} name given. 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of \hyperlink{class_relation}{Relation} to show \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_database_a9e61f5f7d4ac2b56ff768c908acec026}{\index{Database@{Database}!union\-Compatible@{union\-Compatible}}
+\index{union\-Compatible@{union\-Compatible}!Database@{Database}}
+\subsubsection[{union\-Compatible}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::union\-Compatible (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name1, }
+\item[{string}]{rel\-Name2}
+\end{DoxyParamCaption}
+)}}\label{class_database_a9e61f5f7d4ac2b56ff768c908acec026}
+Checks if the given Relations are union-\/compatible 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name1} & Name of the first \hyperlink{class_relation}{Relation} \\
+\hline
+{\em relname2} & Name of the second \hyperlink{class_relation}{Relation} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the two given Relations are union-\/compatible 
+\end{DoxyReturn}
+\hypertarget{class_database_a61173497b8a9b6f1701fabfaa920954c}{\index{Database@{Database}!update\-Attribute\-Value@{update\-Attribute\-Value}}
+\index{update\-Attribute\-Value@{update\-Attribute\-Value}!Database@{Database}}
+\subsubsection[{update\-Attribute\-Value}]{\setlength{\rightskip}{0pt plus 5cm}bool Database\-::update\-Attribute\-Value (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{int}]{key, }
+\item[{string}]{attribute\-Name, }
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}}\label{class_database_a61173497b8a9b6f1701fabfaa920954c}
+Updates an \hyperlink{class_attribute}{Attribute}'s value in a given \hyperlink{class_relation}{Relation} 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} \\
+\hline
+{\em key} & Key of value to update \\
+\hline
+{\em attribute\-Name} & Name of \hyperlink{class_attribute}{Attribute} to be updated \\
+\hline
+{\em value} & Value to update old value to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the value was successfully updated 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_database_ae33e101d9096adf93aeee9c95b7e41d2}{\index{Database@{Database}!relation\-Names@{relation\-Names}}
+\index{relation\-Names@{relation\-Names}!Database@{Database}}
+\subsubsection[{relation\-Names}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ Database\-::relation\-Names\hspace{0.3cm}{\ttfamily [private]}}}\label{class_database_ae33e101d9096adf93aeee9c95b7e41d2}
+Holds the \hyperlink{class_relation}{Relation} names in order of insertion \hypertarget{class_database_a170fceaed7e90333c306c8003320efc5}{\index{Database@{Database}!relations@{relations}}
+\index{relations@{relations}!Database@{Database}}
+\subsubsection[{relations}]{\setlength{\rightskip}{0pt plus 5cm}map$<$string, {\bf Relation}$>$ Database\-::relations\hspace{0.3cm}{\ttfamily [private]}}}\label{class_database_a170fceaed7e90333c306c8003320efc5}
+Map of \hyperlink{class_relation}{Relation} names to Relations 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/Database.\-h\item 
+src/Database.\-cpp\end{DoxyCompactItemize}

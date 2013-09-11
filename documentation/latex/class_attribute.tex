@@ -1,0 +1,243 @@
+\hypertarget{class_attribute}{\section{Attribute Class Reference}
+\label{class_attribute}\index{Attribute@{Attribute}}
+}
+
+
+\hyperlink{class_attribute}{Attribute} Class represents one column in a relation. The \hyperlink{class_attribute}{Attribute} class represents one column in a database relation. It includes all the values for that column in a relation, along with the types of values that can be stored there.  
+
+
+
+
+{\ttfamily \#include $<$Attribute.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_attribute_a8ba4e5a507aef352563e1e56f1930e66}{Attribute} ()
+\item 
+\hyperlink{class_attribute_a02233dafef63f06ff9402c160e0f9373}{Attribute} (string attr\-Type, int len)
+\item 
+bool \hyperlink{class_attribute_a1ef67e13c131f9e3ac6a6a2adbb6e5aa}{is\-Empty} (int key=-\/1)
+\item 
+void \hyperlink{class_attribute_ace0103128f51d118718413c48ba5180d}{set\-Length} (int len)
+\item 
+string \hyperlink{class_attribute_a7fbbc68ab2f0dbef61e783842deca1e3}{get\-Type} ()
+\item 
+int \hyperlink{class_attribute_aab394210caea68ab5fc7bbab5ce33abe}{get\-Size} ()
+\item 
+string \hyperlink{class_attribute_a8df7ea306c5eede720d1933f6a46c337}{get\-Value} (int key)
+\item 
+vector$<$ int $>$ \hyperlink{class_attribute_aae6bd7cf63b3f8069721048d2a9c8ef7}{find\-Value} (string value)
+\item 
+void \hyperlink{class_attribute_a714539d4184caef6ad6accd8b29dcb4c}{remove\-Value} (int key)
+\item 
+void \hyperlink{class_attribute_af75dab2d3c606606d8fca11bb54d4314}{remove\-Last} ()
+\item 
+int \hyperlink{class_attribute_a2e7e01c0077452815fd6e0420d15ba06}{add\-Value} (string val, int key=-\/1)
+\item 
+bool \hyperlink{class_attribute_a248d912b1d34554143e4424d0228198b}{update\-Value} (int key, string val)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ string $>$ \hyperlink{class_attribute_ae3eb3292f5ddc91f6c2c0152edf625fb}{values}
+\item 
+string \hyperlink{class_attribute_abc17bc58ec6c45b21533ee2194bf2516}{type}
+\item 
+int \hyperlink{class_attribute_ace310d0f9b59ecde4923c401852112d0}{length}
+\item 
+queue$<$ int $>$ \hyperlink{class_attribute_a0b0da13208f7c429f72e766c977f9e40}{free\-Keys}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_attribute_a7ee004262f27f8c916688911a71e3aa1}{class {\bfseries Relation}}\label{class_attribute_a7ee004262f27f8c916688911a71e3aa1}
+
+\item 
+\hypertarget{class_attribute_a6efef52d7a939622bbc934ff6b90ffe0}{class {\bfseries Database}}\label{class_attribute_a6efef52d7a939622bbc934ff6b90ffe0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_attribute}{Attribute} Class represents one column in a relation. The \hyperlink{class_attribute}{Attribute} class represents one column in a database relation. It includes all the values for that column in a relation, along with the types of values that can be stored there. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_attribute_a8ba4e5a507aef352563e1e56f1930e66}{\index{Attribute@{Attribute}!Attribute@{Attribute}}
+\index{Attribute@{Attribute}!Attribute@{Attribute}}
+\subsubsection[{Attribute}]{\setlength{\rightskip}{0pt plus 5cm}Attribute\-::\-Attribute (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_attribute_a8ba4e5a507aef352563e1e56f1930e66}
+Initializes type to \char`\"{}\char`\"{} and length to 0 \hypertarget{class_attribute_a02233dafef63f06ff9402c160e0f9373}{\index{Attribute@{Attribute}!Attribute@{Attribute}}
+\index{Attribute@{Attribute}!Attribute@{Attribute}}
+\subsubsection[{Attribute}]{\setlength{\rightskip}{0pt plus 5cm}Attribute\-::\-Attribute (
+\begin{DoxyParamCaption}
+\item[{string}]{attr\-Type, }
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)}}\label{class_attribute_a02233dafef63f06ff9402c160e0f9373}
+Normal \hyperlink{class_attribute}{Attribute} Constructor 
+\begin{DoxyParams}{Parameters}
+{\em attr\-Type} & The type of the attribute \\
+\hline
+{\em len} & The length of the attribute \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_attribute_a2e7e01c0077452815fd6e0420d15ba06}{\index{Attribute@{Attribute}!add\-Value@{add\-Value}}
+\index{add\-Value@{add\-Value}!Attribute@{Attribute}}
+\subsubsection[{add\-Value}]{\setlength{\rightskip}{0pt plus 5cm}int Attribute\-::add\-Value (
+\begin{DoxyParamCaption}
+\item[{string}]{val, }
+\item[{int}]{key = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}}\label{class_attribute_a2e7e01c0077452815fd6e0420d15ba06}
+Adds a value to the \hyperlink{class_attribute}{Attribute}. If no key given, the value is inserted at the first available empty position. 
+\begin{DoxyParams}{Parameters}
+{\em val} & Value to add \\
+\hline
+{\em key} & Key to insert value at \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Key where the value was inserted, or -\/1 if the value was not inserted. 
+\end{DoxyReturn}
+\hypertarget{class_attribute_aae6bd7cf63b3f8069721048d2a9c8ef7}{\index{Attribute@{Attribute}!find\-Value@{find\-Value}}
+\index{find\-Value@{find\-Value}!Attribute@{Attribute}}
+\subsubsection[{find\-Value}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ int $>$ Attribute\-::find\-Value (
+\begin{DoxyParamCaption}
+\item[{string}]{value}
+\end{DoxyParamCaption}
+)}}\label{class_attribute_aae6bd7cf63b3f8069721048d2a9c8ef7}
+Finds all keys where given value appears 
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Keys where value appears 
+\end{DoxyReturn}
+\hypertarget{class_attribute_aab394210caea68ab5fc7bbab5ce33abe}{\index{Attribute@{Attribute}!get\-Size@{get\-Size}}
+\index{get\-Size@{get\-Size}!Attribute@{Attribute}}
+\subsubsection[{get\-Size}]{\setlength{\rightskip}{0pt plus 5cm}int Attribute\-::get\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_attribute_aab394210caea68ab5fc7bbab5ce33abe}
+Gets the number of values currently stored in the \hyperlink{class_attribute}{Attribute}. \begin{DoxyReturn}{Returns}
+Number of values 
+\end{DoxyReturn}
+\hypertarget{class_attribute_a7fbbc68ab2f0dbef61e783842deca1e3}{\index{Attribute@{Attribute}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!Attribute@{Attribute}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}string Attribute\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_attribute_a7fbbc68ab2f0dbef61e783842deca1e3}
+\begin{DoxyReturn}{Returns}
+Type of the \hyperlink{class_attribute}{Attribute} 
+\end{DoxyReturn}
+\hypertarget{class_attribute_a8df7ea306c5eede720d1933f6a46c337}{\index{Attribute@{Attribute}!get\-Value@{get\-Value}}
+\index{get\-Value@{get\-Value}!Attribute@{Attribute}}
+\subsubsection[{get\-Value}]{\setlength{\rightskip}{0pt plus 5cm}string Attribute\-::get\-Value (
+\begin{DoxyParamCaption}
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_attribute_a8df7ea306c5eede720d1933f6a46c337}
+Gets a value stored at a given key 
+\begin{DoxyParams}{Parameters}
+{\em key} & Key to retrieve value from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value at given key 
+\end{DoxyReturn}
+\hypertarget{class_attribute_a1ef67e13c131f9e3ac6a6a2adbb6e5aa}{\index{Attribute@{Attribute}!is\-Empty@{is\-Empty}}
+\index{is\-Empty@{is\-Empty}!Attribute@{Attribute}}
+\subsubsection[{is\-Empty}]{\setlength{\rightskip}{0pt plus 5cm}bool Attribute\-::is\-Empty (
+\begin{DoxyParamCaption}
+\item[{int}]{key = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)}}\label{class_attribute_a1ef67e13c131f9e3ac6a6a2adbb6e5aa}
+If a value for {\ttfamily key} is passed, then the value at that key will be checked to see if it is empty. If a key is not passed, then each value in the \hyperlink{class_attribute}{Attribute} will be checked if they are empty. 
+\begin{DoxyParams}{Parameters}
+{\em key} & Key of value to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the value, or \hyperlink{class_attribute}{Attribute}, is empty 
+\end{DoxyReturn}
+\hypertarget{class_attribute_af75dab2d3c606606d8fca11bb54d4314}{\index{Attribute@{Attribute}!remove\-Last@{remove\-Last}}
+\index{remove\-Last@{remove\-Last}!Attribute@{Attribute}}
+\subsubsection[{remove\-Last}]{\setlength{\rightskip}{0pt plus 5cm}void Attribute\-::remove\-Last (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_attribute_af75dab2d3c606606d8fca11bb54d4314}
+Removes the last value in the \hyperlink{class_attribute}{Attribute} \hypertarget{class_attribute_a714539d4184caef6ad6accd8b29dcb4c}{\index{Attribute@{Attribute}!remove\-Value@{remove\-Value}}
+\index{remove\-Value@{remove\-Value}!Attribute@{Attribute}}
+\subsubsection[{remove\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void Attribute\-::remove\-Value (
+\begin{DoxyParamCaption}
+\item[{int}]{key}
+\end{DoxyParamCaption}
+)}}\label{class_attribute_a714539d4184caef6ad6accd8b29dcb4c}
+Removes a value from the \hyperlink{class_attribute}{Attribute} 
+\begin{DoxyParams}{Parameters}
+{\em key} & Key of value to remove \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_attribute_ace0103128f51d118718413c48ba5180d}{\index{Attribute@{Attribute}!set\-Length@{set\-Length}}
+\index{set\-Length@{set\-Length}!Attribute@{Attribute}}
+\subsubsection[{set\-Length}]{\setlength{\rightskip}{0pt plus 5cm}void Attribute\-::set\-Length (
+\begin{DoxyParamCaption}
+\item[{int}]{len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_attribute_ace0103128f51d118718413c48ba5180d}
+
+\begin{DoxyParams}{Parameters}
+{\em len} & New length for \hyperlink{class_attribute}{Attribute} values \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_attribute_a248d912b1d34554143e4424d0228198b}{\index{Attribute@{Attribute}!update\-Value@{update\-Value}}
+\index{update\-Value@{update\-Value}!Attribute@{Attribute}}
+\subsubsection[{update\-Value}]{\setlength{\rightskip}{0pt plus 5cm}bool Attribute\-::update\-Value (
+\begin{DoxyParamCaption}
+\item[{int}]{key, }
+\item[{string}]{val}
+\end{DoxyParamCaption}
+)}}\label{class_attribute_a248d912b1d34554143e4424d0228198b}
+Update the value at a given key 
+\begin{DoxyParams}{Parameters}
+{\em key} & Key whhere the value to update is \\
+\hline
+{\em val} & What to update the value to \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Whether the value was successfully updated 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_attribute_a0b0da13208f7c429f72e766c977f9e40}{\index{Attribute@{Attribute}!free\-Keys@{free\-Keys}}
+\index{free\-Keys@{free\-Keys}!Attribute@{Attribute}}
+\subsubsection[{free\-Keys}]{\setlength{\rightskip}{0pt plus 5cm}queue$<$int$>$ Attribute\-::free\-Keys\hspace{0.3cm}{\ttfamily [private]}}}\label{class_attribute_a0b0da13208f7c429f72e766c977f9e40}
+Holds the free keys in the array if a value has been removed \hypertarget{class_attribute_ace310d0f9b59ecde4923c401852112d0}{\index{Attribute@{Attribute}!length@{length}}
+\index{length@{length}!Attribute@{Attribute}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}int Attribute\-::length\hspace{0.3cm}{\ttfamily [private]}}}\label{class_attribute_ace310d0f9b59ecde4923c401852112d0}
+If the type is {\ttfamily string} this this is its max length \hypertarget{class_attribute_abc17bc58ec6c45b21533ee2194bf2516}{\index{Attribute@{Attribute}!type@{type}}
+\index{type@{type}!Attribute@{Attribute}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}string Attribute\-::type\hspace{0.3cm}{\ttfamily [private]}}}\label{class_attribute_abc17bc58ec6c45b21533ee2194bf2516}
+The type of the attribute, available types are {\ttfamily string} and {\ttfamily integer} \hypertarget{class_attribute_ae3eb3292f5ddc91f6c2c0152edf625fb}{\index{Attribute@{Attribute}!values@{values}}
+\index{values@{values}!Attribute@{Attribute}}
+\subsubsection[{values}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$string$>$ Attribute\-::values\hspace{0.3cm}{\ttfamily [private]}}}\label{class_attribute_ae3eb3292f5ddc91f6c2c0152edf625fb}
+Holds the attribute values, with the vector key being the row number 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/Attribute.\-h\item 
+src/Attribute.\-cpp\end{DoxyCompactItemize}
