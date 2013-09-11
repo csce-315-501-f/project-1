@@ -30,12 +30,17 @@ public:
 	TokenStream() : i(0) {}
 	TokenStream(vector<Token> t) : i(0), tokens(t) {}
 	vector<Token> tokens;
+	int save() {return i;}
+	TokenStream& restore(int x) {
+		i = x;
+		return *this;
+	}
 	Token get() {
 		if (i < tokens.size())
 			return tokens[i++];
 		else {
 			Token tmp;
-			tmp.value = "";
+			tmp.value = "NO_TOKEN";
 			tmp.type = NO_TOKEN;
 			return tmp;
 		}
@@ -83,6 +88,9 @@ public:
 
 	bool relation(TokenStream& tokens);
 	bool command(TokenStream& tokens);
+	bool integer(TokenStream& tokens);
+	bool type(TokenStream& tokens);
+	bool typed_list(TokenStream& tokens);
 	bool open_cmd(TokenStream& tokens);
 	bool close_cmd(TokenStream& tokens);
 	bool write_cmd(TokenStream& tokens);
@@ -90,7 +98,8 @@ public:
 	bool show_cmd(TokenStream& tokens);
 	bool create_cmd(TokenStream& tokens);
 	bool update_cmd(TokenStream& tokens);
-	bool insert_cmd(TokenStream& tokens);
+	bool insert_cmd1(TokenStream& tokens);
+	bool insert_cmd2(TokenStream& tokens);
 	bool delete_cmd(TokenStream& tokens);
 	//bool show_cmd(TokenStream& tokens);
 
