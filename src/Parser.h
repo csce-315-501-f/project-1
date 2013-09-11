@@ -81,11 +81,17 @@ public:
 	bool difference(TokenStream& tokens);
 	bool product(TokenStream& tokens);
 
+	bool relation(TokenStream& tokens);
 	bool command(TokenStream& tokens);
 	bool open_cmd(TokenStream& tokens);
 	bool close_cmd(TokenStream& tokens);
 	bool write_cmd(TokenStream& tokens);
 	bool exit_cmd(TokenStream& tokens);
+	bool show_cmd(TokenStream& tokens);
+	bool create_cmd(TokenStream& tokens);
+	bool update_cmd(TokenStream& tokens);
+	bool insert_cmd(TokenStream& tokens);
+	bool delete_cmd(TokenStream& tokens);
 	//bool show_cmd(TokenStream& tokens);
 
 	string* keywords;

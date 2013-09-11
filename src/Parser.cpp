@@ -206,70 +206,166 @@ Statement Parser::break_statements(vector<Token> tokens) {
 	return statements;
 }
 
-bool Parser::open_cmd(TokenStream& tokens) {
-	Token relation_name = tokens.get();
-	if (relation_name.type == IDENTIFIER)
+bool Parser::relation(TokenStream& tokens) {
+	Token name = tokens.get();
+	if (name.type == IDENTIFIER)
 		return true;
+	tokens.unget();
+	return false;
+}
+
+bool Parser::open_cmd(TokenStream& tokens) {
+	Token open = tokens.get();
+	if (open.value == "OPEN") {
+		bool rel = relation(tokens);
+		if (rel) return true;
+	}
 	tokens.unget();
 	return false;
 }
 
 bool Parser::close_cmd(TokenStream& tokens) {
-	Token relation_name = tokens.get();
-	if (relation_name.type == IDENTIFIER)
-		return true;
+	Token close = tokens.get();
+	if (close.value == "CLOSE") {
+		bool rel = relation(tokens);
+		if (rel) return true;
+	}
 	tokens.unget();
 	return false;
 }
 
 bool Parser::write_cmd(TokenStream& tokens) {
+	Token write = tokens.get();
+	if (write.value == "WRITE") {
+		bool rel = relation(tokens);
+		if (rel) return true;
+	}
+	tokens.unget();
+	return false;
+}
+
+bool Parser::exit_cmd(TokenStream& tokens) {
+	Token exit = tokens.get();
+	if (exit.value == "EXIT")
+		return true;
+	tokens.unget();
+	return false;
+}
+
+bool Parser::show_cmd(TokenStream& tokens) {
+	Token show = tokens.get();
+	if (show.value == "SHOW") {
+		bool ae =  atomic_expr(tokens);
+		if (ae) return true;
+	}
+	tokens.unget();
+	return false;
+}
+
+
+bool Parser::create_cmd(TokenStream& tokens) {
+	Token create = tokens.get();
+	if (create.value != "CREATE") {
+		tokens.unget();
+		return false;
+	}
+	Token table = tokens.get();
+	if (create.value != "TABLE") {
+		tokens.unget();
+		tokens.unget();
+		return false;
+	}
+	return true;
+}
+
+bool Parser::update_cmd(TokenStream& tokens) {
+	return false;
+	Token create = tokens.get();
+	if (create.value != "CREATE") {
+		tokens.unget();
+		return false;
+	}
+	Token table = tokens.get();
+	if (create.value != "TABLE") {
+		tokens.unget();
+		tokens.unget();
+		return false;
+	}
 	Token relation_name = tokens.get();
-	Token extra = tokens.get();
 	if (relation_name.type == IDENTIFIER)
 		return true;
 	tokens.unget();
 	return false;
 }
 
-bool Parser::exit_cmd(TokenStream& tokens) {
-	return true;
-}
-
-bool Parser::command(TokenStream& tokens) {
-	Token type = tokens.get();
-	if (type.value == "OPEN") {
-		return open_cmd(tokens);
-	}
-	else if (type.value == "CLOSE") {
-		return close_cmd(tokens);
-	}
-	else if (type.value == "WRITE") {
-		return write_cmd(tokens);
-	}
-	else if (type.value == "EXIT") {
-		return exit_cmd(tokens);
-	}
-	else {
+bool Parser::insert_cmd(TokenStream& tokens) {
+	return false;
+	Token create = tokens.get();
+	if (create.value != "CREATE") {
 		tokens.unget();
 		return false;
 	}
+	Token table = tokens.get();
+	if (create.value != "TABLE") {
+		tokens.unget();
+		tokens.unget();
+		return false;
+	}
+	Token relation_name = tokens.get();
+	if (relation_name.type == IDENTIFIER)
+		return true;
+	tokens.unget();
+	return false;
+}
+
+bool Parser::delete_cmd(TokenStream& tokens) {
+	return false;
+	Token create = tokens.get();
+	if (create.value != "CREATE") {
+		tokens.unget();
+		return false;
+	}
+	Token table = tokens.get();
+	if (create.value != "TABLE") {
+		tokens.unget();
+		tokens.unget();
+		return false;
+	}
+	Token relation_name = tokens.get();
+	if (relation_name.type == IDENTIFIER)
+		return true;
+	tokens.unget();
+	return false;
+}
+
+
+bool Parser::command(TokenStream& tokens) {
+	return	open_cmd(tokens) ||
+		close_cmd(tokens) ||
+		write_cmd(tokens) ||
+		exit_cmd(tokens) ||
+		show_cmd(tokens) ||
+		create_cmd(tokens) ||
+		update_cmd(tokens) ||
+		insert_cmd(tokens) ||
+		delete_cmd(tokens);
 }
 
 bool Parser::atomic_expr(TokenStream& tokens) {
+	if (relation(tokens))
+		return true;
 	Token next = tokens.get();
 	if (next.value == "(") {
 		bool exp = expr(tokens);
 		if (exp) {
 			Token end_paren = tokens.get();
-			return (end_paren.value == ")");
-		}
-		else {
+			if (end_paren.value == ")")
+				return true;
 			tokens.unget();
-			return false;
 		}
 	}
-	else 
-		return true;
+	tokens.unget();
+	return false;
 }
 
 
@@ -332,8 +428,10 @@ bool Parser::conjunction(TokenStream& tokens) {
 	if (!comp)
 		return false;
 	Token andand = tokens.get();
-	if (andand.value == "&&")
-		return comparison(tokens);
+	if (andand.value == "&&") {
+		bool cmp =  comparison(tokens);
+		if (cmp) return true;
+	}
 	tokens.unget();
 	return true;
 }
@@ -343,8 +441,10 @@ bool Parser::condition(TokenStream& tokens) {
 	if (!conj)
 		return false;
 	Token oror = tokens.get();
-	if (oror.value == "||")
-		return conjunction(tokens);
+	if (oror.value == "||") {
+		bool cmp = conjunction(tokens);
+		if (cmp) return true;
+	}
 	tokens.unget();
 	return true;
 }
@@ -358,8 +458,10 @@ bool Parser::selection(TokenStream& tokens) {
 			if (cond) {
 				Token end_paren = tokens.get();
 				if (end_paren.value == ")") {
-					return atomic_expr(tokens);
+					bool ae = atomic_expr(tokens);
+					if (ae) return true;
 				}
+				tokens.unget();
 			}
 			else {
 				tokens.unget();
@@ -367,6 +469,7 @@ bool Parser::selection(TokenStream& tokens) {
 				return false;
 			}
 		}
+		tokens.unget();
 	}
 	tokens.unget();
 	return false;
@@ -378,8 +481,10 @@ bool Parser::attrib_list(TokenStream& tokens) {
 	if (!attr)
 		return false;
 	Token comma = tokens.get();
-	if (comma.value == ",")
-		return attrib_list(tokens); // changed attrib to attrib_list
+	if (comma.value == ",") {
+		bool al =  attrib_list(tokens); // changed attrib to attrib_list
+		if (al) return true;
+	}
 	tokens.unget();
 	return true;
 }
@@ -393,8 +498,10 @@ bool Parser::projection(TokenStream& tokens) {
 			if (cond) {
 				Token end_paren = tokens.get();
 				if (end_paren.value == ")") {
-					return atomic_expr(tokens);
+					bool ae =  atomic_expr(tokens);
+					if (ae) return true;
 				}
+				tokens.unget();
 			}
 			else {
 				tokens.unget();
@@ -402,6 +509,7 @@ bool Parser::projection(TokenStream& tokens) {
 				return false;
 			}
 		}
+		tokens.unget();
 	}
 	tokens.unget();
 	return false;
@@ -417,8 +525,10 @@ bool Parser::renaming(TokenStream& tokens) {
 			if (cond) {
 				Token end_paren = tokens.get();
 				if (end_paren.value == ")") {
-					return atomic_expr(tokens);
+					bool ae = atomic_expr(tokens);
+					if (ae) return true;
 				}
+				tokens.unget();
 			}
 			else {
 				tokens.unget();
@@ -426,6 +536,7 @@ bool Parser::renaming(TokenStream& tokens) {
 				return false;
 			}
 		}
+		tokens.unget();
 	}
 	tokens.unget();
 	return false;
@@ -435,8 +546,10 @@ bool Parser::renaming(TokenStream& tokens) {
 bool Parser::union_g(TokenStream& tokens) {
 	bool at_expr = atomic_expr(tokens);
 	Token plus = tokens.get();
-	if (plus.value == "+")
-		return atomic_expr(tokens);
+	if (plus.value == "+") {
+		bool ae = atomic_expr(tokens);
+		if (ae) return true;
+	}
 	tokens.unget();
 	return false;
 }
@@ -444,8 +557,10 @@ bool Parser::union_g(TokenStream& tokens) {
 bool Parser::difference(TokenStream& tokens) {
 	bool at_expr = atomic_expr(tokens);
 	Token minus = tokens.get();
-	if (minus.value == "-")
-		return atomic_expr(tokens);
+	if (minus.value == "-") {
+		bool ae = atomic_expr(tokens);
+		if (ae) return true;
+	}
 	tokens.unget();
 	return false;
 }
@@ -453,8 +568,10 @@ bool Parser::difference(TokenStream& tokens) {
 bool Parser::product(TokenStream& tokens) {
 	bool at_expr = atomic_expr(tokens);
 	Token times = tokens.get();
-	if (times.value == "*")
-		return atomic_expr(tokens);
+	if (times.value == "*") {
+		bool ae = atomic_expr(tokens);
+		if (ae) return true;
+	}
 	tokens.unget();
 	return false;
 }
@@ -470,20 +587,22 @@ bool Parser::expr(TokenStream& tokens) {
 }
 
 bool Parser::query(TokenStream& tokens) {
-	Token relation_name = tokens.get();
-	Token arrow = tokens.get();
-	if (arrow.value != "<-") {
-		tokens.unget();
-		tokens.unget();
-		return false;
+	if (relation(tokens)) {
+		Token arrow = tokens.get();
+		if (arrow.value != "<-") {
+			tokens.unget();
+			return false;
+		}
+		return expr(tokens);
 	}
-	return expr(tokens);
+	return false;
 }
 
 bool Parser::check_grammar(vector<Token> tokens) {
 	TokenStream tok(tokens);
 	bool result = query(tok) || command(tok);
 	Token extra = tok.get();
+	cout << "EXTRA " << extra.value<<extra.type << endl;
 	if (extra.type == NO_TOKEN)
 		return result;
 	else return false;
@@ -495,7 +614,7 @@ vector<string> Parser::parse(string s) {
 	for (int i = 0; i < statements.size(); ++i) {
 		cout << "STATEMENT " << i << endl;
 		for (int j = 0; j < statements[i].size(); ++j)
-			cout << "TOKEN " << statements[i][j].value << endl;
+			cout << "TOKEN " << statements[i][j].value << " " << statements[i][j].type << endl;
 		cout << "GRAMMAR " << flush << (check_grammar(statements[i])?"GOOD":"BAD") << endl << endl;
 	}
 	vector<string> temp;
