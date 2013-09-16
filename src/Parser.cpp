@@ -1,7 +1,6 @@
 #include "Parser.h"
 #include <iostream>
 
-
 /*
  * init_values()
  * This function stores the keyword information for the parser to distinguish
@@ -188,6 +187,12 @@ vector<Token> Parser::tokenize(string s) {
 	return tokens;	
 }
 
+/*
+ * break_statements()
+ * This function breaks a list of tokens into statements, based on the ; operator
+ * @param tokens A list of tokens from the tokenizer to break into a list of statements
+ * @return a Statement list
+ */
 Statement Parser::break_statements(vector<Token> tokens) {
 
 	Statement statements;
@@ -206,6 +211,11 @@ Statement Parser::break_statements(vector<Token> tokens) {
 	return statements;
 }
 
+/*
+ * relation()
+ * This function determines if a set of tokens represents a relation
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::relation(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN RELATION" << endl;
@@ -218,12 +228,16 @@ bool Parser::relation(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * open_cmd()
+ * This function determines if a set of tokens represents an open command "OPEN relation"
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::open_cmd(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN OPEN" << endl;
 	int loc = tokens.save();
 	Token open = tokens.get();
-	cout << "OPEN Val: " << open.value << endl;
 	if (open.value == "OPEN") {
 		bool rel = relation(tokens);
 		if (rel) return true;
@@ -232,6 +246,11 @@ bool Parser::open_cmd(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * close_cmd()
+ * This function determines if a set of tokens represents an close command "CLOSE relation"
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::close_cmd(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN CLOSE" << endl;
@@ -245,6 +264,11 @@ bool Parser::close_cmd(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * write_cmd()
+ * This function determines if a set of tokens represents an write command "WRITE relation"
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::write_cmd(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN WRITE" << endl;
@@ -258,6 +282,11 @@ bool Parser::write_cmd(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * exit_cmd()
+ * This function determines if a set of tokens represents an exit command "EXIT"
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::exit_cmd(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN EXIT" << endl;
@@ -268,6 +297,11 @@ bool Parser::exit_cmd(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * show_cmd()
+ * This function determines if a set of tokens represents an show command "SHOW relation"
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::show_cmd(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN SHOW" << endl;
@@ -281,12 +315,22 @@ bool Parser::show_cmd(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * integer()
+ * This function determines if a set of tokens represents an integer 
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::integer(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN INT" << endl;
 	return literal(tokens);
 }
 
+/*
+ * type()
+ * This function determines if a set of tokens represents a type INTEGER or VARCHAR(n) 
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::type(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN TYPE" << endl;
@@ -307,6 +351,12 @@ bool Parser::type(TokenStream& tokens) {
 	tokens.restore(loc);
 }
 
+/*
+ * typed_list()
+ * This function determines if a set of tokens represents a type list
+ * name type { , typed_list } 
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::typed_list(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN TYPED LIST" << endl;
@@ -324,10 +374,15 @@ bool Parser::typed_list(TokenStream& tokens) {
 		bool al =  typed_list(tokens); // changed type to typed_list
 		return (al);
 	}
-	tokens.unget();
+	if (comma.type != NO_TOKEN) tokens.unget();
 	return true;
 }
 
+/*
+ * create_cmd()
+ * This function determines if a set of tokens represents a create command
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::create_cmd(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN CREATE" << endl;
@@ -390,6 +445,11 @@ bool Parser::create_cmd(TokenStream& tokens) {
 	return true;
 }
 
+/*
+ * update_cmd()
+ * This function determines if a set of tokens represents an update command
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::update_cmd(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN UPDATE" << endl;
@@ -437,6 +497,11 @@ bool Parser::update_cmd(TokenStream& tokens) {
 	return true;
 }
 
+/*
+ * insert_cmd()
+ * This function determines if a set of tokens represents an insert command
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::insert_cmd1(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN INSERT1" << endl;
@@ -483,12 +548,10 @@ bool Parser::insert_cmd2(TokenStream& tokens) {
 		cout << "IN INSERT2" << endl;
 	int loc = tokens.save();
 	Token ins = tokens.get();
-	cout << "INS VAL: " << ins.value << endl;
 	if (ins.value != "INSERT") {
 		tokens.restore(loc);
 		return false;
 	}
-	cout << "HERE" << endl;
 	Token into = tokens.get();
 	if (into.value != "INTO") {
 		tokens.restore(loc);
@@ -522,6 +585,11 @@ bool Parser::insert_cmd2(TokenStream& tokens) {
 	return true;
 }
 
+/*
+ * delete_cmd()
+ * This function determines if a set of tokens represents a delete command
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::delete_cmd(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN DELETE" << endl;
@@ -554,7 +622,11 @@ bool Parser::delete_cmd(TokenStream& tokens) {
 	return true;
 }
 
-
+/*
+ * command()
+ * This function determines if a set of tokens represents a command
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::command(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN COMMAND" << endl;
@@ -571,6 +643,12 @@ bool Parser::command(TokenStream& tokens) {
 		delete_cmd(tokens.restore(loc));
 }
 
+/*
+ * atomic_expr()
+ * This function determines if a set of tokens represents an atomic expression
+ * relation | (expr)
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::atomic_expr(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN ATOMIC EXPR" << endl;
@@ -590,7 +668,11 @@ bool Parser::atomic_expr(TokenStream& tokens) {
 	return false;
 }
 
-
+/*
+ * op()
+ * This function determines if a set of tokens represents an operator
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::op(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN OP" << endl;
@@ -607,6 +689,11 @@ bool Parser::op(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * attrib()
+ * This function determines if a set of tokens represents an attribute
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::attrib(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN ATRIB" << endl;
@@ -617,6 +704,11 @@ bool Parser::attrib(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * literal()
+ * This function determines if a set of tokens represents a literal number
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::literal(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN LITERAL" << endl;
@@ -629,6 +721,11 @@ bool Parser::literal(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * operand()
+ * This function determines if a set of tokens represents an operand
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::operand(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN OPERAND" << endl;
@@ -636,6 +733,12 @@ bool Parser::operand(TokenStream& tokens) {
 	return attrib(tokens) || literal(tokens.restore(loc));
 }
 
+/*
+ * comparison()
+ * This function determines if a set of tokens represents a comparison
+ * operand op operand | ( condition )
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::comparison(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN COMP" << endl;
@@ -659,6 +762,12 @@ bool Parser::comparison(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * comparison()
+ * This function determines if a set of tokens represents a conjunction
+ * comparison {&& comparison}
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::conjunction(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN CONJ" << endl;
@@ -670,10 +779,16 @@ bool Parser::conjunction(TokenStream& tokens) {
 		bool cmp =  comparison(tokens);
 		return (cmp);
 	}
-	tokens.unget();
+	if (andand.type != NO_TOKEN) tokens.unget();
 	return true;
 }
 
+/*
+ * comparison()
+ * This function determines if a set of tokens represents a condition
+ * condition {&& condition}
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::condition(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN CONDITION" << endl;
@@ -685,10 +800,16 @@ bool Parser::condition(TokenStream& tokens) {
 		bool cmp = conjunction(tokens);
 		return (cmp);
 	}
-	tokens.unget();
+	if (oror.type != NO_TOKEN) tokens.unget();
 	return true;
 }
 
+/*
+ * selection()
+ * This function determines if a set of tokens represents a select statement
+ * SELECT (condition) relation
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::selection(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN SELECT" << endl;
@@ -709,9 +830,14 @@ bool Parser::selection(TokenStream& tokens) {
 	}
 	tokens.restore(loc);
 	return false;
-
 }
 
+/*
+ * attrib_list()
+ * This function determines if a set of tokens represents a attribute list
+ * attrib {, attrib_list}
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::attrib_list(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN ATRIBLIST" << endl;
@@ -723,10 +849,16 @@ bool Parser::attrib_list(TokenStream& tokens) {
 		bool al =  attrib_list(tokens); // changed attrib to attrib_list
 		return (al);
 	}
-	tokens.unget();
+	if (comma.type != NO_TOKEN) tokens.unget();
 	return true;
 }
 
+/*
+ * projection()
+ * This function determines if a set of tokens represents a projection statement
+ * PROJECT (attrib_list) atomic_expr
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::projection(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN PROJECT" << endl;
@@ -749,7 +881,12 @@ bool Parser::projection(TokenStream& tokens) {
 	return false;
 }
 
-
+/*
+ * renaming()
+ * This function determines if a set of tokens represents a renaming statement
+ * RENAME (attrib_list) atomic_expr
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::renaming(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN RENAME" << endl;
@@ -772,14 +909,21 @@ bool Parser::renaming(TokenStream& tokens) {
 	return false;
 }
 
-
+/*
+ * union_g()
+ * This function determines if a set of tokens represents a union statement
+ * atomic_expr + atomic_expr
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::union_g(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN UNION" << endl;
 	int loc = tokens.save();
 	bool at_expr = atomic_expr(tokens);
-	if (!at_expr)
+	if (!at_expr) {
+		tokens.restore(loc);
 		return false;
+	}
 	Token plus = tokens.get();
 	if (plus.value == "+") {
 		bool ae = atomic_expr(tokens);
@@ -789,13 +933,21 @@ bool Parser::union_g(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * difference()
+ * This function determines if a set of tokens represents a difference statement
+ * atomic_expr - atomic_expr
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::difference(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN DIFFERENCE" << endl;
 	int loc = tokens.save();
 	bool at_expr = atomic_expr(tokens);
-	if (!at_expr)
+	if (!at_expr) {
+		tokens.restore(loc);
 		return false;
+	}
 	Token minus = tokens.get();
 	if (minus.value == "-") {
 		bool ae = atomic_expr(tokens);
@@ -805,13 +957,21 @@ bool Parser::difference(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * product()
+ * This function determines if a set of tokens represents a product statement
+ * atomic_expr * atomic_expr
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::product(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN PRODUCT" << endl;
 	int loc = tokens.save();
 	bool at_expr = atomic_expr(tokens);
-	if (!at_expr)
+	if (!at_expr) {
+		tokens.restore(loc);
 		return false;
+	}
 	Token times = tokens.get();
 	if (times.value == "*") {
 		bool ae = atomic_expr(tokens);
@@ -821,6 +981,11 @@ bool Parser::product(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * expr()
+ * This function determines if a set of tokens represents a expression
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::expr(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN EXPR" << endl;
@@ -834,6 +999,12 @@ bool Parser::expr(TokenStream& tokens) {
 		atomic_expr(tokens.restore(loc));
 }
 
+/*
+ * query()
+ * This function determines if a set of tokens represents a query
+ * relation <- expr
+ * @param tokens A TokenStream object already broken into one statement
+ */
 bool Parser::query(TokenStream& tokens) {
 	if (DEBUG)
 		cout << "IN QUERY" << endl;
@@ -850,24 +1021,47 @@ bool Parser::query(TokenStream& tokens) {
 	return false;
 }
 
+/*
+ * check_grammar()
+ * This function determines if a set of tokens has proper grammar
+ * @param tokens A vector of tokens already broken into one statement
+ */
 bool Parser::check_grammar(vector<Token> tokens) {
 	TokenStream tok(tokens);
 	bool result;
-	return  query(tok) || command(tok);
+	result = query(tok) || command(tok);
+	if (DEBUG)
+		cout << "RESULT: " << result << endl;
 	Token extra = tok.get();
-	cout << "EXTRA " << extra.value<<extra.type << endl;
+	if (DEBUG)
+		cout << "EXTRA: " << extra.value << endl;
 	if (extra.type == NO_TOKEN)
 		return result;
 	else return false;
 }
 
+/*
+ * parse()
+ * This function tokenizes a string and breaks it into statements then checks their grammar
+ * individually for correct syntax in the SQL language
+ * @param tokens A string representing the SQL language
+ */
 vector<string> Parser::parse(string s) {
-	vector<Token> tokens = tokenize(s);
+	string info = "";
+	stringstream ss;
+	ss << s;
+	string line;
+	while (getline(ss,line))
+		info += line;
+	cout << info << endl;
+	vector<Token> tokens = tokenize(info);
 	Statement statements = break_statements(tokens);
 	for (int i = 0; i < statements.size(); ++i) {
-		cout << "STATEMENT " << i << endl;
-		for (int j = 0; j < statements[i].size(); ++j)
-			cout << "TOKEN " << statements[i][j].value << " " << statements[i][j].type << endl;
+		cout << "STATEMENT " << i+1 << ":"<< endl;
+		for (int j = 0; j < statements[i].size(); ++j) {
+			cout << statements[i][j].value << " " << flush;
+		}
+		cout << ";" << endl;
 		cout << "GRAMMAR " << flush << (check_grammar(statements[i])?"GOOD":"BAD") << endl << endl;
 	}
 	vector<string> temp;

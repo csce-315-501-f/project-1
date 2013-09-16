@@ -1,0 +1,23 @@
+CREATE TABLE animals (name VARCHAR(20), kind VARCHAR(8), years INTEGER) PRIMARY KEY (name, kind);
+
+SHOW animals;
+
+dogs <- SELECT (kind == dog) animals;
+olddogs <- SELECT (age > 10) dogs;
+
+catsordogs <- dogs + (SELECT (kind == cat) animals);
+
+CREATE TABLE species (kind VARCHAR(10)) PRIMARY KEY (kind);
+
+INSERT INTO species VALUES FROM RELATION PROJECT (kind) animals;
+
+a <- RENAME (aname, akind) (PROJECT (name, kind) animals);
+commonnames <- PROJECT (name) (SELECT (aname == name && akind != kind) (a * animals));
+answer <- commonnames;
+
+SHOW answer;
+
+WRITE animals;
+CLOSE animals;
+
+EXIT;

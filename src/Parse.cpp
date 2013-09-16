@@ -1203,7 +1203,14 @@ ParseNode* Parser::check_grammar(vector<Token> tokens) {
  * @param tokens A string representing the SQL language
  */
 vector<ParseNode*> Parser::parse(string s) {
-	vector<Token> tokens = tokenize(s);
+	string info = "";
+	stringstream ss;
+	ss << s;
+	string line;
+	while (getline(ss,line))
+		info += line;
+	cout << info << endl;
+	vector<Token> tokens = tokenize(info);
 	Statement statements = break_statements(tokens);
 	vector<ParseNode*> results;
 	for (int i = 0; i < statements.size(); ++i) {

@@ -1,16 +1,21 @@
 #include "Parser.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
 
 using namespace std;
 
 int main() {
 	Parser p;
-	string s;
 	vector<Token> vec;
-	cout << "Enter code to parse: " << flush;
-	getline(cin, s);
-	cout << "Str:" << s << endl;
+	string file;
+	string s;
+	//cout << "Enter file to parse: " << flush;
+	//cin >> file;
+	ifstream ifs;
+	ifs.open("exampleSQL");
+	getline(ifs,s,'\0');
 	//vec = p.tokenize(s);
 	//cout << "Token results: " << endl;
 	//for (int i = 0; i < vec.size(); ++i) {
