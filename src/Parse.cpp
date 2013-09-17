@@ -60,6 +60,8 @@ vector<Token> Parser::tokenize(string s) {
 	Token tok;			// a temporary token based on the current data
 	string buffer;			// a string used to hold more than one char data
 	bool buffering = false;		// a state to determine when to read in more info
+	bool literal = false;		// a state to determine if buffering a literal 
+					// ie between quotes "
 
 	// initialize the stringstream and read until characters finish
 	ss << s;
@@ -75,6 +77,16 @@ vector<Token> Parser::tokenize(string s) {
 		if (buffering)
 			if (isalnum(c))
 				buffer += c;	
+			else if (literal && c == '\"') {
+				buffering = false;
+				literal = false;
+				tok.value = buffer;
+				tok.type = LITERAL;
+				tokens.push_back(tok);
+			}
+			else if (literal) {
+				buffer += c;
+			}
 			else {
 				ss.unget();
 				buffering = false;
@@ -154,6 +166,11 @@ vector<Token> Parser::tokenize(string s) {
 						tokens.push_back(tok);
 						break;
 					}
+				}
+				else if (c == '\"') {
+					buffering = true;
+					literal = true;
+					buffer = "";
 				}
 				else {
 					tok.value = c;
@@ -783,6 +800,8 @@ ParseNode* Parser::literal(TokenStream& tokens) {
 		cout << "LITERAL TYPE " << name.type << endl;
 	if (name.type == NUMBER)
 		return new ParseNode(name.value,NUMBER);
+	if (name.type == LITERAL)
+		return new ParseNode(name.value,LITERAL);
 	if (name.type != NO_TOKEN) tokens.unget();
 	return NULL;
 }

@@ -1,5 +1,7 @@
 CC=g++
 
+all: parse parsetree
+
 parse: Parser.o ParserTest.cpp
 	$(CC) Parser.o ParserTest.cpp -o parse
 parsetree: Parse.o ParseTest.cpp

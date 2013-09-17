@@ -23,6 +23,7 @@ typedef int TokenType;
 #define OPERATOR 3
 #define PARSE_ERROR 4
 #define TYPE 5
+#define LITERAL 6
 #define NO_TOKEN -1
 
 /*

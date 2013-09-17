@@ -60,6 +60,8 @@ vector<Token> Parser::tokenize(string s) {
 	Token tok;			// a temporary token based on the current data
 	string buffer;			// a string used to hold more than one char data
 	bool buffering = false;		// a state to determine when to read in more info
+	bool literal = false;		// a state to determine if buffering a literal 
+					// ie between quotes "
 
 	// initialize the stringstream and read until characters finish
 	ss << s;
@@ -74,7 +76,17 @@ vector<Token> Parser::tokenize(string s) {
 		// if buffering, continue buffering or terminate and determine type of token
 		if (buffering)
 			if (isalnum(c))
-				buffer += c;	
+				buffer += c;
+			else if (literal && c == '\"') {
+				buffering = false;
+				literal = false;
+				tok.value = buffer;
+				tok.type = LITERAL;
+				tokens.push_back(tok);
+			}
+			else if (literal) {
+				buffer += c;
+			}
 			else {
 				ss.unget();
 				buffering = false;
@@ -154,6 +166,11 @@ vector<Token> Parser::tokenize(string s) {
 						tokens.push_back(tok);
 						break;
 					}
+				}
+				else if (c == '\"') {
+					buffering = true;
+					literal = true;
+					buffer = "";
 				}
 				else {
 					tok.value = c;
@@ -715,7 +732,7 @@ bool Parser::literal(TokenStream& tokens) {
 	Token name = tokens.get();
 	if (DEBUG)
 		cout << "LITERAL TYPE " << name.type << endl;
-	if (name.type == NUMBER)
+	if (name.type == NUMBER || name.type == LITERAL)
 		return true;
 	if (name.type != NO_TOKEN) tokens.unget();
 	return false;
@@ -1053,7 +1070,6 @@ vector<string> Parser::parse(string s) {
 	string line;
 	while (getline(ss,line))
 		info += line;
-	cout << info << endl;
 	vector<Token> tokens = tokenize(info);
 	Statement statements = break_statements(tokens);
 	for (int i = 0; i < statements.size(); ++i) {

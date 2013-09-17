@@ -2,12 +2,18 @@ CREATE TABLE animals (name VARCHAR(20), kind VARCHAR(8), years INTEGER) PRIMARY 
 
 SHOW animals;
 
-dogs <- SELECT (kind == dog) animals;
-olddogs <- SELECT (age > 10) dogs;
+SHOW animals && dogs;
 
-catsordogs <- dogs + (SELECT (kind == cat) animals);
+dogs <- SELECT (kind == "dog") animals;
+dogs <- SELECT animals (kind == "dog");
+olddogs <- SELECT (age > 10) dogs;
+olddogs <- SELECT (age > ) dogs;
+
+catsordogs <- dogs + (SELECT (kind == "cat") animals);
+catsordogs <- dogs + (SELECT (kind = "cat") animals);
 
 CREATE TABLE species (kind VARCHAR(10)) PRIMARY KEY (kind);
+CREATE TABLE species (kind VARCHAR) PRIMARY KEY (kind);
 
 INSERT INTO species VALUES FROM RELATION PROJECT (kind) animals;
 
@@ -20,4 +26,5 @@ SHOW answer;
 WRITE animals;
 CLOSE animals;
 
+EXIT now;
 EXIT;

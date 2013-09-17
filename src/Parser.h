@@ -12,19 +12,32 @@
 
 using namespace std;
 
+/*
+ * TokenType
+ * This defines the possible types that a token may be
+ */
 typedef int TokenType;
 #define KEYWORD 0
 #define IDENTIFIER 1
 #define NUMBER 2
 #define OPERATOR 3
 #define PARSE_ERROR 4
+#define LITERAL 6
 #define NO_TOKEN -1
 
+/*
+ * Token class
+ * Each token holds a value and a type
+ */
 struct Token {
 	string value;
 	TokenType type;
 };
 
+/*
+ * TokenStream class
+ * A TokenStream allows a user to retreive one token at a time
+ */
 class TokenStream {
 public:
 	TokenStream() : i(0) {}
@@ -54,15 +67,36 @@ private:
 
 typedef vector< vector<Token> > Statement;
 
-class Parser {
+/*
+ * ParseNode class
+ * Contains a node for the Abstract Syntax Tree
+ */
+struct ParseNode {
+	string value;
+	TokenType type;
+	vector<ParseNode*> children;
+	ParseNode (string v = "NO_TOKEN", TokenType t = NO_TOKEN): value(v), type(t) {}
+};
 
+typedef vector<ParseNode*> ParseList;
+
+/*
+ * Parser class
+ * The Parser contains the necessary elements for a user to parse a string and return
+ * grammatical correctness
+ */
+class Parser {
 public:
 	Parser() {
 		init_values();
 	}
 	vector<string> parse(string s);
 
-//private:
+private:
+
+	string* keywords;
+	set<string> Keywords;
+
 	void init_values();
 	vector<Token> tokenize(string s);
 	Statement break_statements(vector<Token>);
@@ -101,10 +135,7 @@ public:
 	bool insert_cmd1(TokenStream& tokens);
 	bool insert_cmd2(TokenStream& tokens);
 	bool delete_cmd(TokenStream& tokens);
-	//bool show_cmd(TokenStream& tokens);
 
-	string* keywords;
-	set<string> Keywords;
 };
 
 
