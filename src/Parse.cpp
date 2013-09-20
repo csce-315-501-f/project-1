@@ -555,7 +555,7 @@ ParseNode* Parser::update_cmd(TokenStream& tokens) {
 }
 
 /*
- * insert_cmd()
+ * insert_cmd1()
  * This function determines if a set of tokens represents an insert command
  * @param tokens A TokenStream object already broken into one statement
  */
@@ -603,9 +603,40 @@ ParseNode* Parser::insert_cmd1(TokenStream& tokens) {
 	inse->children.push_back(exp);
 	return inse;
 }
+/*
+ * literal_list()
+ * This function determines if a set of tokens represents a attribute list
+ * attrib {, attrib_list}
+ * @param tokens A TokenStream object already broken into one statement
+ */
+ParseNode* Parser::literal_list(TokenStream& tokens) {
+	if (DEBUG)
+		cout << "IN LITERAL LIST" << endl;
+	int loc = tokens.save();
+	ParseNode* lits = literal(tokens);
+	if (!lits)
+		return NULL;
+	ParseNode* lit_list = new ParseNode("LITERAL LIST", KEYWORD);
+	lit_list->children.push_back(lits);
+	Token comma = tokens.get();
+	if (comma.value == ",") {
+		ParseNode* ll = literal_list(tokens); // changed attrib to attrib_list
+		if (!ll) {
+			tokens.restore(loc);
+			delete lit_list;
+			return NULL;
+		}
+		for (int i = 0; i < ll->children.size(); ++i)
+			lit_list->children.push_back(ll->children[i]);
+		return lit_list;
+	}
+	if (comma.type != NO_TOKEN) tokens.unget();
+	return lit_list;
+}
+
 
 /*
- * insert_cmd()
+ * insert_cmd2()
  * This function determines if a set of tokens represents an insert command
  * @param tokens A TokenStream object already broken into one statement
  */
@@ -618,7 +649,6 @@ ParseNode* Parser::insert_cmd2(TokenStream& tokens) {
 		tokens.restore(loc);
 		return NULL;
 	}
-	cout << "HERE" << endl;
 	Token into = tokens.get();
 	if (into.value != "INTO") {
 		tokens.restore(loc);
@@ -639,19 +669,24 @@ ParseNode* Parser::insert_cmd2(TokenStream& tokens) {
 		tokens.restore(loc);
 		return NULL;
 	}
-	Token rela = tokens.get();
-	if (rela.value != "RELATION") {
+	Token open_paren = tokens.get();
+	if (open_paren.value != "(") {
 		tokens.restore(loc);
 		return NULL;
 	}
-	ParseNode* exp = expr(tokens);
-	if (!exp) {
+	ParseNode* lits = literal_list(tokens);
+	if (!lits) {
+		tokens.restore(loc);
+		return NULL;
+	}
+	Token end_paren = tokens.get();
+	if (end_paren.value != ")") {
 		tokens.restore(loc);
 		return NULL;
 	}
 	ParseNode* inse = new ParseNode("INSERT",KEYWORD);
 	inse->children.push_back(rel);
-	inse->children.push_back(exp);
+	inse->children.push_back(lits);
 	return inse;
 }
 
@@ -720,6 +755,8 @@ ParseNode* Parser::command(TokenStream& tokens) {
 		return update_cmd(tokens.restore(loc));
 	if (insert_cmd1(tokens.restore(loc)))
 		return insert_cmd1(tokens.restore(loc));
+	if (insert_cmd2(tokens.restore(loc)))
+		return insert_cmd2(tokens.restore(loc));
 	if (delete_cmd(tokens.restore(loc)))
 		return delete_cmd(tokens.restore(loc));
 	return NULL;

@@ -134,6 +134,7 @@ private:
 	ParseNode* create_cmd(TokenStream& tokens);
 	ParseNode* update_cmd(TokenStream& tokens);
 	ParseNode* insert_cmd1(TokenStream& tokens);
+	ParseNode* literal_list(TokenStream& tokens);
 	ParseNode* insert_cmd2(TokenStream& tokens);
 	ParseNode* delete_cmd(TokenStream& tokens);
 
