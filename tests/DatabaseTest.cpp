@@ -268,6 +268,26 @@ void DatabaseTest::relationCrossProductTest() {
     relation2.show();
 }
 
+void DatabaseTest::writeRelationTest() {
+    Database database;
+    database.addRelation("testRelation1");
+    database.addAttribute("testRelation1","testIntegerAttribute1","integer",0);
+    database.addAttribute("testRelation1","testStringAttribute1","string",20);
+
+    vector<string> row1;
+    row1.push_back("1");
+    row1.push_back("teststring1");
+
+    vector<string> row2;
+    row2.push_back("2");
+    row2.push_back("teststring2");
+
+    database.addRow("testRelation1",row1);
+    database.addRow("testRelation1",row2);
+
+    database.writeRelation("testRelation1");
+}
+
 /**************************************************
  * Function to run all tests
  **************************************************/
@@ -302,5 +322,7 @@ void DatabaseTest::runAll() {
     cout << "relationCrossProductTest:" << endl;
     relationCrossProductTest();
     cout << "------------------------------------------------------------" << endl;
+    cout << endl;
+    writeRelationTest();
     cout << endl;
 }

@@ -1,4 +1,5 @@
 #include "Database.h"
+// #include <algorithm>
 
 bool Database::relationExists(string name) {
     if (relations.find(name) == relations.end()) {
@@ -244,4 +245,58 @@ Relation Database::relationCrossProduct(string relName1, string relName2) {
         }
     }
     return relation;
+}
+
+void Database::writeRelation(string relName) {
+    if (relationExists(relName)) {
+        string relFileName = relName + ".db";
+        ofstream relFile;
+        relFile.open(relFileName.c_str());
+        relFile << "CREATE TABLE " + relName + " ";
+
+        int numAttributes = relations[relName].attributeNames.size();
+        if (numAttributes > 0) relFile << "(";
+
+        for (int i = 0; i < numAttributes; ++i) {
+            string attrName = relations[relName].attributeNames[i];
+            string attrType = relations[relName].attributes[attrName].type;
+            int attrLength = relations[relName].attributes[attrName].length;
+
+            string attrTypeUpper = attrType;
+            transform(attrTypeUpper.begin(), attrTypeUpper.end(),attrTypeUpper.begin(), ::toupper);
+
+            relFile << attrName << " ";
+            if (attrTypeUpper == "INTEGER") {
+                relFile << "INTEGER";
+            }
+            else {
+                relFile << "VARCHAR(" << attrLength << ")";
+            }
+            if (i < numAttributes - 1) relFile << ", ";
+        }
+        if (numAttributes > 0) relFile << ")";
+        // TODO Add primary key output
+        relFile << ";" << endl;
+
+        vector< vector<string> > relRows = relations[relName].getAllRows();
+        numAttributes = relRows.size();
+        for (int i = 0; i < numAttributes; ++i) {
+            relFile << "INSERT INTO " << relName << " VALUES FROM (";
+            for (int j = 0; j < relRows[i].size(); ++j) {
+                // string attrType = relations[relName].attributeNames[j].type;
+                string attrName = relations[relName].attributeNames[j];
+                string attrType = relations[relName].attributes[attrName].type;
+                transform(attrType.begin(), attrType.end(),attrType.begin(), ::toupper);
+                if (attrType == "INTEGER") {
+                    relFile << relRows[i][j];
+                }
+                else {
+                    relFile << "\"" << relRows[i][j] << "\"";
+                }
+                if (j < relRows[i].size() - 1) relFile << ", ";
+            }
+            relFile << ");" << endl;
+        }
+        relFile.close();
+    }
 }

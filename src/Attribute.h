@@ -67,7 +67,7 @@ class Attribute{
 private:
     vector<string> values; /**< Holds the attribute values, with the vector key being the row number */
     string type;           /**< The type of the attribute, available types are `string` and `integer` */
-    int length;            /**< If the type is `string` this this is its max length */
+    int length;            /**< If the type is `VARCHAR` this this is its max length */
 
     queue<int> freeKeys;   /**< Holds the free keys in the array if a value has been removed */
 

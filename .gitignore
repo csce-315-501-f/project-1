@@ -20,3 +20,4 @@ attributeTest
 relationTest
 databaseTest
 mainTest
+*.db

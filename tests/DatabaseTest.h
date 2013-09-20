@@ -16,6 +16,7 @@ class DatabaseTest {
     void relationUnionTest();
     void relationDifferenceTest();
     void relationCrossProductTest();
+    void writeRelationTest();
 public:
     void runAll();
 };

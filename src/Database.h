@@ -4,6 +4,7 @@
 #include "Relation.h"
 #include <algorithm>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 /** 
@@ -154,11 +155,17 @@ public:
 
     /**
      * Cross/Cartesian Product Operation
-     * @param string relName1 first relation name
-     * @param string relname2 second relation name
+     * @param relName1 Name of the first Relation
+     * @param relName2 Name of the second Relation
      * @return Relation of the resulting cross/cartesian product
      */
     Relation relationCrossProduct(string relName1, string relName2);
+
+    /**
+     * Writes the given relation to a file
+     * @param relName Name of the Relation to write
+     */
+    void writeRelation(string relName);
 };
 
 #endif
