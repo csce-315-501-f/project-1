@@ -102,7 +102,7 @@ public:
      * @param value Value to find
      * @return Rows in given Relation where the given value was found in the given Attribute
      */
-    vector< vector<string> > getRowsWhere(string relName, string attrName, string value);
+    vector< vector<string> > getRowsWhere(string relName, string attrName, string value, string op = "==");
 
     /**
      * Renames the given Relation

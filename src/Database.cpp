@@ -108,10 +108,10 @@ bool Database::updateAttributeValue(string relName, int key, string attributeNam
     }
 }
 
-vector< vector<string> > Database::getRowsWhere(string relName, string attrName, string value) {
+vector< vector<string> > Database::getRowsWhere(string relName, string attrName, string value, string op) {
     vector< vector<string> > rows;
     if (relationExists(relName)) {
-        rows = relations[relName].getRowsWhere(attrName,value);
+        rows = relations[relName].getRowsWhere(attrName,value,op);
     }
     return rows;
 }

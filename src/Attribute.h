@@ -117,9 +117,10 @@ public:
     /** 
      * Finds all keys where given value appears
      * @param value Value to find
+     * @param op Operator for comparing value
      * @return Keys where value appears
      */
-    vector<int> findValue(string value);
+    vector<int> findValue(string value, string op = "==");
 
     /** 
      * Removes a value from the Attribute

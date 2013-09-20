@@ -93,18 +93,19 @@ vector<string> Relation::getRow(int key) {
     return row;
 }
 
-vector< vector<string> > Relation::getRowsWhere(string attributeName, string value) {
+vector< vector<string> > Relation::getRowsWhere(string attributeName, string value, string op) {
     vector< vector<string> > rows;
-    if (attributes.find(attributeName) == attributes.end()) {
-        // error, attribute does not exist
-        return rows;
+    if (attributeExists(attributeName)) {
+        vector<int> foundRowKeys = attributes[attributeName].findValue(value,op);
+
+        for (int i = 0; i < foundRowKeys.size(); ++i) {
+            vector<string> row = getRow(foundRowKeys[i]);
+            rows.push_back(row);
+        }
     }
-    vector<int> foundRowKeys = attributes[attributeName].findValue(value);
     
-    for (int i = 0; i < foundRowKeys.size(); ++i) {
-        vector<string> row = getRow(foundRowKeys[i]);
-        rows.push_back(row);
-    }
+    
+    
     return rows;
 }
 

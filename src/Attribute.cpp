@@ -20,13 +20,55 @@ bool Attribute::isEmpty(int key) {
     }
 }
 
-vector<int> Attribute::findValue(string value) {
+vector<int> Attribute::findValue(string value, string op) {
     vector<int> keys;
-    for (int i = 0; i < values.size(); ++i) {
-        if (values[i] == value) {
-            keys.push_back(i);
-        }
+    int compOp;
+    if (op == "==") compOp = 1;
+    else if (op == ">") compOp = 2;
+    else if (op == "<") compOp = 3;
+    else if (op == ">=") compOp = 4;
+    else if (op == "<=") compOp = 5;
+
+    switch (compOp) {
+        case 1:
+            for (int i = 0; i < values.size(); ++i) {
+                if (values[i] == value) {
+                    keys.push_back(i);
+                }
+            }
+            break;
+        case 2:
+            for (int i = 0; i < values.size(); ++i) {
+                if (values[i] > value) {
+                    keys.push_back(i);
+                }
+            }
+            break;
+        case 3:
+            for (int i = 0; i < values.size(); ++i) {
+                if (values[i] < value) {
+                    keys.push_back(i);
+                }
+            }
+            break;
+        case 4:
+            for (int i = 0; i < values.size(); ++i) {
+                if (values[i] >= value) {
+                    keys.push_back(i);
+                }
+            }
+            break;
+        case 5:
+            for (int i = 0; i < values.size(); ++i) {
+                if (values[i] <= value) {
+                    keys.push_back(i);
+                }
+            }
+            break;
+        default:
+            break;
     }
+
     return keys;
 }
 

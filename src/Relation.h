@@ -65,9 +65,10 @@ public:
      * Gets rows where a given Attribute has a given value
      * @param attributeName Attribute to search
      * @param value Value to find in given Attribute
+     * @param op Operator for value comparison (>,<,=>,=<,==)
      * @return Rows where the given value was found in the given Attribute
      */
-    vector< vector<string> > getRowsWhere(string attributeName, string value);
+    vector< vector<string> > getRowsWhere(string attributeName, string value, string op = "==");
 
     /**
      * Gets all rows in the Relation
