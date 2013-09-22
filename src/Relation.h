@@ -17,7 +17,10 @@ class Relation {
 private:
     map<string, Attribute> attributes; /**< Map of Attribute names mapped to Attributes */
     vector<string> attributeNames;     /**< Holds the Attribute names in order of insertion */
+    string relname;
 public:
+    void setName (string name) { relname = name; }
+    string getName() { return relname; }
     /**
      * Checks if the given Attribute exists in the Relation
      * @param name Name of Attribute to check
