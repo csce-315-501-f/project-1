@@ -72,6 +72,8 @@ private:
     queue<int> freeKeys;   /**< Holds the free keys in the array if a value has been removed */
 
 public:
+    int getLength() { return length; }
+    
     /**
      * Initializes type to "" and length to 0
      */

@@ -20,6 +20,13 @@ private:
     string relname;
 public:
     void setName (string name) { relname = name; }
+    
+    string getAttributeNames(int x) { return attributeNames[x]; }
+    
+    string getAttributeType(string name) { return attributes.find(name)->second.getType(); }
+    
+    int getAttributeLength(string name) { return attributes.find(name)->second.getLength(); }
+    
     string getName() { return relname; }
     /**
      * Checks if the given Attribute exists in the Relation
