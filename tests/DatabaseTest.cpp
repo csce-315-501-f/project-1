@@ -91,6 +91,28 @@ bool DatabaseTest::renameAttributeTest() {
     return successAddAttribute && successRenameAttribute;
 }
 
+void DatabaseTest::selectionTest() {
+    Database database;
+    // setup relations union will be taken of
+    database.addRelation("testRelation1");
+    database.addAttribute("testRelation1","testIntegerAttribute1","integer",0);
+    database.addAttribute("testRelation1","testIntegerAttribute2","integer",0);
+
+    vector<string> row1;
+    row1.push_back("1");
+    row1.push_back("2");
+
+    vector<string> row2;
+    row2.push_back("3");
+    row2.push_back("4");
+
+    database.addRow("testRelation1",row1);
+    database.addRow("testRelation1",row2);
+
+    Relation selection = database.selection("testRelation1","testIntegerAttribute1","1");
+    selection.show();
+}
+
 void DatabaseTest::projectionTest() {
     Database database;
     
@@ -305,6 +327,12 @@ void DatabaseTest::runAll() {
     cout << "getRowsWhereTest:      " << (getRowsWhereTest()?"Passed":"Failed") << endl;
     cout << "renameRelationTest:    " << (renameRelationTest()?"Passed":"Failed") << endl;
     cout << "renameAttributeTest:   " << (renameAttributeTest()?"Passed":"Failed") << endl;
+    cout << "selectionTest:         " << endl;
+    cout << endl;
+    cout << "------------------------------------------------------------" << endl;
+    selectionTest();
+    cout << endl;
+    cout << "------------------------------------------------------------" << endl;
     cout << "projectionTest:        " << endl;
     cout << endl;
     cout << "------------------------------------------------------------" << endl;

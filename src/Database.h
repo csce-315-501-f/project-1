@@ -166,6 +166,8 @@ public:
      * @param relName Name of the Relation to write
      */
     void writeRelation(string relName);
+
+    Relation selection(string relName, string attrName, string value, string op = "==");
 };
 
 #endif
