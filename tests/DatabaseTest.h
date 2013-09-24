@@ -10,6 +10,7 @@ class DatabaseTest {
     bool addRowTest();
     bool removeRowTest();
     bool getRowsWhereTest();
+    void selectionTest();
     bool renameRelationTest();
     bool renameAttributeTest();
     void projectionTest();

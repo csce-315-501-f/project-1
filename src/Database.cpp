@@ -300,3 +300,20 @@ void Database::writeRelation(string relName) {
         relFile.close();
     }
 }
+
+Relation Database::selection(string relName, string attrName, string value, string op) {
+    Relation selectRelation;
+    if (relationExists(relName)) {
+        for (int i = 0; i < relations[relName].attributeNames.size(); ++i) {
+            string attrName = relations[relName].attributeNames[i];
+            string attrType = relations[relName].attributes[attrName].type;
+            int attrLength = relations[relName].attributes[attrName].length;
+            selectRelation.addAttribute(attrName,attrType,attrLength);
+        }
+        vector< vector<string> > rows = getRowsWhere(relName, attrName, value, op);
+        for (int i = 0; i < rows.size(); ++i) {
+            selectRelation.addRow(rows[i]);
+        }
+    }
+    return selectRelation;
+}
