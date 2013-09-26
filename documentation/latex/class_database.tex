@@ -33,7 +33,9 @@ void \hyperlink{class_database_aa8324ade169386cde3f1c0a212e186f9}{remove\-Row} (
 \item 
 bool \hyperlink{class_database_a61173497b8a9b6f1701fabfaa920954c}{update\-Attribute\-Value} (string rel\-Name, int key, string attribute\-Name, string value)
 \item 
-vector$<$ vector$<$ string $>$ $>$ \hyperlink{class_database_acfe8e5676779ee61013a47d34ef0e39c}{get\-Rows\-Where} (string rel\-Name, string attr\-Name, string value)
+vector$<$ vector$<$ string $>$ $>$ \hyperlink{class_database_ad131657b77495a4c0c5c23439bd1c3dc}{get\-Rows\-Where} (string rel\-Name, string attr\-Name, string value, string op=\char`\"{}==\char`\"{})
+\item 
+\hyperlink{class_relation}{Relation} \hyperlink{class_database_a29c9274854dd136ff1c42568c0352876}{selection} (string rel\-Name, string attr\-Name, string value, string op=\char`\"{}==\char`\"{})
 \item 
 bool \hyperlink{class_database_af9213d1ecf9a4ec08d67e3f2bd565f2f}{rename\-Relation} (string current\-Name, string new\-Name)
 \item 
@@ -48,6 +50,8 @@ bool \hyperlink{class_database_a9e61f5f7d4ac2b56ff768c908acec026}{union\-Compati
 \hyperlink{class_relation}{Relation} \hyperlink{class_database_a8799dbd5a15a2e43c74bc4543fe8fa2e}{relation\-Difference} (string rel\-Name1, string rel\-Name2)
 \item 
 \hyperlink{class_relation}{Relation} \hyperlink{class_database_adabfc3cb1f51932ff08007200b0972a8}{relation\-Cross\-Product} (string rel\-Name1, string rel\-Name2)
+\item 
+void \hyperlink{class_database_a35f0c7002a68e6de2d8aa11fc42e8d38}{write\-Relation} (string rel\-Name)
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -136,24 +140,27 @@ Checks if the given \hyperlink{class_attribute}{Attribute} exists in the given \
 \begin{DoxyReturn}{Returns}
 True if \hyperlink{class_attribute}{Attribute} exists in \hyperlink{class_relation}{Relation} 
 \end{DoxyReturn}
-\hypertarget{class_database_acfe8e5676779ee61013a47d34ef0e39c}{\index{Database@{Database}!get\-Rows\-Where@{get\-Rows\-Where}}
+\hypertarget{class_database_ad131657b77495a4c0c5c23439bd1c3dc}{\index{Database@{Database}!get\-Rows\-Where@{get\-Rows\-Where}}
 \index{get\-Rows\-Where@{get\-Rows\-Where}!Database@{Database}}
 \subsubsection[{get\-Rows\-Where}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$ string $>$ $>$ Database\-::get\-Rows\-Where (
 \begin{DoxyParamCaption}
 \item[{string}]{rel\-Name, }
 \item[{string}]{attr\-Name, }
-\item[{string}]{value}
+\item[{string}]{value, }
+\item[{string}]{op = {\ttfamily \char`\"{}==\char`\"{}}}
 \end{DoxyParamCaption}
-)}}\label{class_database_acfe8e5676779ee61013a47d34ef0e39c}
+)}}\label{class_database_ad131657b77495a4c0c5c23439bd1c3dc}
 Selection Operation. Gets rows in \hyperlink{class_relation}{Relation} where a given value exists in a given \hyperlink{class_attribute}{Attribute}. 
 \begin{DoxyParams}{Parameters}
 {\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} to get from  attr\-Name Name of \hyperlink{class_attribute}{Attribute} to search \\
 \hline
 {\em value} & Value to find \\
 \hline
+{\em op} & Operation to perform \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Rows in given \hyperlink{class_relation}{Relation} where the given value was found in the given \hyperlink{class_attribute}{Attribute} 
+Rows in given \hyperlink{class_relation}{Relation} where the given value was found in the given \hyperlink{class_attribute}{Attribute} accoring to the operator. 
 \end{DoxyReturn}
 \hypertarget{class_database_af113b1e566197ff5231c7b792a6a4d98}{\index{Database@{Database}!projection@{projection}}
 \index{projection@{projection}!Database@{Database}}
@@ -183,9 +190,9 @@ Projection Operation
 )}}\label{class_database_adabfc3cb1f51932ff08007200b0972a8}
 Cross/\-Cartesian Product Operation 
 \begin{DoxyParams}{Parameters}
-{\em string} & rel\-Name1 first relation name \\
+{\em rel\-Name1} & Name of the first \hyperlink{class_relation}{Relation} \\
 \hline
-{\em string} & relname2 second relation name \\
+{\em rel\-Name2} & Name of the second \hyperlink{class_relation}{Relation} \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -329,6 +336,28 @@ Renames the given \hyperlink{class_relation}{Relation}
 \begin{DoxyReturn}{Returns}
 True if \hyperlink{class_relation}{Relation} successfully renamed 
 \end{DoxyReturn}
+\hypertarget{class_database_a29c9274854dd136ff1c42568c0352876}{\index{Database@{Database}!selection@{selection}}
+\index{selection@{selection}!Database@{Database}}
+\subsubsection[{selection}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Relation} Database\-::selection (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name, }
+\item[{string}]{attr\-Name, }
+\item[{string}]{value, }
+\item[{string}]{op = {\ttfamily \char`\"{}==\char`\"{}}}
+\end{DoxyParamCaption}
+)}}\label{class_database_a29c9274854dd136ff1c42568c0352876}
+Selection operation. Works the same as get\-Rows\-Where, except returns a \hyperlink{class_relation}{Relation} instead of a vector of rows. 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of \hyperlink{class_relation}{Relation} to get from  attr\-Name Name of \hyperlink{class_attribute}{Attribute} to search \\
+\hline
+{\em value} & Value to find \\
+\hline
+{\em op} & Operation to perform \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_relation}{Relation} containing rows where the given value was found in the given \hyperlink{class_attribute}{Attribute} according to the operator. 
+\end{DoxyReturn}
 \hypertarget{class_database_a959909a78516b1a6a73ccea7968c70e7}{\index{Database@{Database}!show@{show}}
 \index{show@{show}!Database@{Database}}
 \subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}void Database\-::show (
@@ -383,6 +412,18 @@ Updates an \hyperlink{class_attribute}{Attribute}'s value in a given \hyperlink{
 \begin{DoxyReturn}{Returns}
 True if the value was successfully updated 
 \end{DoxyReturn}
+\hypertarget{class_database_a35f0c7002a68e6de2d8aa11fc42e8d38}{\index{Database@{Database}!write\-Relation@{write\-Relation}}
+\index{write\-Relation@{write\-Relation}!Database@{Database}}
+\subsubsection[{write\-Relation}]{\setlength{\rightskip}{0pt plus 5cm}void Database\-::write\-Relation (
+\begin{DoxyParamCaption}
+\item[{string}]{rel\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_database_a35f0c7002a68e6de2d8aa11fc42e8d38}
+Writes the given relation to a file 
+\begin{DoxyParams}{Parameters}
+{\em rel\-Name} & Name of the \hyperlink{class_relation}{Relation} to write \\
+\hline
+\end{DoxyParams}
 
 
 \subsection{Member Data Documentation}

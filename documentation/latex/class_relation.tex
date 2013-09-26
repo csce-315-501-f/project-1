@@ -13,6 +13,21 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hypertarget{class_relation_aa9b3f638b86037d6806874828eaf6def}{void {\bfseries set\-Name} (string name)}\label{class_relation_aa9b3f638b86037d6806874828eaf6def}
+
+\item 
+\hypertarget{class_relation_a5436e4f87b09692326f144ee77565d47}{string {\bfseries get\-Attribute\-Names} (int x)}\label{class_relation_a5436e4f87b09692326f144ee77565d47}
+
+\item 
+\hypertarget{class_relation_a546eb99e970baa0877ad4b963942c956}{string {\bfseries get\-Attribute\-Type} (string name)}\label{class_relation_a546eb99e970baa0877ad4b963942c956}
+
+\item 
+\hypertarget{class_relation_af2648ce451bc18a893ab396dcc95a793}{int {\bfseries get\-Attribute\-Length} (string name)}\label{class_relation_af2648ce451bc18a893ab396dcc95a793}
+
+\item 
+\hypertarget{class_relation_ace3fe9536b1a3e1aac8e7c034638e585}{string {\bfseries get\-Name} ()}\label{class_relation_ace3fe9536b1a3e1aac8e7c034638e585}
+
+\item 
 bool \hyperlink{class_relation_a95c3faa21d7bc2eb8a78991dfc059f8c}{attribute\-Exists} (string name)
 \item 
 bool \hyperlink{class_relation_af4a5da7f3ffe0883b9e253c982cb9d20}{add\-Attribute} (string name, string type, int length)
@@ -25,7 +40,7 @@ bool \hyperlink{class_relation_ac2c0d40f65dd8a7f2dd95726afcc3091}{remove\-Attrib
 \item 
 vector$<$ string $>$ \hyperlink{class_relation_a549eddb9c701414f87ea739407c1d56f}{get\-Row} (int key)
 \item 
-vector$<$ vector$<$ string $>$ $>$ \hyperlink{class_relation_a4eed29fdf5f9427b603e65cdf910b132}{get\-Rows\-Where} (string attribute\-Name, string value)
+vector$<$ vector$<$ string $>$ $>$ \hyperlink{class_relation_a822ee3b07846702f74e026d4e8593115}{get\-Rows\-Where} (string attribute\-Name, string value, string op=\char`\"{}==\char`\"{})
 \item 
 vector$<$ vector$<$ string $>$ $>$ \hyperlink{class_relation_ae84c1daafc74ca37b516f1c7814569f8}{get\-All\-Rows} ()
 \item 
@@ -43,6 +58,9 @@ bool \hyperlink{class_relation_afe7d8ff14a51b47fd8dc4e1a1a069e56}{rename\-Attrib
 map$<$ string, \hyperlink{class_attribute}{Attribute} $>$ \hyperlink{class_relation_ad505b043cf529432345433e6d4e2ded9}{attributes}
 \item 
 vector$<$ string $>$ \hyperlink{class_relation_ace8c91beafd208dcf6469b9b2425ecf7}{attribute\-Names}
+\item 
+\hypertarget{class_relation_a9dea0564435560991f70344788ac3b22}{string {\bfseries relname}}\label{class_relation_a9dea0564435560991f70344788ac3b22}
+
 \end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -132,19 +150,22 @@ Gets the specified row
 \begin{DoxyReturn}{Returns}
 Row found at given key, or empty vector if row not found. 
 \end{DoxyReturn}
-\hypertarget{class_relation_a4eed29fdf5f9427b603e65cdf910b132}{\index{Relation@{Relation}!get\-Rows\-Where@{get\-Rows\-Where}}
+\hypertarget{class_relation_a822ee3b07846702f74e026d4e8593115}{\index{Relation@{Relation}!get\-Rows\-Where@{get\-Rows\-Where}}
 \index{get\-Rows\-Where@{get\-Rows\-Where}!Relation@{Relation}}
 \subsubsection[{get\-Rows\-Where}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ vector$<$ string $>$ $>$ Relation\-::get\-Rows\-Where (
 \begin{DoxyParamCaption}
 \item[{string}]{attribute\-Name, }
-\item[{string}]{value}
+\item[{string}]{value, }
+\item[{string}]{op = {\ttfamily \char`\"{}==\char`\"{}}}
 \end{DoxyParamCaption}
-)}}\label{class_relation_a4eed29fdf5f9427b603e65cdf910b132}
+)}}\label{class_relation_a822ee3b07846702f74e026d4e8593115}
 Gets rows where a given \hyperlink{class_attribute}{Attribute} has a given value 
 \begin{DoxyParams}{Parameters}
 {\em attribute\-Name} & \hyperlink{class_attribute}{Attribute} to search \\
 \hline
 {\em value} & Value to find in given \hyperlink{class_attribute}{Attribute} \\
+\hline
+{\em op} & Operator for value comparison ($>$,$<$,=$>$,=$<$,==) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
