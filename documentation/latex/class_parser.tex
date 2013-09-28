@@ -4,13 +4,130 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_parser_a6c061189bf198a9ff82c850059bc6a07}{vector$<$ string $>$ {\bfseries parse} (string s)}\label{class_parser_a6c061189bf198a9ff82c850059bc6a07}
+\hypertarget{class_parser_a6c061189bf198a9ff82c850059bc6a07}{vector$<$ \hyperlink{struct_parse_node}{Parse\-Node} $\ast$ $>$ {\bfseries parse} (string s)}\label{class_parser_a6c061189bf198a9ff82c850059bc6a07}
 
+\item 
+\hypertarget{class_parser_a2914ae117a15611278821a451357200e}{vector$<$ string $>$ {\bfseries parse} (string s)}\label{class_parser_a2914ae117a15611278821a451357200e}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
 \item 
 \hypertarget{class_parser_ac96b9afc820eaef9a480f4048c6a8828}{void {\bfseries init\-\_\-values} ()}\label{class_parser_ac96b9afc820eaef9a480f4048c6a8828}
 
 \item 
 \hypertarget{class_parser_aacfcfb3cafc88f6389eb0f8bc09a2d0d}{vector$<$ \hyperlink{struct_token}{Token} $>$ {\bfseries tokenize} (string s)}\label{class_parser_aacfcfb3cafc88f6389eb0f8bc09a2d0d}
+
+\item 
+\hypertarget{class_parser_a9c573337bd17fd450e5dedbf776c4171}{Statement {\bfseries break\-\_\-statements} (vector$<$ \hyperlink{struct_token}{Token} $>$)}\label{class_parser_a9c573337bd17fd450e5dedbf776c4171}
+
+\item 
+\hypertarget{class_parser_a65ff44533bc25f4d3f4f7365fa776fa1}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries check\-\_\-grammar} (vector$<$ \hyperlink{struct_token}{Token} $>$ tokens)}\label{class_parser_a65ff44533bc25f4d3f4f7365fa776fa1}
+
+\item 
+\hypertarget{class_parser_a0c65f050142923184cb56372614f5221}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries query} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a0c65f050142923184cb56372614f5221}
+
+\item 
+\hypertarget{class_parser_a0eb3710e8ddf53bf91ef1341338802fa}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries expr} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a0eb3710e8ddf53bf91ef1341338802fa}
+
+\item 
+\hypertarget{class_parser_a1dd01c414355cc51537fd5a019d1957e}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries atomic\-\_\-expr} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a1dd01c414355cc51537fd5a019d1957e}
+
+\item 
+\hypertarget{class_parser_af13706aef97f6d8e918024b2bd902e96}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries operand} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_af13706aef97f6d8e918024b2bd902e96}
+
+\item 
+\hypertarget{class_parser_ad5d5c5f02cf36de7f70aabf5d725a820}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries attrib} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_ad5d5c5f02cf36de7f70aabf5d725a820}
+
+\item 
+\hypertarget{class_parser_a12974938ca1b6939cfec0ac0793977d1}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries attrib\-\_\-list} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a12974938ca1b6939cfec0ac0793977d1}
+
+\item 
+\hypertarget{class_parser_a176760525f50db98dc5fda9ab2db0fcb}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries literal} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a176760525f50db98dc5fda9ab2db0fcb}
+
+\item 
+\hypertarget{class_parser_a2aedb5b2f5d206b03da62ef0a679b930}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries op} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a2aedb5b2f5d206b03da62ef0a679b930}
+
+\item 
+\hypertarget{class_parser_a9d5cfc4bf8ce1381745b2aebf6317f9f}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries comparison} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a9d5cfc4bf8ce1381745b2aebf6317f9f}
+
+\item 
+\hypertarget{class_parser_aa0918a4b4b81e8a68c5371b2234be593}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries conjunction} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_aa0918a4b4b81e8a68c5371b2234be593}
+
+\item 
+\hypertarget{class_parser_a2ea2590f28d75622224de86e0cfee007}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries condition} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a2ea2590f28d75622224de86e0cfee007}
+
+\item 
+\hypertarget{class_parser_ae5b2f692d716fd6e96c0ff7bb62c4dea}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries selection} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_ae5b2f692d716fd6e96c0ff7bb62c4dea}
+
+\item 
+\hypertarget{class_parser_a28808985415b83d87095524f84f87ba2}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries projection} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a28808985415b83d87095524f84f87ba2}
+
+\item 
+\hypertarget{class_parser_a2e53587ebf7ea21e487e403731e073db}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries renaming} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a2e53587ebf7ea21e487e403731e073db}
+
+\item 
+\hypertarget{class_parser_afdfde11f35aac97404322c743377ea33}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries union\-\_\-g} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_afdfde11f35aac97404322c743377ea33}
+
+\item 
+\hypertarget{class_parser_ad7f01cf7d5fb28e9369a9500ba6d4096}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries difference} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_ad7f01cf7d5fb28e9369a9500ba6d4096}
+
+\item 
+\hypertarget{class_parser_a492c3dc32b1c0cf3689148bb88e9b10e}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries product} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a492c3dc32b1c0cf3689148bb88e9b10e}
+
+\item 
+\hypertarget{class_parser_a61cb1bfff03651c7d3a57d83134f77e0}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries relation} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a61cb1bfff03651c7d3a57d83134f77e0}
+
+\item 
+\hypertarget{class_parser_aecc133f5cfe5c9fa2793f859406e9cc3}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries command} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_aecc133f5cfe5c9fa2793f859406e9cc3}
+
+\item 
+\hypertarget{class_parser_aeed91f0d233f55bd3a27a2b6ff15d969}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries integer} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_aeed91f0d233f55bd3a27a2b6ff15d969}
+
+\item 
+\hypertarget{class_parser_a3771c9a97879e4151c6e518d8f8381c0}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries type} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a3771c9a97879e4151c6e518d8f8381c0}
+
+\item 
+\hypertarget{class_parser_a0ccefcf444a06bb1dfd62052fd49bcfc}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries typed\-\_\-list} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a0ccefcf444a06bb1dfd62052fd49bcfc}
+
+\item 
+\hypertarget{class_parser_a25c0c6accc8136c3e882db6f58b0b6b1}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries open\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a25c0c6accc8136c3e882db6f58b0b6b1}
+
+\item 
+\hypertarget{class_parser_a55719a1b9c559a21647153dc24ccf9cf}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries close\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a55719a1b9c559a21647153dc24ccf9cf}
+
+\item 
+\hypertarget{class_parser_a53fc5c754ee8e232b8d88647798f4b36}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries write\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a53fc5c754ee8e232b8d88647798f4b36}
+
+\item 
+\hypertarget{class_parser_a92c41292eabec49947407e3152f1883f}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries exit\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a92c41292eabec49947407e3152f1883f}
+
+\item 
+\hypertarget{class_parser_a4202288d506cf2a6e99f3dfce351a152}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries show\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a4202288d506cf2a6e99f3dfce351a152}
+
+\item 
+\hypertarget{class_parser_aaaf5e82e4aafb6b73a593b03f82f3ade}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries create\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_aaaf5e82e4aafb6b73a593b03f82f3ade}
+
+\item 
+\hypertarget{class_parser_aee56e9e1b7c8a2fcc4fa9cfb8e7454dc}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries update\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_aee56e9e1b7c8a2fcc4fa9cfb8e7454dc}
+
+\item 
+\hypertarget{class_parser_a1724f6543438950d37b868fd8f78f337}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries insert\-\_\-cmd1} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a1724f6543438950d37b868fd8f78f337}
+
+\item 
+\hypertarget{class_parser_a8cce8d4d29a543dcc6baa4f905d94f48}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries literal\-\_\-list} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a8cce8d4d29a543dcc6baa4f905d94f48}
+
+\item 
+\hypertarget{class_parser_ad6c1e60d15b7c4af573fa36c86417793}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries insert\-\_\-cmd2} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_ad6c1e60d15b7c4af573fa36c86417793}
+
+\item 
+\hypertarget{class_parser_a7216e601459e66e825d8814f3f31523d}{\hyperlink{struct_parse_node}{Parse\-Node} $\ast$ {\bfseries delete\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a7216e601459e66e825d8814f3f31523d}
+
+\item 
+\hypertarget{class_parser_ac96b9afc820eaef9a480f4048c6a8828}{void {\bfseries init\-\_\-values} ()}\label{class_parser_ac96b9afc820eaef9a480f4048c6a8828}
+
+\item 
+\hypertarget{class_parser_a8f1f1131b8ee415321749d7e9407beb1}{vector$<$ \hyperlink{struct_token}{Token} $>$ {\bfseries tokenize} (string s)}\label{class_parser_a8f1f1131b8ee415321749d7e9407beb1}
 
 \item 
 \hypertarget{class_parser_a9c573337bd17fd450e5dedbf776c4171}{Statement {\bfseries break\-\_\-statements} (vector$<$ \hyperlink{struct_token}{Token} $>$)}\label{class_parser_a9c573337bd17fd450e5dedbf776c4171}
@@ -76,6 +193,15 @@
 \hypertarget{class_parser_aecc133f5cfe5c9fa2793f859406e9cc3}{bool {\bfseries command} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_aecc133f5cfe5c9fa2793f859406e9cc3}
 
 \item 
+\hypertarget{class_parser_aeed91f0d233f55bd3a27a2b6ff15d969}{bool {\bfseries integer} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_aeed91f0d233f55bd3a27a2b6ff15d969}
+
+\item 
+\hypertarget{class_parser_a3771c9a97879e4151c6e518d8f8381c0}{bool {\bfseries type} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a3771c9a97879e4151c6e518d8f8381c0}
+
+\item 
+\hypertarget{class_parser_a0ccefcf444a06bb1dfd62052fd49bcfc}{bool {\bfseries typed\-\_\-list} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a0ccefcf444a06bb1dfd62052fd49bcfc}
+
+\item 
 \hypertarget{class_parser_a25c0c6accc8136c3e882db6f58b0b6b1}{bool {\bfseries open\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a25c0c6accc8136c3e882db6f58b0b6b1}
 
 \item 
@@ -97,24 +223,29 @@
 \hypertarget{class_parser_aee56e9e1b7c8a2fcc4fa9cfb8e7454dc}{bool {\bfseries update\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_aee56e9e1b7c8a2fcc4fa9cfb8e7454dc}
 
 \item 
-\hypertarget{class_parser_af32ad4b5c4d2b09643ab1bc202c53ff4}{bool {\bfseries insert\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_af32ad4b5c4d2b09643ab1bc202c53ff4}
+\hypertarget{class_parser_a1724f6543438950d37b868fd8f78f337}{bool {\bfseries insert\-\_\-cmd1} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a1724f6543438950d37b868fd8f78f337}
+
+\item 
+\hypertarget{class_parser_ad6c1e60d15b7c4af573fa36c86417793}{bool {\bfseries insert\-\_\-cmd2} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_ad6c1e60d15b7c4af573fa36c86417793}
 
 \item 
 \hypertarget{class_parser_a7216e601459e66e825d8814f3f31523d}{bool {\bfseries delete\-\_\-cmd} (\hyperlink{class_token_stream}{Token\-Stream} \&tokens)}\label{class_parser_a7216e601459e66e825d8814f3f31523d}
 
 \end{DoxyCompactItemize}
-\subsection*{Public Attributes}
+\subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_parser_a306c207ca06a31321ffc5dd5dcbbea7a}{string $\ast$ {\bfseries keywords}}\label{class_parser_a306c207ca06a31321ffc5dd5dcbbea7a}
+\hypertarget{class_parser_a0874c2c35133d7b6e37ce72bdd0a5c75}{string $\ast$ {\bfseries keywords}}\label{class_parser_a0874c2c35133d7b6e37ce72bdd0a5c75}
 
 \item 
-\hypertarget{class_parser_a3e3d3fc20d70443d5d8242523bea82b3}{set$<$ string $>$ {\bfseries Keywords}}\label{class_parser_a3e3d3fc20d70443d5d8242523bea82b3}
+\hypertarget{class_parser_ae03be083811a7044a3f94e65afbc8c56}{set$<$ string $>$ {\bfseries Keywords}}\label{class_parser_ae03be083811a7044a3f94e65afbc8c56}
 
 \end{DoxyCompactItemize}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
+src/Parse.\-h\item 
 src/Parser.\-h\item 
+src/Parse.\-cpp\item 
 src/Parser.\-cpp\end{DoxyCompactItemize}

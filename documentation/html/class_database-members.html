@@ -91,7 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr><td class="entry"><a class="el" href="class_database.html#ae1a928caf223e2cbe1a3a78140773e88">addRelation</a>(string name)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_database.html#ac73ed9280bd5c4f685cdd89ef7e2cd3e">addRow</a>(string relName, vector&lt; string &gt; row)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_database.html#a8553be991d9615cd04aa96f117363537">attributeExists</a>(string relName, string attrName)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_database.html#acfe8e5676779ee61013a47d34ef0e39c">getRowsWhere</a>(string relName, string attrName, string value)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_database.html#ad131657b77495a4c0c5c23439bd1c3dc">getRowsWhere</a>(string relName, string attrName, string value, string op=&quot;==&quot;)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_database.html#af113b1e566197ff5231c7b792a6a4d98">projection</a>(string relName, vector&lt; string &gt; attrNames)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_database.html#adabfc3cb1f51932ff08007200b0972a8">relationCrossProduct</a>(string relName1, string relName2)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_database.html#a8799dbd5a15a2e43c74bc4543fe8fa2e">relationDifference</a>(string relName1, string relName2)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
@@ -104,13 +104,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <tr class="even"><td class="entry"><a class="el" href="class_database.html#aa8324ade169386cde3f1c0a212e186f9">removeRow</a>(string relName, int key)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_database.html#a1f9663265995e751bf461d1b9e60ebfd">renameAttribute</a>(string relName, string currentName, string newName)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_database.html#af9213d1ecf9a4ec08d67e3f2bd565f2f">renameRelation</a>(string currentName, string newName)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_database.html#a959909a78516b1a6a73ccea7968c70e7">show</a>(string name=&quot;&quot;)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_database.html#a9e61f5f7d4ac2b56ff768c908acec026">unionCompatible</a>(string relName1, string relName2)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_database.html#a61173497b8a9b6f1701fabfaa920954c">updateAttributeValue</a>(string relName, int key, string attributeName, string value)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_database.html#a29c9274854dd136ff1c42568c0352876">selection</a>(string relName, string attrName, string value, string op=&quot;==&quot;)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_database.html#a959909a78516b1a6a73ccea7968c70e7">show</a>(string name=&quot;&quot;)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_database.html#a9e61f5f7d4ac2b56ff768c908acec026">unionCompatible</a>(string relName1, string relName2)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_database.html#a61173497b8a9b6f1701fabfaa920954c">updateAttributeValue</a>(string relName, int key, string attributeName, string value)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_database.html#a35f0c7002a68e6de2d8aa11fc42e8d38">writeRelation</a>(string relName)</td><td class="entry"><a class="el" href="class_database.html">Database</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 11 2013 16:36:21 for Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 26 2013 11:23:08 for Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

@@ -101,52 +101,62 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_relation.html#ad505b043cf529432345433e6d4e2ded9">   18</a></span>&#160;    map&lt;string, Attribute&gt; <a class="code" href="class_relation.html#ad505b043cf529432345433e6d4e2ded9">attributes</a>; </div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_relation.html#ace8c91beafd208dcf6469b9b2425ecf7">   19</a></span>&#160;    vector&lt;string&gt; <a class="code" href="class_relation.html#ace8c91beafd208dcf6469b9b2425ecf7">attributeNames</a>;     </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#a8553be991d9615cd04aa96f117363537">attributeExists</a>(<span class="keywordtype">string</span> name);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#ab53f2a8af55fd5ff8daa92eaf4f2c55f">addAttribute</a>(<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> type, <span class="keywordtype">int</span> length);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_database.html#ac73ed9280bd5c4f685cdd89ef7e2cd3e">addRow</a>(vector&lt;string&gt; row);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_database.html#aa8324ade169386cde3f1c0a212e186f9">removeRow</a>(<span class="keywordtype">int</span> key);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#af7bed4fd63c5374cb1fd97f0e9f72b96">removeAttribute</a>(<span class="keywordtype">string</span> name);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    vector&lt;string&gt; getRow(<span class="keywordtype">int</span> key);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    vector&lt; vector&lt;string&gt; &gt; <a class="code" href="class_database.html#acfe8e5676779ee61013a47d34ef0e39c">getRowsWhere</a>(<span class="keywordtype">string</span> attributeName, <span class="keywordtype">string</span> value);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    vector&lt; vector&lt;string&gt; &gt; getAllRows();</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#a61173497b8a9b6f1701fabfaa920954c">updateAttributeValue</a>(<span class="keywordtype">int</span> key, <span class="keywordtype">string</span> attributeName, <span class="keywordtype">string</span> value);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_database.html#a959909a78516b1a6a73ccea7968c70e7">show</a>();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#a1f9663265995e751bf461d1b9e60ebfd">renameAttribute</a>(<span class="keywordtype">string</span> currentName, <span class="keywordtype">string</span> newName);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="class_relation.html">Relation</a> operator=(<a class="code" href="class_relation.html">Relation</a> b);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="class_database_html_af7bed4fd63c5374cb1fd97f0e9f72b96"><div class="ttname"><a href="class_database.html#af7bed4fd63c5374cb1fd97f0e9f72b96">Database::removeAttribute</a></div><div class="ttdeci">bool removeAttribute(string relName, string attrName)</div><div class="ttdef"><b>Definition:</b> Database.cpp:43</div></div>
-<div class="ttc" id="class_database_html_acfe8e5676779ee61013a47d34ef0e39c"><div class="ttname"><a href="class_database.html#acfe8e5676779ee61013a47d34ef0e39c">Database::getRowsWhere</a></div><div class="ttdeci">vector&lt; vector&lt; string &gt; &gt; getRowsWhere(string relName, string attrName, string value)</div><div class="ttdef"><b>Definition:</b> Database.cpp:110</div></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">string</span> relname;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> setName (<span class="keywordtype">string</span> name) { relname = name; }</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">string</span> getAttributeNames(<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> attributeNames[x]; }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">string</span> getAttributeType(<span class="keywordtype">string</span> name) { <span class="keywordflow">return</span> attributes.find(name)-&gt;second.getType(); }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> getAttributeLength(<span class="keywordtype">string</span> name) { <span class="keywordflow">return</span> attributes.find(name)-&gt;second.getLength(); }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">string</span> getName() { <span class="keywordflow">return</span> relname; }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#a8553be991d9615cd04aa96f117363537">attributeExists</a>(<span class="keywordtype">string</span> name);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#ab53f2a8af55fd5ff8daa92eaf4f2c55f">addAttribute</a>(<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> type, <span class="keywordtype">int</span> length);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_database.html#ac73ed9280bd5c4f685cdd89ef7e2cd3e">addRow</a>(vector&lt;string&gt; row);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_database.html#aa8324ade169386cde3f1c0a212e186f9">removeRow</a>(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#af7bed4fd63c5374cb1fd97f0e9f72b96">removeAttribute</a>(<span class="keywordtype">string</span> name);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    vector&lt;string&gt; getRow(<span class="keywordtype">int</span> key);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    vector&lt; vector&lt;string&gt; &gt; <a class="code" href="class_database.html#ad131657b77495a4c0c5c23439bd1c3dc">getRowsWhere</a>(<span class="keywordtype">string</span> attributeName, <span class="keywordtype">string</span> value, <span class="keywordtype">string</span> op = <span class="stringliteral">&quot;==&quot;</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    vector&lt; vector&lt;string&gt; &gt; getAllRows();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#a61173497b8a9b6f1701fabfaa920954c">updateAttributeValue</a>(<span class="keywordtype">int</span> key, <span class="keywordtype">string</span> attributeName, <span class="keywordtype">string</span> value);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_database.html#a959909a78516b1a6a73ccea7968c70e7">show</a>();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_database.html#a1f9663265995e751bf461d1b9e60ebfd">renameAttribute</a>(<span class="keywordtype">string</span> currentName, <span class="keywordtype">string</span> newName);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="class_relation.html">Relation</a> operator=(<a class="code" href="class_relation.html">Relation</a> b);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;};</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="class_database_html_af7bed4fd63c5374cb1fd97f0e9f72b96"><div class="ttname"><a href="class_database.html#af7bed4fd63c5374cb1fd97f0e9f72b96">Database::removeAttribute</a></div><div class="ttdeci">bool removeAttribute(string relName, string attrName)</div><div class="ttdef"><b>Definition:</b> Database.cpp:44</div></div>
 <div class="ttc" id="class_relation_html"><div class="ttname"><a href="class_relation.html">Relation</a></div><div class="ttdoc">Relation Class represents one table in the database. The Relation Class represents one table in a dat...</div><div class="ttdef"><b>Definition:</b> Relation.h:15</div></div>
-<div class="ttc" id="class_database_html_aa8324ade169386cde3f1c0a212e186f9"><div class="ttname"><a href="class_database.html#aa8324ade169386cde3f1c0a212e186f9">Database::removeRow</a></div><div class="ttdeci">void removeRow(string relName, int key)</div><div class="ttdef"><b>Definition:</b> Database.cpp:94</div></div>
-<div class="ttc" id="class_database_html_a1f9663265995e751bf461d1b9e60ebfd"><div class="ttname"><a href="class_database.html#a1f9663265995e751bf461d1b9e60ebfd">Database::renameAttribute</a></div><div class="ttdeci">bool renameAttribute(string relName, string currentName, string newName)</div><div class="ttdef"><b>Definition:</b> Database.cpp:136</div></div>
+<div class="ttc" id="class_database_html_aa8324ade169386cde3f1c0a212e186f9"><div class="ttname"><a href="class_database.html#aa8324ade169386cde3f1c0a212e186f9">Database::removeRow</a></div><div class="ttdeci">void removeRow(string relName, int key)</div><div class="ttdef"><b>Definition:</b> Database.cpp:95</div></div>
+<div class="ttc" id="class_database_html_a1f9663265995e751bf461d1b9e60ebfd"><div class="ttname"><a href="class_database.html#a1f9663265995e751bf461d1b9e60ebfd">Database::renameAttribute</a></div><div class="ttdeci">bool renameAttribute(string relName, string currentName, string newName)</div><div class="ttdef"><b>Definition:</b> Database.cpp:137</div></div>
 <div class="ttc" id="class_relation_html_ad505b043cf529432345433e6d4e2ded9"><div class="ttname"><a href="class_relation.html#ad505b043cf529432345433e6d4e2ded9">Relation::attributes</a></div><div class="ttdeci">map&lt; string, Attribute &gt; attributes</div><div class="ttdef"><b>Definition:</b> Relation.h:18</div></div>
-<div class="ttc" id="class_database_html_a61173497b8a9b6f1701fabfaa920954c"><div class="ttname"><a href="class_database.html#a61173497b8a9b6f1701fabfaa920954c">Database::updateAttributeValue</a></div><div class="ttdeci">bool updateAttributeValue(string relName, int key, string attributeName, string value)</div><div class="ttdef"><b>Definition:</b> Database.cpp:100</div></div>
-<div class="ttc" id="class_database_html_a959909a78516b1a6a73ccea7968c70e7"><div class="ttname"><a href="class_database.html#a959909a78516b1a6a73ccea7968c70e7">Database::show</a></div><div class="ttdeci">void show(string name=&quot;&quot;)</div><div class="ttdef"><b>Definition:</b> Database.cpp:70</div></div>
+<div class="ttc" id="class_database_html_a61173497b8a9b6f1701fabfaa920954c"><div class="ttname"><a href="class_database.html#a61173497b8a9b6f1701fabfaa920954c">Database::updateAttributeValue</a></div><div class="ttdeci">bool updateAttributeValue(string relName, int key, string attributeName, string value)</div><div class="ttdef"><b>Definition:</b> Database.cpp:101</div></div>
+<div class="ttc" id="class_database_html_a959909a78516b1a6a73ccea7968c70e7"><div class="ttname"><a href="class_database.html#a959909a78516b1a6a73ccea7968c70e7">Database::show</a></div><div class="ttdeci">void show(string name=&quot;&quot;)</div><div class="ttdef"><b>Definition:</b> Database.cpp:71</div></div>
 <div class="ttc" id="class_relation_html_ace8c91beafd208dcf6469b9b2425ecf7"><div class="ttname"><a href="class_relation.html#ace8c91beafd208dcf6469b9b2425ecf7">Relation::attributeNames</a></div><div class="ttdeci">vector&lt; string &gt; attributeNames</div><div class="ttdef"><b>Definition:</b> Relation.h:19</div></div>
-<div class="ttc" id="class_database_html"><div class="ttname"><a href="class_database.html">Database</a></div><div class="ttdoc">Database Class represents one database. The Database Class represents one database that includes a ve...</div><div class="ttdef"><b>Definition:</b> Database.h:13</div></div>
-<div class="ttc" id="class_database_html_ac73ed9280bd5c4f685cdd89ef7e2cd3e"><div class="ttname"><a href="class_database.html#ac73ed9280bd5c4f685cdd89ef7e2cd3e">Database::addRow</a></div><div class="ttdeci">int addRow(string relName, vector&lt; string &gt; row)</div><div class="ttdef"><b>Definition:</b> Database.cpp:85</div></div>
-<div class="ttc" id="class_database_html_a8553be991d9615cd04aa96f117363537"><div class="ttname"><a href="class_database.html#a8553be991d9615cd04aa96f117363537">Database::attributeExists</a></div><div class="ttdeci">bool attributeExists(string relName, string attrName)</div><div class="ttdef"><b>Definition:</b> Database.cpp:13</div></div>
-<div class="ttc" id="class_database_html_ab53f2a8af55fd5ff8daa92eaf4f2c55f"><div class="ttname"><a href="class_database.html#ab53f2a8af55fd5ff8daa92eaf4f2c55f">Database::addAttribute</a></div><div class="ttdeci">bool addAttribute(string relName, string attrName, string type, int length)</div><div class="ttdef"><b>Definition:</b> Database.cpp:35</div></div>
+<div class="ttc" id="class_database_html"><div class="ttname"><a href="class_database.html">Database</a></div><div class="ttdoc">Database Class represents one database. The Database Class represents one database that includes a ve...</div><div class="ttdef"><b>Definition:</b> Database.h:14</div></div>
+<div class="ttc" id="class_database_html_ad131657b77495a4c0c5c23439bd1c3dc"><div class="ttname"><a href="class_database.html#ad131657b77495a4c0c5c23439bd1c3dc">Database::getRowsWhere</a></div><div class="ttdeci">vector&lt; vector&lt; string &gt; &gt; getRowsWhere(string relName, string attrName, string value, string op=&quot;==&quot;)</div><div class="ttdef"><b>Definition:</b> Database.cpp:111</div></div>
+<div class="ttc" id="class_database_html_ac73ed9280bd5c4f685cdd89ef7e2cd3e"><div class="ttname"><a href="class_database.html#ac73ed9280bd5c4f685cdd89ef7e2cd3e">Database::addRow</a></div><div class="ttdeci">int addRow(string relName, vector&lt; string &gt; row)</div><div class="ttdef"><b>Definition:</b> Database.cpp:86</div></div>
+<div class="ttc" id="class_database_html_a8553be991d9615cd04aa96f117363537"><div class="ttname"><a href="class_database.html#a8553be991d9615cd04aa96f117363537">Database::attributeExists</a></div><div class="ttdeci">bool attributeExists(string relName, string attrName)</div><div class="ttdef"><b>Definition:</b> Database.cpp:14</div></div>
+<div class="ttc" id="class_database_html_ab53f2a8af55fd5ff8daa92eaf4f2c55f"><div class="ttname"><a href="class_database.html#ab53f2a8af55fd5ff8daa92eaf4f2c55f">Database::addAttribute</a></div><div class="ttdeci">bool addAttribute(string relName, string attrName, string type, int length)</div><div class="ttdef"><b>Definition:</b> Database.cpp:36</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 11 2013 16:36:21 for Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 26 2013 11:23:08 for Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>

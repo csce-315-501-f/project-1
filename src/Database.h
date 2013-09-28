@@ -100,9 +100,20 @@ public:
      * @param relName Name of Relation to get from
      * @oaram attrName Name of Attribute to search
      * @param value Value to find
-     * @return Rows in given Relation where the given value was found in the given Attribute
+     * @param op Operation to perform
+     * @return Rows in given Relation where the given value was found in the given Attribute accoring to the operator.
      */
     vector< vector<string> > getRowsWhere(string relName, string attrName, string value, string op = "==");
+
+    /**
+     * Selection operation. Works the same as getRowsWhere, except returns a Relation instead of a vector of rows.
+     * @param relName Name of Relation to get from
+     * @oaram attrName Name of Attribute to search
+     * @param value Value to find
+     * @param op Operation to perform
+     * @return Relation containing rows where the given value was found in the given Attribute according to the operator.
+     */
+    Relation selection(string relName, string attrName, string value, string op = "==");
 
     /**
      * Renames the given Relation
@@ -166,8 +177,6 @@ public:
      * @param relName Name of the Relation to write
      */
     void writeRelation(string relName);
-
-    Relation selection(string relName, string attrName, string value, string op = "==");
 };
 
 #endif

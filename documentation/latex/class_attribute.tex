@@ -13,6 +13,9 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hypertarget{class_attribute_aeac4704598e6d1a514a1b2d19cac3cca}{int {\bfseries get\-Length} ()}\label{class_attribute_aeac4704598e6d1a514a1b2d19cac3cca}
+
+\item 
 \hyperlink{class_attribute_a8ba4e5a507aef352563e1e56f1930e66}{Attribute} ()
 \item 
 \hyperlink{class_attribute_a02233dafef63f06ff9402c160e0f9373}{Attribute} (string attr\-Type, int len)
@@ -27,7 +30,7 @@ int \hyperlink{class_attribute_aab394210caea68ab5fc7bbab5ce33abe}{get\-Size} ()
 \item 
 string \hyperlink{class_attribute_a8df7ea306c5eede720d1933f6a46c337}{get\-Value} (int key)
 \item 
-vector$<$ int $>$ \hyperlink{class_attribute_aae6bd7cf63b3f8069721048d2a9c8ef7}{find\-Value} (string value)
+vector$<$ int $>$ \hyperlink{class_attribute_a675aebbedeb6349cc9c001fb31884c10}{find\-Value} (string value, string op=\char`\"{}==\char`\"{})
 \item 
 void \hyperlink{class_attribute_a714539d4184caef6ad6accd8b29dcb4c}{remove\-Value} (int key)
 \item 
@@ -106,16 +109,19 @@ Adds a value to the \hyperlink{class_attribute}{Attribute}. If no key given, the
 \begin{DoxyReturn}{Returns}
 Key where the value was inserted, or -\/1 if the value was not inserted. 
 \end{DoxyReturn}
-\hypertarget{class_attribute_aae6bd7cf63b3f8069721048d2a9c8ef7}{\index{Attribute@{Attribute}!find\-Value@{find\-Value}}
+\hypertarget{class_attribute_a675aebbedeb6349cc9c001fb31884c10}{\index{Attribute@{Attribute}!find\-Value@{find\-Value}}
 \index{find\-Value@{find\-Value}!Attribute@{Attribute}}
 \subsubsection[{find\-Value}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ int $>$ Attribute\-::find\-Value (
 \begin{DoxyParamCaption}
-\item[{string}]{value}
+\item[{string}]{value, }
+\item[{string}]{op = {\ttfamily \char`\"{}==\char`\"{}}}
 \end{DoxyParamCaption}
-)}}\label{class_attribute_aae6bd7cf63b3f8069721048d2a9c8ef7}
+)}}\label{class_attribute_a675aebbedeb6349cc9c001fb31884c10}
 Finds all keys where given value appears 
 \begin{DoxyParams}{Parameters}
 {\em value} & Value to find \\
+\hline
+{\em op} & Operator for comparing value \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -229,7 +235,7 @@ Whether the value was successfully updated
 Holds the free keys in the array if a value has been removed \hypertarget{class_attribute_ace310d0f9b59ecde4923c401852112d0}{\index{Attribute@{Attribute}!length@{length}}
 \index{length@{length}!Attribute@{Attribute}}
 \subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}int Attribute\-::length\hspace{0.3cm}{\ttfamily [private]}}}\label{class_attribute_ace310d0f9b59ecde4923c401852112d0}
-If the type is {\ttfamily string} this this is its max length \hypertarget{class_attribute_abc17bc58ec6c45b21533ee2194bf2516}{\index{Attribute@{Attribute}!type@{type}}
+If the type is {\ttfamily V\-A\-R\-C\-H\-A\-R} this this is its max length \hypertarget{class_attribute_abc17bc58ec6c45b21533ee2194bf2516}{\index{Attribute@{Attribute}!type@{type}}
 \index{type@{type}!Attribute@{Attribute}}
 \subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}string Attribute\-::type\hspace{0.3cm}{\ttfamily [private]}}}\label{class_attribute_abc17bc58ec6c45b21533ee2194bf2516}
 The type of the attribute, available types are {\ttfamily string} and {\ttfamily integer} \hypertarget{class_attribute_ae3eb3292f5ddc91f6c2c0152edf625fb}{\index{Attribute@{Attribute}!values@{values}}

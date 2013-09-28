@@ -97,6 +97,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aeac4704598e6d1a514a1b2d19cac3cca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeac4704598e6d1a514a1b2d19cac3cca"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>getLength</b> ()</td></tr>
+<tr class="separator:aeac4704598e6d1a514a1b2d19cac3cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ba4e5a507aef352563e1e56f1930e66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_attribute.html#a8ba4e5a507aef352563e1e56f1930e66">Attribute</a> ()</td></tr>
 <tr class="separator:a8ba4e5a507aef352563e1e56f1930e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02233dafef63f06ff9402c160e0f9373"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_attribute.html#a02233dafef63f06ff9402c160e0f9373">Attribute</a> (string attrType, int len)</td></tr>
@@ -111,8 +114,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aab394210caea68ab5fc7bbab5ce33abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8df7ea306c5eede720d1933f6a46c337"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_attribute.html#a8df7ea306c5eede720d1933f6a46c337">getValue</a> (int key)</td></tr>
 <tr class="separator:a8df7ea306c5eede720d1933f6a46c337"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae6bd7cf63b3f8069721048d2a9c8ef7"><td class="memItemLeft" align="right" valign="top">vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_attribute.html#aae6bd7cf63b3f8069721048d2a9c8ef7">findValue</a> (string value)</td></tr>
-<tr class="separator:aae6bd7cf63b3f8069721048d2a9c8ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a675aebbedeb6349cc9c001fb31884c10"><td class="memItemLeft" align="right" valign="top">vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_attribute.html#a675aebbedeb6349cc9c001fb31884c10">findValue</a> (string value, string op=&quot;==&quot;)</td></tr>
+<tr class="separator:a675aebbedeb6349cc9c001fb31884c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a714539d4184caef6ad6accd8b29dcb4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_attribute.html#a714539d4184caef6ad6accd8b29dcb4c">removeValue</a> (int key)</td></tr>
 <tr class="separator:a714539d4184caef6ad6accd8b29dcb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af75dab2d3c606606d8fca11bb54d4314"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_attribute.html#af75dab2d3c606606d8fca11bb54d4314">removeLast</a> ()</td></tr>
@@ -239,7 +242,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Database</b></td></t
 
 </div>
 </div>
-<a class="anchor" id="aae6bd7cf63b3f8069721048d2a9c8ef7"></a>
+<a class="anchor" id="a675aebbedeb6349cc9c001fb31884c10"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -247,8 +250,18 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Database</b></td></t
           <td class="memname">vector&lt; int &gt; Attribute::findValue </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>op</em> = <code>&quot;==&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -256,6 +269,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Database</b></td></t
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>Value to find </td></tr>
+    <tr><td class="paramname">op</td><td>Operator for comparing value </td></tr>
   </table>
   </dd>
 </dl>
@@ -519,7 +533,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Database</b></td></t
   </tr>
 </table>
 </div><div class="memdoc">
-<p>If the type is <code>string</code> this this is its max length </p>
+<p>If the type is <code>VARCHAR</code> this this is its max length </p>
 
 </div>
 </div>
@@ -572,7 +586,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Database</b></td></t
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 11 2013 16:36:21 for Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 26 2013 11:23:08 for Project 1 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.5
 </small></address>
