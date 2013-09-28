@@ -126,10 +126,11 @@ void removeassign(Database& db, int course) {
 }
 
 void showcourse(Database& db, int course) {
-	// db code to show course info
 
 	int opt = 0;
 	while (opt != -1) {
+		// db code to show course info
+
 		opt = coursemenu();
 		switch (opt) {
 		case 1:
@@ -210,6 +211,9 @@ int main()
 			break;
 		case 2:
 			addcourse(db);
+			break;
+		case 3:
+			// db code to save database
 			break;
 		}
 	}
