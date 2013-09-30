@@ -38,7 +38,12 @@ int mainmenu() {
 
 int selectcourse(Database& db) {
 	// db code to list all courses and fill courses vector
+    Parser p;
+    vector<ParseNode*> statements;
+    //statements = p.parse(show("Courses"));
+    //execute(statements,db);
 	vector<string> courses;
+    // courses = db.
 	int i, c;
 	clear();
 	cout << "Course List" << endl << endl;
@@ -66,6 +71,8 @@ int coursemenu() {
 
 void addassignment(Database& db, int course) {
 	clear();
+    Parser p;
+    vector<ParseNode*> statements;
 	cout << "Add Assignment" << endl << endl;
 	string name;
 	string duedate;
@@ -85,6 +92,8 @@ void addassignment(Database& db, int course) {
 	}
 	if (c == 1) {
 		// db code to add assignment
+        //statements = p.parse(newassignment(name,duedate));
+        //execute(statements,db);
 	
 		cout << "Added." << endl;
 		string temp;
@@ -96,6 +105,8 @@ void addassignment(Database& db, int course) {
 }
 
 int assignments(Database& db, int course) {
+    Parser p;
+    vector<ParseNode*> statements;
 	// db code to list all assignments in a course and fill courses vector
 	vector<string> assigns;
 	int i, c;
@@ -128,8 +139,12 @@ void removeassign(Database& db, int course) {
 void showcourse(Database& db, int course) {
 
 	int opt = 0;
+    Parser p;
+    vector<ParseNode*> statements;
 	while (opt != -1) {
 		// db code to show course info
+        //statements = p.parse(show(to_string(course));
+        //execute(statements,db);
 
 		opt = coursemenu();
 		switch (opt) {
@@ -154,6 +169,8 @@ void opencourse(Database& db) {
 
 void addcourse(Database& db) {
 	clear();
+    Parser p;
+    vector<ParseNode*> statements;// =p.parse(s);
 	cout << "Add Course" << endl << endl;
 	string name;
 	string instructor;
@@ -173,6 +190,8 @@ void addcourse(Database& db) {
 	}
 	if (c == 1) {
 		// db code to add course
+        //statements = p.parse(newcourse(name,instructor));
+        //execute(statements,db);
 	
 		cout << "Added." << endl;
 		string temp;
@@ -184,7 +203,7 @@ void addcourse(Database& db) {
 
 int main()
 {
-        Database db;
+    Database db;
 	vector<string> dbfiles;
 	char pwd[128];
 	getcwd(pwd,128);

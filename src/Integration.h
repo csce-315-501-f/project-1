@@ -333,6 +333,51 @@ void execute(ParseNode* node, Database& db) {
 	}
 }
 
+string createassignment(){
+    string command = "CREATE TABLE Assignments (id INTEGER, Title VARCHAR(20), Due Date VARCHAR(20)) PRIMARY KEY (id);";
+    return command;
+}
+
+string createcourse(){
+    string command = "CREATE TABLE Courses (id INTEGER, Title VARCHAR(20), Times VARCHAR(20), Instructor VARCHAR(20)) PRIMARY KEY (id);";
+    return command;
+}
+
+string newcourse (string name, string prof){
+    string command = "INSERT INTO Courses VALUES FROM (\"" + name + "\", \"" + prof + "\");";
+    return command;
+}
+
+string newassignment (string name, string duedate){
+    string command = "INSERT INTO Assignments VALUES FROM (\"" + name + "\", \"" + duedate + "\");";
+    return command;
+}
+
+string removessignment (int id){
+    string command = "DELETE FROM Assignments WHERE id = " + to_string(id) + ";";
+    return command;
+}
+
+string open (string file){
+    string command = "OPEN " + file + ";";
+    return command;
+}
+
+string showrel (string relname) {
+    string command = "SHOW " + relname + ";";
+    return command;
+}
+
+string showall() {
+    string command = "SHOW;";
+    return command;
+}
+
+/*string createcommand(string tablename){
+    string command = "CREATE TABLE " + tablename +";";
+    return command;
+}*/
+
 void print_node(ParseNode* node, int level) {
 	cout << "|" << flush;
 	for (int i = 0; i < level; ++i)
