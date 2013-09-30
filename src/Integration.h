@@ -320,7 +320,7 @@ void execute(ParseNode* node, Database& db) {
         compnode1 = ((condnode->children[0])->children[0])->children[0];
         compnode2 = ((condnode->children[0])->children[0])->children[2];
         opnode = ((condnode->children[0])->children[0])->children[1];
-        cout << "Age = " << compnode2->type << endl;
+        //cout << "Age = " << compnode2->type << endl;
         if (db.relationExists(relnode->value)) {
             attributes = att.findValue(compnode2->value);
             if (opnode->value == "=") {
@@ -370,6 +370,11 @@ string showrel (string relname) {
 
 string showall() {
     string command = "SHOW;";
+    return command;
+}
+
+string selectassignment(){
+    string command = "CREATE TABLE Assignments (id INTEGER, Title VARCHAR(20), Due Date VARCHAR(20)) PRIMARY KEY (id);";
     return command;
 }
 
