@@ -2,12 +2,21 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "Parse.h"
 #include "Attribute.h"
 #include "Database.h"
 #include "Relation.h"
 
 using namespace std;
+
+template <typename T>
+string to_string (const T& t) {
+	ostringstream os;
+	os << t;
+	return os.str();
+}
+
 
 void execute(ParseNode* node, Database& db) {
     string name, s, ext;
@@ -334,22 +343,22 @@ void execute(ParseNode* node, Database& db) {
 }
 
 string createassignment(){
-    string command = "CREATE TABLE Assignments (id INTEGER, Title VARCHAR(20), Due Date VARCHAR(20)) PRIMARY KEY (id);";
+    string command = "CREATE TABLE Assignments (id INTEGER, Title VARCHAR(255), DueDate VARCHAR(255)) PRIMARY KEY (id);";
     return command;
 }
 
 string createcourse(){
-    string command = "CREATE TABLE Courses (id INTEGER, Title VARCHAR(20), Times VARCHAR(20), Instructor VARCHAR(20)) PRIMARY KEY (id);";
+    string command = "CREATE TABLE Courses (id INTEGER, Title VARCHAR(255), Days VARCHAR(255), Instructor VARCHAR(255)) PRIMARY KEY (id);";
     return command;
 }
 
-string newcourse (string name, string prof){
-    string command = "INSERT INTO Courses VALUES FROM (\"" + name + "\", \"" + prof + "\");";
+string newcourse (int id, string name, string days, string prof){
+    string command = "INSERT INTO Courses VALUES FROM (" + to_string(id)  + ", \"" + name + "\", \"" + days + "\", \"" + prof + "\");";
     return command;
 }
 
-string newassignment (string name, string duedate){
-    string command = "INSERT INTO Assignments VALUES FROM (\"" + name + "\", \"" + duedate + "\");";
+string newassignment (int id, string name, string duedate){
+    string command = "INSERT INTO Assignments VALUES FROM (" + to_string(id) + ", \"" + name + "\", \"" + duedate + "\");";
     return command;
 }
 

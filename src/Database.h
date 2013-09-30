@@ -34,9 +34,17 @@ public:
     /**
      * Adds a Relation to the Database
      * @param name Name of Relation to add
-     * @param True if Relation was successfully added
+     * @return True if Relation was successfully added
      */
     bool addRelation(string name);
+
+    /**
+     * Adds a Relation to the Database
+     * @param name Name of Relation to add
+     * @param relation Relation to add
+     * @return True if Relation was successfully added
+     */
+    bool addRelation(string name, Relation relation);
 
     /**
      * Adds an Attribute to the given Relation
@@ -104,6 +112,9 @@ public:
      * @return Rows in given Relation where the given value was found in the given Attribute accoring to the operator.
      */
     vector< vector<string> > getRowsWhere(string relName, string attrName, string value, string op = "==");
+
+    vector< vector<string> > getAllRows(string relName);
+
 
     /**
      * Selection operation. Works the same as getRowsWhere, except returns a Relation instead of a vector of rows.

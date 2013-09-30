@@ -25,6 +25,20 @@ bool Database::addRelation(string name) {
         // attribute name does not exist in `attributes`
         Relation relation;
         relations[name] = relation;
+        relationNames.push_back(name);
+        return true;
+    }
+    else {
+        // error, relation name already exists in attributes
+        return false;
+    }
+}
+
+bool Database::addRelation(string name, Relation relation) {
+    if (relations.find(name) == relations.end()) {
+        // attribute name does not exist in `attributes`
+        relations[name] = relation;
+        relationNames.push_back(name);
         return true;
     }
     else {
@@ -112,6 +126,14 @@ vector< vector<string> > Database::getRowsWhere(string relName, string attrName,
     vector< vector<string> > rows;
     if (relationExists(relName)) {
         rows = relations[relName].getRowsWhere(attrName,value,op);
+    }
+    return rows;
+}
+
+vector< vector<string> > Database::getAllRows(string relName) {
+    vector< vector<string> > rows;
+    if (relationExists(relName)) {
+        rows = relations[relName].getAllRows();
     }
     return rows;
 }
