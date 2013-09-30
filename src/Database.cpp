@@ -116,6 +116,14 @@ vector< vector<string> > Database::getRowsWhere(string relName, string attrName,
     return rows;
 }
 
+vector< vector<string> > Database::getAllRows(string relName) {
+    vector< vector<string> > rows;
+    if (relationExists(relName)) {
+        rows = relations[relName].getAllRows();
+    }
+    return rows;
+}
+
 bool Database::renameRelation(string currentName, string newName) {
     if (relationExists(newName)) {
         // error, newName already exists

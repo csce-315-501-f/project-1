@@ -105,6 +105,9 @@ public:
      */
     vector< vector<string> > getRowsWhere(string relName, string attrName, string value, string op = "==");
 
+    vector< vector<string> > getAllRows(string relName);
+
+
     /**
      * Selection operation. Works the same as getRowsWhere, except returns a Relation instead of a vector of rows.
      * @param relName Name of Relation to get from
