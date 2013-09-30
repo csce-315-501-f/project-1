@@ -28,7 +28,7 @@ void header() {
 
 int mainmenu() {
 	int choice;
-	cout << "1. Open Course" << endl;
+	cout << "1. View Course" << endl;
 	cout << "2. Add New Course" << endl;
 	cout << "3. Exit" << endl;
 	cout << "Enter choice: " << flush;
@@ -39,11 +39,16 @@ int mainmenu() {
 int selectcourse(Database& db) {
 	// db code to list all courses and fill courses vector
     Parser p;
-    vector<ParseNode*> statements;
-    //statements = p.parse(show("Courses"));
-    //execute(statements,db);
+    vector< vector<string> > rows = db.getAllRows("Courses");
+    vector<int> mapping;
 	vector<string> courses;
-    // courses = db.
+    for(int i = 0; i < rows.size(); ++i) {
+	mapping.push_back(atoi(rows[i][0].c_str()));
+	courses.push_back(rows[i][1]);
+    }
+    //vector<ParseNode*> statements;
+    //statements = p.parse(showrel("Courses"));
+    //execute(statements[0],db);
 	int i, c;
 	clear();
 	cout << "Course List" << endl << endl;
@@ -55,20 +60,43 @@ int selectcourse(Database& db) {
 	cout << i+1 << ". Back" << endl;
 	cin >> c;
 	if (c == i+1) return -1;
-	return c;
+	return mapping[c];
 }
 
 int coursemenu() {
+	clear();
 	int choice;
-	cout << "1. Add Assignment" << endl;
-	cout << "2. Remove Assignment" << endl;
-	cout << "3. Back" << endl;
+	cout << "1. View All Assignments" << endl;
+	cout << "2. View Assignments By Category" << endl;
+	cout << "3. Add Assignment" << endl;
+	cout << "4. Remove Assignment" << endl;
+	cout << "5. Add Category" << endl;
+	cout << "6. Remove Category" << endl;
+	cout << "7. \033[1;31mDelete Course\033[0m" << endl;
+	cout << "8. Back" << endl;
 	cout << "Enter choice: " << flush;
 	cin >> choice;
+	if (choice == 8)
+		return -1;
 	return choice;
 
 }
 
+#define YES 1
+#define NO 2
+int confirm() {
+	int c = 0;
+	while (c != 1 && c != 2) {
+		cout << "1. Yes" << endl;
+		cout << "2. No" << endl;
+		cout << "Confirm: " << flush;
+		cin >> c;
+	}
+	return c;
+}
+
+
+int l = 0;
 void addassignment(Database& db, int course) {
 	clear();
     Parser p;
@@ -83,17 +111,11 @@ void addassignment(Database& db, int course) {
 	fflush(stdin);
 	getline(cin,duedate);
 	cout << "Add assignment '" << name << "' due on '" << duedate << "'?" << endl;
-	int c = 0;
-	while (c != 1 && c != 2) {
-		cout << "1. Yes" << endl;
-		cout << "2. No" << endl;
-		cout << "Confirm: " << flush;
-		cin >> c;
-	}
-	if (c == 1) {
+	int c = confirm();
+		if (c == YES) {
 		// db code to add assignment
-        //statements = p.parse(newassignment(name,duedate));
-        //execute(statements,db);
+        statements = p.parse(newassignment(l++,name,duedate));
+        execute(statements[0],db);
 	
 		cout << "Added." << endl;
 		string temp;
@@ -107,7 +129,7 @@ void addassignment(Database& db, int course) {
 int assignments(Database& db, int course) {
     Parser p;
     vector<ParseNode*> statements;
-	// db code to list all assignments in a course and fill courses vector
+	// db code to list all assignments in a course and fill assigns vector
 	vector<string> assigns;
 	int i, c;
 	clear();
@@ -143,16 +165,38 @@ void showcourse(Database& db, int course) {
     vector<ParseNode*> statements;
 	while (opt != -1) {
 		// db code to show course info
-        //statements = p.parse(show(to_string(course));
-        //execute(statements,db);
+	//vector<vector<string> > vs = db.getRowsWhere("Courses","Title","chris");
+	//for(int i = 0; i < vs.size(); ++i) {
+		//for (int j = 0; j < vs[i].size(); ++j)
+			//cout << vs[i][j] << endl;
+		//cout << endl;
+	//}
+        statements = p.parse(showrel("Courses"));
+        execute(statements[0], db);
 
 		opt = coursemenu();
 		switch (opt) {
 		case 1:
-			addassignment(db,course);
+			// view all assignments
 			break;
 		case 2:
+			// view assigns by category
+			break;
+		case 3:
+			addassignment(db,course);
+			break;
+		case 4:
 			removeassign(db,course);
+			break;
+		case 5:
+			// add category
+			break;
+		case 6:
+			// delete category	
+			break;
+		case 7:
+			// db code to delete course	
+			opt = -1;
 			break;
 		}
 	}
@@ -167,6 +211,7 @@ void opencourse(Database& db) {
 	}
 }
 
+int k = 0;
 void addcourse(Database& db) {
 	clear();
     Parser p;
@@ -174,24 +219,23 @@ void addcourse(Database& db) {
 	cout << "Add Course" << endl << endl;
 	string name;
 	string instructor;
+	string days;
 	cout << "Enter course name: " << flush;
 	fflush(stdin);
 	getline(cin,name);
 	cout << "Enter course instructor: " << flush; 
 	fflush(stdin);
 	getline(cin,instructor);
-	cout << "Add course '" << name << "' with instructor '" << instructor << "'?" << endl;
-	int c = 0;
-	while (c != 1 && c != 2) {
-		cout << "1. Yes" << endl;
-		cout << "2. No" << endl;
-		cout << "Confirm: " << flush;
-		cin >> c;
-	}
-	if (c == 1) {
+	cout << "Enter course days: " << flush;
+	fflush(stdin);
+	getline(cin,days);
+	cout << "Add course '" << name << "' with instructor '" << instructor <<
+		"' on '" << days << "'?" << endl;
+	int c = confirm();
+	if (c == YES) {
 		// db code to add course
-        //statements = p.parse(newcourse(name,instructor));
-        //execute(statements,db);
+        statements = p.parse(newcourse(k++,name, days, instructor));
+        execute(statements[0], db);
 	
 		cout << "Added." << endl;
 		string temp;
@@ -203,22 +247,30 @@ void addcourse(Database& db) {
 
 int main()
 {
-    Database db;
-	vector<string> dbfiles;
-	char pwd[128];
-	getcwd(pwd,128);
-	DIR* dir = opendir(pwd);
-	if (dir) {
-		dirent* fil;
-		while ( fil = readdir(dir)) {
-			if (strstr(fil->d_name,".db"))
-				dbfiles.push_back(fil->d_name);
-		}
-		closedir(dir);
-	}
+	Database db;
+	ifstream assignFile("Assignments.db");
+	ifstream courseFile("Courses.db");
 
 	// db code to initilize database with dbfiles
-
+	Parser p;
+	vector<ParseNode*> statements;
+	if (assignFile) {
+		statements = p.parse(open("Assignments"));
+		execute(statements[0],db);
+	}
+	else {
+		statements = p.parse(createassignment());
+		execute(statements[0],db);
+	}
+	if (courseFile) {
+		statements = p.parse(open("Courses"));
+		execute(statements[0],db);
+	}
+	else {
+		statements = p.parse(createcourse());
+		execute(statements[0],db);
+	}
+	
 	int c = 0;
 
 	while (c != 3) {
