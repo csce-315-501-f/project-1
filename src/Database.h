@@ -34,9 +34,17 @@ public:
     /**
      * Adds a Relation to the Database
      * @param name Name of Relation to add
-     * @param True if Relation was successfully added
+     * @return True if Relation was successfully added
      */
     bool addRelation(string name);
+
+    /**
+     * Adds a Relation to the Database
+     * @param name Name of Relation to add
+     * @param relation Relation to add
+     * @return True if Relation was successfully added
+     */
+    bool addRelation(string name, Relation relation);
 
     /**
      * Adds an Attribute to the given Relation

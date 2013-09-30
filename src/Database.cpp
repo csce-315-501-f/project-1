@@ -25,6 +25,20 @@ bool Database::addRelation(string name) {
         // attribute name does not exist in `attributes`
         Relation relation;
         relations[name] = relation;
+        relationNames.push_back(name);
+        return true;
+    }
+    else {
+        // error, relation name already exists in attributes
+        return false;
+    }
+}
+
+bool Database::addRelation(string name, Relation relation) {
+    if (relations.find(name) == relations.end()) {
+        // attribute name does not exist in `attributes`
+        relations[name] = relation;
+        relationNames.push_back(name);
         return true;
     }
     else {
