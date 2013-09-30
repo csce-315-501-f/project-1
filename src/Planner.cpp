@@ -60,11 +60,10 @@ int selectcourse(Database& db) {
 	cout << i+1 << ". Back" << endl;
 	cin >> c;
 	if (c == i+1) return -1;
-	return mapping[c];
+	return mapping[c-1];
 }
 
 int coursemenu() {
-	clear();
 	int choice;
 	cout << "1. View All Assignments" << endl;
 	cout << "2. View Assignments By Category" << endl;
@@ -164,6 +163,7 @@ void showcourse(Database& db, int course) {
     Parser p;
     vector<ParseNode*> statements;
 	while (opt != -1) {
+		clear();
 		// db code to show course info
 	//vector<vector<string> > vs = db.getRowsWhere("Courses","Title","chris");
 	//for(int i = 0; i < vs.size(); ++i) {
@@ -171,9 +171,12 @@ void showcourse(Database& db, int course) {
 			//cout << vs[i][j] << endl;
 		//cout << endl;
 	//}
-        statements = p.parse(showrel("Courses"));
-        execute(statements[0], db);
-
+	vector<vector<string> > val = db.getRowsWhere("Courses","id",to_string(course));
+	cout << val[0][1] << endl << endl; 
+	cout << "Instructor: " << val[0][2] << endl;
+	cout << "Days: " << val[0][3] << endl << endl;
+        //statements = p.parse("a<-SELECT(id == \"" + to_string(course) + "\") Courses; SHOW a;");
+        //execute(statements[0], db);
 		opt = coursemenu();
 		switch (opt) {
 		case 1:
@@ -234,7 +237,7 @@ void addcourse(Database& db) {
 	int c = confirm();
 	if (c == YES) {
 		// db code to add course
-        statements = p.parse(newcourse(k++,name, days, instructor));
+        statements = p.parse(newcourse(k++,name, instructor, days));
         execute(statements[0], db);
 	
 		cout << "Added." << endl;
