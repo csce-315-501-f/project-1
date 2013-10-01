@@ -320,7 +320,7 @@ void execute(ParseNode* node, Database& db) {
         compnode1 = ((condnode->children[0])->children[0])->children[0];
         compnode2 = ((condnode->children[0])->children[0])->children[2];
         opnode = ((condnode->children[0])->children[0])->children[1];
-        cout << "Age = " << compnode2->type << endl;
+        // cout << "Age = " << compnode2->type << endl;
         if (db.relationExists(relnode->value)) {
             attributes = att.findValue(compnode2->value);
             if (opnode->value == "=") {

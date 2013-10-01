@@ -378,7 +378,7 @@ string newassignmentcat (int id, string name){
     return command;
 }
 
-string removeassignment (int id){
+string removeassignmentcategory (int id){
     string command = "DELETE FROM AssignmentsCategories WHERE id = " + to_string(id) + ";";
     return command;
 }

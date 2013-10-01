@@ -17,11 +17,47 @@
         //}
     //}
 	
-vector< vector<string> > selection(string selectQuery) {
+
+vector<string> keyToId;
+
+
+vector<string> explode(string str, char delim) {
+	vector<string> strings;
+	stringstream buffer(str);
+	string temp;
+	while (std::getline(buffer, temp, delim)) {
+		// cout << "test line" << temp << endl;
+		strings.push_back(temp);
+	}
+	return strings;
+}
+
+vector< vector<string> > selection(Database &db, string selectQuery) {
 	vector< vector<string> > rows;
-	// streambuf* oldCoutStreamBuf = cout.rdbuf();
-	// ostringstream strCout;
-	// cout.rdbuf( strCout.rdbuf() );
+	stringstream ss;
+	streambuf* oldCoutStreamBuf = cout.rdbuf(ss.rdbuf());
+
+	Parser p;
+	vector<ParseNode*> statements;
+	selectQuery = showrel("Courses");
+	statements = p.parse(selectQuery);
+    execute(statements[0],db);
+	cout.rdbuf( oldCoutStreamBuf );
+
+	vector<string> strings = explode(ss.str(),'\n');
+	bool done = false;
+	int itr = 0;
+	while (!done) {
+		if (strings[0].substr(0,2) == "id") {
+			done = true;
+		}
+		strings.erase(strings.begin()+itr);
+
+	}
+
+	for (int i = 0; i < strings.size(); ++i) {
+		rows.push_back(explode(strings[i],'\t'));
+	}
 
 	return rows;
 }
@@ -239,14 +275,17 @@ void addcourse(Database& db) {
 	string instructor;
 	string days;
 	cout << "Enter course name: " << flush;
-	fflush(stdin);
-	getline(cin,name);
+	cin >> name;
+	// fflush(stdin);
+	// getline(cin,name);
 	cout << "Enter course instructor: " << flush; 
-	fflush(stdin);
-	getline(cin,instructor);
+	cin >> instructor;
+	// fflush(stdin);
+	// getline(cin,instructor);
 	cout << "Enter course days: " << flush;
-	fflush(stdin);
-	getline(cin,days);
+	cin >> days;
+	// fflush(stdin);
+	// getline(cin,days);
 	cout << "Add course '" << name << "' with instructor '" << instructor <<
 		"' on '" << days << "'?" << endl;
 	int c = confirm();
@@ -303,6 +342,9 @@ int main()
 			break;
 		case 3:
 			// db code to save database
+			break;
+		case 4:
+			selection(db,"");
 			break;
 		}
 	}
