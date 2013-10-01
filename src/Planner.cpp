@@ -262,16 +262,16 @@ void removeassign(Database& db, int course) {
 int coursemenu() {
 	int choice;
 	cout << "1. View All Assignments" << endl;
-	cout << "2. View Assignments By Category" << endl;
-	cout << "3. Add Assignment" << endl;
-	cout << "4. Remove Assignment" << endl;
-	cout << "5. Add Category" << endl;
-	cout << "6. Remove Category" << endl;
-	cout << "7. \033[1;31mDelete Course\033[0m" << endl;
-	cout << "8. Back" << endl;
+	// cout << "2. View Assignments By Category" << endl;
+	cout << "2. Add Assignment" << endl;
+	// cout << "4. Remove Assignment" << endl;
+	// cout << "5. Add Category" << endl;
+	// cout << "6. Remove Category" << endl;
+	cout << "3. \033[1;31mDelete Course\033[0m" << endl;
+	cout << "4. Back" << endl;
 	cout << "Enter choice: " << flush;
 	cin >> choice;
-	if (choice == 8)
+	if (choice == 4)
 		return -1;
 	return choice;
 
@@ -301,22 +301,22 @@ void showcourse(Database& db, int courseN) {
 			// view all assignments
 			assignments(db,courseN);
 			break;
+		// case 2:
+		// 	// view assigns by category
+		// 	break;
 		case 2:
-			// view assigns by category
-			break;
-		case 3:
 			addassignment(db,courseN);
 			break;
-		case 4:
-			// removeassign(db,course);
-			break;
-		case 5:
-			// add category
-			break;
-		case 6:
+		// case 4:
+		// 	// removeassign(db,course);
+		// 	break;
+		// case 5:
+		// 	// add category
+		// 	break;
+		case 3:
 			// delete category	
 			break;
-		case 7:
+		case 4:
 			// db code to delete course	
 			opt = -1;
 			break;
