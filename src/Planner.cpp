@@ -214,7 +214,7 @@ void addassignment(Database& db, int course) {
 }
 
 int assignments(Database& db, int course) {
-	vector<string> assignments;
+	vector< vector<string> > assignments;
 
 	string query = "a<-SELECT(Course == \"" + currentCourse + "\") Assignments; SHOW a;";
 	vector< vector<string> > allAssignments = selection(db,query);
@@ -224,24 +224,28 @@ int assignments(Database& db, int course) {
 	for (int i = 0; i < allAssignments.size(); ++i) {
 		string id = allAssignments[i][0];
 		string name = allAssignments[i][1];
-		// string instructor = allAssignments[i][2];
+		string due = allAssignments[i][2];
 		// string days = allAssignments[i][3];
 		keyToId[i] = id;
-		assignments.push_back(name);
+		vector<string> tempp;
+		tempp.push_back(name);
+		tempp.push_back(due);
+		assignments.push_back(tempp);
 	}
 
 	int i, c;
 	clear();
 	cout << "Assignment List" << endl << endl;
 	for(i = 0; i < assignments.size(); ++i)
-		cout << i+1 << ". " << assignments[i] << endl;
+		// cout << i+1 << ". " << assignments[i] << endl;
+		cout << "\"" << assignments[i][0] << "\" is due on " << assignments[i][1] << endl;
 	if (assignments.size() == 0) {
 		cout << "No assignments in database." << endl;
 	}
-	cout << i+1 << ". Back" << endl;
+	cout << "1" << ". Back" << endl;
 	cout << "Enter choice: " << flush;
 	cin >> c;
-	if (c == i+1) return -1;
+	if (c == 1) return -1;
 	// return mapping[c-1];
 	return atoi(keyToId[c-1].c_str());
 }
@@ -267,11 +271,11 @@ int coursemenu() {
 	// cout << "4. Remove Assignment" << endl;
 	// cout << "5. Add Category" << endl;
 	// cout << "6. Remove Category" << endl;
-	cout << "3. \033[1;31mDelete Course\033[0m" << endl;
-	cout << "4. Back" << endl;
+	// cout << "3. \033[1;31mDelete Course\033[0m" << endl;
+	cout << "3. Back" << endl;
 	cout << "Enter choice: " << flush;
 	cin >> choice;
-	if (choice == 4)
+	if (choice == 3)
 		return -1;
 	return choice;
 
@@ -313,10 +317,10 @@ void showcourse(Database& db, int courseN) {
 		// case 5:
 		// 	// add category
 		// 	break;
+		// case 3:
+		// 	// delete category	
+		// 	break;
 		case 3:
-			// delete category	
-			break;
-		case 4:
 			// db code to delete course	
 			opt = -1;
 			break;
