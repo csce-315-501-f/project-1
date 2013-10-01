@@ -142,10 +142,11 @@ void Relation::show() {
         for (int j = 0; j < attributeNames.size(); ++j) {
             string value = attributes[attributeNames[j]].getValue(i);
             cout << value;
-            for (int k = 0; k < attributeNames[j].size() - value.size(); ++k) {
-                cout << ' ';
-            }
-            cout << "  ";
+            // for (int k = 0; k < attributeNames[j].size() - value.size(); ++k) {
+            //     cout << ' ';
+            // }
+            cout << '\t';
+            // cout << "  ";
         }
         cout << endl;
     }

@@ -17,6 +17,18 @@
         //}
     //}
 	
+vector< vector<string> > selection(string selectQuery) {
+	vector< vector<string> > rows;
+	// streambuf* oldCoutStreamBuf = cout.rdbuf();
+	// ostringstream strCout;
+	// cout.rdbuf( strCout.rdbuf() );
+
+	return rows;
+}
+
+
+
+
 void clear() {
 	system("clear");
 }

@@ -21,3 +21,6 @@ relationTest
 databaseTest
 mainTest
 *.db
+parse
+parsetree
+planner
