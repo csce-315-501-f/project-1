@@ -19,6 +19,10 @@
 	
 
 vector<string> keyToId;
+int courseId = 0;
+int assignmentId = 0;
+int categoryId = 0;
+
 
 
 vector<string> explode(string str, char delim) {
@@ -26,7 +30,6 @@ vector<string> explode(string str, char delim) {
 	stringstream buffer(str);
 	string temp;
 	while (std::getline(buffer, temp, delim)) {
-		// cout << "test line" << temp << endl;
 		strings.push_back(temp);
 	}
 	return strings;
@@ -39,7 +42,6 @@ vector< vector<string> > selection(Database &db, string selectQuery) {
 
 	Parser p;
 	vector<ParseNode*> statements;
-	selectQuery = showrel("Courses");
 	statements = p.parse(selectQuery);
     execute(statements[0],db);
 	cout.rdbuf( oldCoutStreamBuf );
@@ -62,6 +64,31 @@ vector< vector<string> > selection(Database &db, string selectQuery) {
 	return rows;
 }
 
+void initId(Database& db) {
+
+	// vector< vector<string> > courses = selection(db,showrel("Courses"));
+	// for (int i = 0; i < courses.size(); ++i) {
+	// 	string id = atoi(courses[i][0]);
+	// 	if (id > courseId) courseId = courses[i][0];
+	// }
+	// cout << courses[0][0] << endl;
+	/*vector< vector<string> > assignments = selection(db,showrel("Assignemnts"));
+	for (int i = 0; i < assignments.size(); ++i) {
+		if (atoi(assignments[i][0]) > assignmentId) assignmentId = assignments[i][0];
+	}*/
+
+	cout << courseId << endl << assignmentId << endl;
+
+	// vector< vector<string> > courses = selection(db,showrel("AssignmentCategories"));
+
+
+
+}
+
+
+
+
+
 
 
 
@@ -76,7 +103,7 @@ void header() {
 
 int mainmenu() {
 	int choice;
-	cout << "1. View Course" << endl;
+	cout << "1. View Courses" << endl;
 	cout << "2. Add New Course" << endl;
 	cout << "3. Exit" << endl;
 	cout << "Enter choice: " << flush;
@@ -90,10 +117,26 @@ int selectcourse(Database& db) {
     vector< vector<string> > rows = db.getAllRows("Courses");
     vector<int> mapping;
 	vector<string> courses;
-    for(int i = 0; i < rows.size(); ++i) {
+    /*for(int i = 0; i < rows.size(); ++i) {
 	mapping.push_back(atoi(rows[i][0].c_str()));
 	courses.push_back(rows[i][1]);
-    }
+    }*/
+
+	vector< vector<string> > allCourses = selection(db,showrel("Courses"));
+	keyToId.clear();
+	vector<string> temp(allCourses.size());
+	keyToId = temp;
+	for (int i = 0; i < allCourses.size(); ++i) {
+		string id = allCourses[i][0];
+		string name = allCourses[i][1];
+		// string instructor = allCourses[i][2];
+		// string days = allCourses[i][3];
+		keyToId[i] = id;
+		courses.push_back(name);
+	}
+
+
+
     //vector<ParseNode*> statements;
     //statements = p.parse(showrel("Courses"));
     //execute(statements[0],db);
@@ -106,6 +149,7 @@ int selectcourse(Database& db) {
 		cout << "No courses in database." << endl;
 	}
 	cout << i+1 << ". Back" << endl;
+	cout << "Enter choice: " << flush;
 	cin >> c;
 	if (c == i+1) return -1;
 	return mapping[c-1];
@@ -265,6 +309,20 @@ void opencourse(Database& db) {
 	}
 }
 
+/*void viewcourses(Database& db) {
+	vector< vector<string> > rows = selection(db,showrel("Courses"));
+	for (int i = 0; i < rows.size(); ++i) {
+		string id = rows[i][0];
+		string name = rows[i][1];
+		string instructor = rows[i][2];
+		string days = rows[i][3];
+		keyToId[i] = id;
+	}
+
+
+}*/
+
+
 int k = 0;
 void addcourse(Database& db) {
 	clear();
@@ -328,6 +386,10 @@ int main()
 		execute(statements[0],db);
 	}
 	
+	// initId(db);
+
+
+
 	int c = 0;
 
 	while (c != 3) {
@@ -336,15 +398,15 @@ int main()
 		switch (c) {
 		case 1:
 			opencourse(db);
+			// viewcourses(db);
 			break;
 		case 2:
 			addcourse(db);
 			break;
 		case 3:
 			// db code to save database
-			break;
-		case 4:
-			selection(db,"");
+			db.writeRelation("Courses");
+			db.writeRelation("Assignments");
 			break;
 		}
 	}
