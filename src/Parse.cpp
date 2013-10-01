@@ -1265,7 +1265,7 @@ vector<ParseNode*> Parser::parse(string s) {
 	string line;
 	while (getline(ss,line))
 		info += line;
-	cout << info << endl;
+	// cout << info << endl;
 	vector<Token> tokens = tokenize(info);
 	Statement statements = break_statements(tokens);
 	vector<ParseNode*> results;
