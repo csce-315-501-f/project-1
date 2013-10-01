@@ -19,7 +19,7 @@
 	
 
 vector<string> keyToId;
-int currentCourse = -1;
+string currentCourse;
 int courseId = 0;
 int assignmentId = 0;
 int categoryId = 0;
@@ -67,16 +67,16 @@ vector< vector<string> > selection(Database &db, string selectQuery) {
 }
 
 void initId(Database& db) {
-	vector< vector<string> > courses = selection(db,showrel("Courses"));
-	// vector< vector<string> > courses = db.getAllRows("Courses");
+	// vector< vector<string> > courses = selection(db,showrel("Courses"));
+	vector< vector<string> > courses = db.getAllRows("Courses");
 	for (int i = 0; i < courses.size(); ++i) {
 		int id;
 		istringstream ( courses[i][0] ) >> id;
 		if (id > courseId) courseId = id;
 	}
 
-	vector< vector<string> > assignments = selection(db,showrel("Assignemnts"));
-	// vector< vector<string> > assignments = db.getAllRows("Assignments");
+	// vector< vector<string> > assignments = selection(db,showrel("Assignemnts"));
+	vector< vector<string> > assignments = db.getAllRows("Assignments");
 	for (int i = 0; i < assignments.size(); ++i) {
 		int id;
 		istringstream ( assignments[i][0] ) >> id;
@@ -159,7 +159,7 @@ int selectcourse(Database& db) {
 	cin >> c;
 	if (c == i+1) return -1;
 	// return mapping[c-1];
-	return c-1;
+	return atoi(keyToId[c-1].c_str());
 }
 
 #define YES 1
@@ -175,8 +175,6 @@ int confirm() {
 	return c;
 }
 
-
-int l = 0;
 void addassignment(Database& db, int course) {
 	clear();
     Parser p;
@@ -184,21 +182,30 @@ void addassignment(Database& db, int course) {
 	cout << "Add Assignment" << endl << endl;
 	string name;
 	string duedate;
+	// char name[256];
+	// char duedate[256];
+	cin.ignore(1,'\n');
 	cout << "Enter assignment name: " << flush;
 	fflush(stdin);
 	getline(cin,name);
+	// cin >> name;
+	// cin.getline(name,256);
 	cout << "Enter due date [mm/dd/yy]: " << flush; 
 	fflush(stdin);
 	getline(cin,duedate);
+	// cin >> duedate;
+	// cin.getline(duedate,256);
 	cout << "Add assignment '" << name << "' due on '" << duedate << "'?" << endl;
 	int c = confirm();
 		if (c == YES) {
 		// db code to add assignment
-        statements = p.parse(newassignment(l++,name,duedate));
+		assignmentId++;
+        statements = p.parse(newassignment(assignmentId,name,duedate,currentCourse));
         execute(statements[0],db);
 	
 		cout << "Added." << endl;
 		string temp;
+		cin.ignore(1,'\n');
 		cout << "Press Enter key to continue..." << flush;
 		fflush(stdin);
 		getline(cin,temp);
@@ -207,22 +214,36 @@ void addassignment(Database& db, int course) {
 }
 
 int assignments(Database& db, int course) {
-    Parser p;
-    vector<ParseNode*> statements;
-	// db code to list all assignments in a course and fill assigns vector
-	vector<string> assigns;
+	vector<string> assignments;
+
+	string query = "a<-SELECT(Course == \"" + currentCourse + "\") Assignments; SHOW a;";
+	vector< vector<string> > allAssignments = selection(db,query);
+	keyToId.clear();
+	vector<string> temp(allAssignments.size());
+	keyToId = temp;
+	for (int i = 0; i < allAssignments.size(); ++i) {
+		string id = allAssignments[i][0];
+		string name = allAssignments[i][1];
+		// string instructor = allAssignments[i][2];
+		// string days = allAssignments[i][3];
+		keyToId[i] = id;
+		assignments.push_back(name);
+	}
+
 	int i, c;
 	clear();
 	cout << "Assignment List" << endl << endl;
-	for(i = 0; i < assigns.size(); ++i)
-		cout << i+1 << ". " << assigns[i] << endl;
-	if (assigns.size() == 0) {
+	for(i = 0; i < assignments.size(); ++i)
+		cout << i+1 << ". " << assignments[i] << endl;
+	if (assignments.size() == 0) {
 		cout << "No assignments in database." << endl;
 	}
 	cout << i+1 << ". Back" << endl;
+	cout << "Enter choice: " << flush;
 	cin >> c;
 	if (c == i+1) return -1;
-	return c;
+	// return mapping[c-1];
+	return atoi(keyToId[c-1].c_str());
 }
 
 void removeassign(Database& db, int course) {
@@ -256,34 +277,21 @@ int coursemenu() {
 
 }
 
-void showcourse(Database& db, int course) {
+void showcourse(Database& db, int courseN) {
 
 	int opt = 0;
-    // Parser p;
-    // vector<ParseNode*> statements;
 	while (opt != -1) {
 		clear();
 		// db code to show course info
-	//vector<vector<string> > vs = db.getRowsWhere("Courses","Title","chris");
-	//for(int i = 0; i < vs.size(); ++i) {
-		//for (int j = 0; j < vs[i].size(); ++j)
-			//cout << vs[i][j] << endl;
-		//cout << endl;
-	//}
-        // statements = p.parse(selectcourse(course));
-        // execute(statements[0], db);
-        //execute(statements[1], db);
-	//vector<vector<string> > val = db.getRowsWhere("Courses","id",to_string(course));
-	//cout << val[0][1] << endl << endl;
-	//cout << "Instructor: " << val[0][2] << endl;
-	//cout << "Days: " << val[0][3] << endl << endl;
-        //statements = p.parse("a<-SELECT(id == \"" + to_string(course) + "\") Courses; SHOW a;");
-        //execute(statements[0], db);
+		string query = "a<-SELECT(id == \"" + to_string(courseN) + "\") Courses; SHOW a;";
+		vector< vector<string> > course = selection(db,query);
 
+		currentCourse = course[0][1];
 
-		// cout << course[1] << endl;
-		// cout << "Instructor: " << course[2] << endl;
-		// cout << "Days: " << course[3] << endl;
+		cout << "Course: " << course[0][1] << endl;
+		cout << "Instructor: " << course[0][2] << endl;
+		cout << "Days: " << course[0][3] << endl;
+		cout << endl;
 
 
 
@@ -291,12 +299,13 @@ void showcourse(Database& db, int course) {
 		switch (opt) {
 		case 1:
 			// view all assignments
+			assignments(db,courseN);
 			break;
 		case 2:
 			// view assigns by category
 			break;
 		case 3:
-			// addassignment(db,course);
+			addassignment(db,courseN);
 			break;
 		case 4:
 			// removeassign(db,course);
@@ -337,28 +346,31 @@ void addcourse(Database& db) {
 	string name;
 	string instructor;
 	string days;
+	cin.ignore(1,'\n');
 	cout << "Enter course name: " << flush;
-	cin >> name;
-	// fflush(stdin);
-	// getline(cin,name);
+	// cin >> name;
+	fflush(stdin);
+	getline(cin,name);
 	cout << "Enter course instructor: " << flush; 
-	cin >> instructor;
-	// fflush(stdin);
-	// getline(cin,instructor);
+	// cin >> instructor;
+	fflush(stdin);
+	getline(cin,instructor);
 	cout << "Enter course days: " << flush;
-	cin >> days;
-	// fflush(stdin);
-	// getline(cin,days);
+	// cin >> days;
+	fflush(stdin);
+	getline(cin,days);
 	cout << "Add course '" << name << "' with instructor '" << instructor <<
 		"' on '" << days << "'?" << endl;
 	int c = confirm();
 	if (c == YES) {
 		// db code to add course
-        statements = p.parse(newcourse(k++,name, instructor, days));
+		courseId++;
+        statements = p.parse(newcourse(courseId,name, instructor, days));
         execute(statements[0], db);
 	
 		cout << "Added." << endl;
 		string temp;
+		cin.ignore(1,'\n');
 		cout << "Press Enter key to continue..." << flush;
 		fflush(stdin);
 		getline(cin,temp);
@@ -391,7 +403,7 @@ int main()
 		execute(statements[0],db);
 	}
 	
-	// initId(db);
+	initId(db);
 
 
 

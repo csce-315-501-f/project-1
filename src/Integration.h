@@ -256,7 +256,7 @@ void execute(ParseNode* node, Database& db) {
         ext = ".db";
         name = relnode->value + ext;
         ifs.open(name.c_str());
-        while (!ifs.eof) {
+        while (!ifs.eof()) {
             getline(ifs,s,'\0');
             vector<ParseNode*> statements = p.parse(s);
             for (int i = 0; i< statements.size(); i++) {
@@ -341,7 +341,7 @@ void execute(ParseNode* node, Database& db) {
 }
 
 string createassignment(){
-    string command = "CREATE TABLE Assignments (id INTEGER, Title VARCHAR(255), DueDate VARCHAR(255)) PRIMARY KEY (id);";
+    string command = "CREATE TABLE Assignments (id INTEGER, Title VARCHAR(255), DueDate VARCHAR(255), Course VARCHAR(255)) PRIMARY KEY (id);";
     return command;
 }
 
@@ -365,8 +365,8 @@ string removecourse (int id){
     return command;
 }
 
-string newassignment (int id, string name, string duedate){
-    string command = "INSERT INTO Assignments VALUES FROM (" + to_string(id) + ", \"" + name + "\", \"" + duedate + "\");";
+string newassignment (int id, string name, string duedate, string course){
+    string command = "INSERT INTO Assignments VALUES FROM (" + to_string(id) + ", \"" + name + "\", \"" + duedate + "\", \"" + course + "\");";
     return command;
 }
 
