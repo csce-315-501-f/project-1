@@ -252,14 +252,16 @@ void execute(ParseNode* node, Database& db) {
          */
         
         relnode = (node->children[0]);
-        ifstream ifs;                                                               //concatenate string + .db
+        ifstream ifs;                                 //concatenate string + .db
         ext = ".db";
         name = relnode->value + ext;
         ifs.open(name.c_str());
-        getline(ifs,s,'\0');
-        vector<ParseNode*> statements = p.parse(s);
-        for (int i = 0; i< statements.size(); i++) {
-        execute(statements[i], db);
+        while (!ifs.eof) {
+            getline(ifs,s,'\0');
+            vector<ParseNode*> statements = p.parse(s);
+            for (int i = 0; i< statements.size(); i++) {
+                execute(statements[i], db);
+            }
         }
 	}
 	else if (node->value == "CLOSE") {
