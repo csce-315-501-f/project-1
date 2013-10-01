@@ -171,10 +171,13 @@ void showcourse(Database& db, int course) {
 			//cout << vs[i][j] << endl;
 		//cout << endl;
 	//}
-	vector<vector<string> > val = db.getRowsWhere("Courses","id",to_string(course));
-	cout << val[0][1] << endl << endl; 
-	cout << "Instructor: " << val[0][2] << endl;
-	cout << "Days: " << val[0][3] << endl << endl;
+        statements = p.parse(selectcourse(course));
+        execute(statements[0], db);
+        //execute(statements[1], db);
+	//vector<vector<string> > val = db.getRowsWhere("Courses","id",to_string(course));
+	//cout << val[0][1] << endl << endl;
+	//cout << "Instructor: " << val[0][2] << endl;
+	//cout << "Days: " << val[0][3] << endl << endl;
         //statements = p.parse("a<-SELECT(id == \"" + to_string(course) + "\") Courses; SHOW a;");
         //execute(statements[0], db);
 		opt = coursemenu();

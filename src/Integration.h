@@ -200,13 +200,9 @@ void execute(ParseNode* node, Database& db) {
             opnode = (((qnode->children[0])->children[0])->children[0])->children[1];       // Inequlaity
             setnode1 = (qnode->children[1]);                                                // Relation node
             select = db.selection(setnode1->value, compnode1->value,compnode2->value, opnode->value);
-            db.addRelation(relnode->value);
-            db.addAttribute(relnode->value, select.getAttributeNames(0), select.getAttributeType(compnode1->value), select.getAttributeLength(compnode1->value));
-            vrow = db.getRowsWhere(setnode1->value, compnode1->value, compnode2->value, opnode->value);
-            /*for (int i = 0; vrow.size(); i++) {
-               db.addRow(relnode->value,vrow[i]);
-            }*/
-            //db.show(relnode->value);
+            db.addRelation(relnode->value, select);
+            select.show();
+
         }
         if (qnode->value == "PROJECT") {
             for (int i = 0; i < ((qnode->children[0])->children.size()); i++ ) {
@@ -352,8 +348,18 @@ string createcourse(){
     return command;
 }
 
+string createassignmentcat(){
+    string command = "CREATE TABLE AssignmentCategories (id INTEGER, Title VARCHAR(255)) PRIMARY KEY (id);";
+    return command;
+}
+
 string newcourse (int id, string name, string days, string prof){
     string command = "INSERT INTO Courses VALUES FROM (" + to_string(id)  + ", \"" + name + "\", \"" + days + "\", \"" + prof + "\");";
+    return command;
+}
+
+string removecourse (int id){
+    string command = "DELETE FROM Courses WHERE id = " + to_string(id) + ";";
     return command;
 }
 
@@ -362,8 +368,18 @@ string newassignment (int id, string name, string duedate){
     return command;
 }
 
-string removessignment (int id){
+string removeassignment (int id){
     string command = "DELETE FROM Assignments WHERE id = " + to_string(id) + ";";
+    return command;
+}
+
+string newassignmentcat (int id, string name){
+    string command = "INSERT INTO AssignmentCategories VALUES FROM (" + to_string(id)  + ", \"" + name + "\");";
+    return command;
+}
+
+string removeassignment (int id){
+    string command = "DELETE FROM AssignmentsCategories WHERE id = " + to_string(id) + ";";
     return command;
 }
 
@@ -382,15 +398,21 @@ string showall() {
     return command;
 }
 
-string selectassignment(){
-    string command = "CREATE TABLE Assignments (id INTEGER, Title VARCHAR(20), Due Date VARCHAR(20)) PRIMARY KEY (id);";
+string selectcourse(int course){
+    string command = "a<-SELECT(id == \"" + to_string(course) + "\") Courses; SHOW a;";
     return command;
 }
 
-/*string createcommand(string tablename){
-    string command = "CREATE TABLE " + tablename +";";
+string selectassignment(int course){
+    string command = "a<-SELECT(id == \"" + to_string(course) + "\") Assignments; SHOW a;";
     return command;
-}*/
+}
+
+string selectassignmentcat(int course){
+    string command = "a<-SELECT(id == \"" + to_string(course) + "\") AssignmentCategories; SHOW a;";
+    return command;
+}
+
 
 void print_node(ParseNode* node, int level) {
 	cout << "|" << flush;
